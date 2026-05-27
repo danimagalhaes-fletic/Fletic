@@ -6,9 +6,10 @@ A Fletic é uma empresa de saúde digital com três produtos:
 - **METTA** — mentoria de alta personalização em pequenos grupos para médicos
 - **Fletic Vision** — consultoria B2B institucional para hospitais, clínicas e gestão pública
 
-**Sócias:**
+**Board Executivo:**
 - **Dani Magalhães** — CEO, operações, comercial e estratégia
 - **Simone Farah** — CMO, especialista médica, responsável pelo conteúdo técnico, aulas e capacitação (atua nos 3 produtos)
+- **Tamires Bala** — COO, coordena todos os agentes e garante a operação integrada dos 3 produtos
 
 **Ferramentas em uso:** Google Workspace (Gmail, Calendar, Drive, Sheets), Trello, WhatsApp, Slack
 
@@ -30,7 +31,7 @@ Fletic/
 
 Estes agentes servem os 3 produtos. Quando acionados a partir deste hub, têm visão consolidada de toda a empresa.
 
-### 1. Agente Financeiro
+### 1. Beatriz Campos — Gerente Financeira
 **Responsabilidade:** Visão consolidada das finanças da Fletic.
 - Monitora receitas da MC (repasses Hotmart/plataforma)
 - Controla recorrência e inadimplência do METTA (contratos individuais)
@@ -41,7 +42,7 @@ Estes agentes servem os 3 produtos. Quando acionados a partir deste hub, têm vi
 
 ---
 
-### 2. Agente Admin/Ops
+### 2. Carla Mendes — Assistente Executiva & Ops
 **Responsabilidade:** Coordenação operacional geral.
 - Gerencia Google Calendar (Dani e Simone)
 - Organiza tarefas no Trello (board central)
@@ -53,7 +54,7 @@ Estes agentes servem os 3 produtos. Quando acionados a partir deste hub, têm vi
 
 ---
 
-### 3. Agente de Marketing/Conteúdo
+### 3. Júlia Andrade — Marketing & Conteúdo
 **Responsabilidade:** Calendário editorial e copies para os 3 produtos.
 - Planeja e organiza calendário de conteúdo mensal
 - Produz copies para redes sociais, emails e landing pages
@@ -64,7 +65,7 @@ Estes agentes servem os 3 produtos. Quando acionados a partir deste hub, têm vi
 
 ---
 
-### 4. Agente de Design
+### 4. Fernanda Lima — Design
 **Responsabilidade:** Briefings e organização de assets visuais.
 - Gera briefings detalhados para criação no Canva
 - Organiza biblioteca de assets no Google Drive por produto
@@ -74,7 +75,7 @@ Estes agentes servem os 3 produtos. Quando acionados a partir deste hub, têm vi
 
 ---
 
-### 5. Agente de Tráfego
+### 5. Ricardo Souza — Tráfego Pago
 **Responsabilidade:** Gestão de anúncios pagos.
 - Foco principal em MC (infoproduto) e METTA (captação de mentorados)
 - Monitora métricas de campanhas (CPA, ROAS, CTR)
