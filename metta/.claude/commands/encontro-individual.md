@@ -2,7 +2,7 @@
 
 **Acionamento:** `/encontro-individual`
 
-Processa a transcrição de um encontro individual mensal de mentorada METTA, atualiza o Google Doc cumulativo e envia o documento por e-mail.
+Processa a transcrição de um encontro individual mensal de mentorada METTA, gera PDF com visual METTA oficial, atualiza o Google Doc cumulativo e envia por WhatsApp/e-mail.
 
 ## O que fazer quando acionado
 
@@ -30,7 +30,35 @@ Para cada tarefa inclua:
 - Título objetivo em negrito
 - Descrição detalhada do que fazer (1-2 linhas)
 
-### 3. Atualizar o Google Doc da mentorada
+### 3. Gerar PDF com visual METTA oficial
+
+Use o script Python `/tmp/gerar_checklist_metta.py` como base. Substitua as variáveis:
+
+```python
+NOME = "[Nome da mentorada]"
+ESPECIALIDADE = "[Especialidade]"
+ENCONTRO_NUM = "[Nº]º"
+DATA = "[DD de Mês de AAAA]"
+TEMA = "[Tema da sessão]"
+RESUMO = "[Resumo da sessão]"
+TAREFAS = [
+    ("💰 FINANÇAS & GESTÃO", [
+        ("Título da tarefa", "Descrição detalhada."),
+    ]),
+    # ... demais categorias
+]
+OUTPUT = "/tmp/METTA_Checklist_[Nome]_[N]Encontro.pdf"
+```
+
+Visual obrigatório:
+- Cabeçalho **preto** com METTA em letras ouro (`#C9963A`), "T" em branco
+- Subtítulo "MENTORIA ESTRATÉGICA" em ouro
+- Checkboxes ☐ em ouro para cada tarefa
+- Assinatura: "Simone Farah & Danielle Magalhães / Mentoria METTA — Fletic"
+
+Execute: `python3 /tmp/gerar_checklist_metta.py` → envia o PDF resultante por WhatsApp e e-mail.
+
+### 4. Atualizar o Google Doc da mentorada
 Arquivo no Drive: `METTA — Encontros Individuais — [Nome da Mentorada]`
 
 - Localize a seção `[Será preenchido após o encontro]` correspondente ao número do encontro
