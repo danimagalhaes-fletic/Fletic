@@ -30,33 +30,30 @@ Para cada tarefa inclua:
 - Título objetivo em negrito
 - Descrição detalhada do que fazer (1-2 linhas)
 
-### 3. Gerar PDF com visual METTA oficial
+### 3. Gerar DOCX com visual METTA oficial
 
-Use o script Python `/tmp/gerar_checklist_metta.py` como base. Substitua as variáveis:
+Use o template DOCX em `metta/templates/checklist_encontro_individual_template.docx` como base.
+
+Com python-docx, abra o template e substitua os campos:
+- Nome da mentorada, especialidade, número do encontro, data
+- Resumo da sessão
+- Tarefas por categoria (manter checkboxes clicáveis do template)
+- Dados do próximo encontro
 
 ```python
-NOME = "[Nome da mentorada]"
-ESPECIALIDADE = "[Especialidade]"
-ENCONTRO_NUM = "[Nº]º"
-DATA = "[DD de Mês de AAAA]"
-TEMA = "[Tema da sessão]"
-RESUMO = "[Resumo da sessão]"
-TAREFAS = [
-    ("💰 FINANÇAS & GESTÃO", [
-        ("Título da tarefa", "Descrição detalhada."),
-    ]),
-    # ... demais categorias
-]
-OUTPUT = "/tmp/METTA_Checklist_[Nome]_[N]Encontro.pdf"
+from docx import Document
+doc = Document('metta/templates/checklist_encontro_individual_template.docx')
+# Substituir textos nos parágrafos e tabelas conforme dados do encontro
+doc.save(f'/tmp/METTA_Checklist_{nome}_{n}Encontro.docx')
 ```
 
-Visual obrigatório:
-- Cabeçalho **preto** com METTA em letras ouro (`#C9963A`), "T" em branco
-- Subtítulo "MENTORIA ESTRATÉGICA" em ouro
-- Checkboxes ☐ em ouro para cada tarefa
+O template já contém:
+- Logo METTA oficial no cabeçalho
+- Layout visual com cores da marca (ouro #C9963A, preto #1A1A1A)
+- Checkboxes clicáveis para a mentorada marcar progresso
 - Assinatura: "Simone Farah & Danielle Magalhães / Mentoria METTA — Fletic"
 
-Execute: `python3 /tmp/gerar_checklist_metta.py` → envia o PDF resultante por WhatsApp e e-mail.
+Envie o DOCX por e-mail para que a mentorada possa interagir com os checkboxes.
 
 ### 4. Atualizar o Google Doc da mentorada
 Arquivo no Drive: `METTA — Encontros Individuais — [Nome da Mentorada]`
