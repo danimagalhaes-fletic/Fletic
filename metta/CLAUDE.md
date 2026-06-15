@@ -81,33 +81,33 @@ O METTA é um produto de relacionamento. Nenhum agente deve enviar mensagem pess
 
 ---
 
-## Padrão de Cabeçalho — Todo DOCX e PDF do METTA
+## Padrão de Cabeçalho — Kit de Marca METTA (Regra de Ouro)
 
-Todo documento DOCX **e PDF** do METTA (checklists de encontro, atas, relatórios de presença, materiais de mentorado) deve usar **exatamente** este cabeçalho visual:
+Todo documento PDF do METTA (listas de presença, atas, relatórios, materiais) deve seguir **exatamente** este padrão visual:
 
 ### Estrutura
-1. **Linha 1 — Título principal:** `ENCONTROS INDIVIDUAIS`
-   - Fonte: Helvetica Bold (ou equivalente)
-   - Cor: `#0A0A0A` (preto)
-   - Tamanho: grande (17–18pt)
-2. **Linha 2 — Subtítulo dourado:** ex. `4.º e 5.º Encontro de 6`
-   - Fonte: Bold
-   - Cor: `#B38600` (dourado METTA)
-   - Tamanho: 11–12pt
-3. **Separador:** linha horizontal na cor dourada `#B38600`
-4. **Bloco de metadados** (tabela simples, 2 colunas):
-   | Campo | Valor |
-   |---|---|
-   | Programa | Mentoria METTA — Encontros Individuais |
-   | Mentorada | [Nome completo] |
-   | Mentoras | Danielle Magalhães & Simone Farah |
-   | Data | [Data por extenso, ex: 12 de junho de 2026] |
-   | Encontro | [N.º de 6] |
+1. **Faixa de cabeçalho:** retângulo preto `#000000`, altura ~90pt, largura total da página
+   - Logo METTA centralizado na faixa (arquivo: `metta_logo_cabecalho.png` no Drive)
+   - Logo: aproximadamente 220×75pt, preservando proporção
+2. **Corpo do documento:** fundo claro — branco ou `#FAFAF7` (off-white)
+   - Nunca usar preto ou dourado no fundo do corpo
 
-### Referência visual
-Ver página do 4.º Encontro Individual da Ana Paula no Notion como referência canônica de layout.
+### Regra de Ouro
+**Preto e dourado APENAS no cabeçalho.** O corpo usa tons claros (branco, off-white, cinza suave).
 
-### Cores METTA
-- Preto texto: `#0A0A0A`
-- Dourado: `#B38600`
-- Cinza secundário: `#4A4A4A`
+### Cores do Kit de Marca
+| Elemento | Cor | Hex |
+|---|---|---|
+| Faixa do cabeçalho | Preto | `#000000` |
+| Dourado principal | Gold | `#E9A820` |
+| Dourado escuro (bordas/acentos) | Gold Dark | `#B07C0A` |
+| Cabeçalho de tabela | Cinza claro | `#F3F3F0` |
+| Linhas alternadas tabela | Off-white | `#FAFAF7` |
+| Texto principal | Quase preto | `#1A1A1A` |
+| Texto secundário | Cinza | `#4A4A4A` |
+| Bordas de grade | Cinza suave | `#DDDDDD` |
+
+### Arquivos de referência no Drive (pasta METTA)
+- **Lista Turma 1 (paisagem A4):** `1OzByy0nWvRP-soeVATGSxxtLKBuE0zvf`
+- **Lista Ana Paula (retrato A4):** `1y0Aq5tR7I7y9mol209zWNArKmdMAoJp2`
+- **Lista Ethel (retrato A4):** `1G4cQGy1PMgX95xXM67VuIq4sFSIrCGHi`
