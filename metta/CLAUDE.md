@@ -81,9 +81,9 @@ O METTA é um produto de relacionamento. Nenhum agente deve enviar mensagem pess
 
 ---
 
-## Padrão de Cabeçalho — Todo DOCX do METTA
+## Padrão de Cabeçalho — Todo DOCX e PDF do METTA
 
-Todo documento DOCX do METTA (checklists de encontro, atas, materiais de mentorado) deve usar **exatamente** este cabeçalho visual:
+Todo documento DOCX **e PDF** do METTA (checklists de encontro, atas, relatórios de presença, materiais de mentorado) deve usar **exatamente** este cabeçalho visual:
 
 ### Estrutura
 1. **Linha 1 — Título principal:** `ENCONTROS INDIVIDUAIS`
