@@ -108,6 +108,6 @@ Todo documento PDF do METTA (listas de presença, atas, relatórios, materiais) 
 | Bordas de grade | Cinza suave | `#DDDDDD` |
 
 ### Arquivos de referência no Drive (pasta METTA)
-- **Lista Turma 1 (paisagem A4):** `1OzByy0nWvRP-soeVATGSxxtLKBuE0zvf`
+- **Lista Turma 1 (retrato A4):** `1o5ykLm98VJq64ubYSe_ZHUlfkg4lxRwP`
 - **Lista Ana Paula (retrato A4):** `1y0Aq5tR7I7y9mol209zWNArKmdMAoJp2`
 - **Lista Ethel (retrato A4):** `1G4cQGy1PMgX95xXM67VuIq4sFSIrCGHi`
