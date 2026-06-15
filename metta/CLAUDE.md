@@ -78,3 +78,36 @@ Simone lidera as mentorias, conhece cada mentorado individualmente e define o co
 
 ## Regra Crítica
 O METTA é um produto de relacionamento. Nenhum agente deve enviar mensagem pessoal para um mentorado sem revisão humana (Simone ou Dani). Sempre gere rascunho e aguarde aprovação antes de enviar.
+
+---
+
+## Padrão de Cabeçalho — Todo DOCX do METTA
+
+Todo documento DOCX do METTA (checklists de encontro, atas, materiais de mentorado) deve usar **exatamente** este cabeçalho visual:
+
+### Estrutura
+1. **Linha 1 — Título principal:** `ENCONTROS INDIVIDUAIS`
+   - Fonte: Helvetica Bold (ou equivalente)
+   - Cor: `#0A0A0A` (preto)
+   - Tamanho: grande (17–18pt)
+2. **Linha 2 — Subtítulo dourado:** ex. `4.º e 5.º Encontro de 6`
+   - Fonte: Bold
+   - Cor: `#B38600` (dourado METTA)
+   - Tamanho: 11–12pt
+3. **Separador:** linha horizontal na cor dourada `#B38600`
+4. **Bloco de metadados** (tabela simples, 2 colunas):
+   | Campo | Valor |
+   |---|---|
+   | Programa | Mentoria METTA — Encontros Individuais |
+   | Mentorada | [Nome completo] |
+   | Mentoras | Danielle Magalhães & Simone Farah |
+   | Data | [Data por extenso, ex: 12 de junho de 2026] |
+   | Encontro | [N.º de 6] |
+
+### Referência visual
+Ver página do 4.º Encontro Individual da Ana Paula no Notion como referência canônica de layout.
+
+### Cores METTA
+- Preto texto: `#0A0A0A`
+- Dourado: `#B38600`
+- Cinza secundário: `#4A4A4A`
