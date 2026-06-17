@@ -52,12 +52,13 @@ MEETINGS = [
 ]
 
 PRESENCA = {
-    "E1":(True,True),"E2":(True,True),"E3":(True,True),"E4":(True,True),
-    "E5":(False,False),"E6":(True,True),"E7":(True,True),"E8":(False,False),
-    "E9":(True,True),"E10":(True,True),"E11":(True,True),"E12":(True,True),
-    "E13":(True,True),"E14":(True,True),"E15":(True,True),"E16":(False,False),
-    "E17":(False,False),"E18":(True,True),"E19":(True,True),"E20":(True,True),
-    "E21":(True,True),"E22":(True,True),"E23":(True,True),"E24":(True,True),
+    # (Ana Paula, Ethel)  — fonte: METTA_Relatorio_Presenca_Turma1_2026.docx
+    "E1": (False,False), "E2": (True, True),  "E3": (False,True),  "E4": (False,True),
+    "E5": (False,False), "E6": (True, True),  "E7": (False,True),  "E8": (False,False),
+    "E9": (True, True),  "E10":(True, True),  "E11":(True, True),  "E12":(True, True),
+    "E13":(True, False), "E14":(True, True),  "E15":(True, False), "E16":(False,False),
+    "E17":(False,False), "E18":(True, True),  "E19":(True, False), "E20":(True, True),
+    "E21":(True, True),  "E22":(True, True),  "E23":(True, True),  "E24":(True, True),
 }
 ALUNOS = ["Ana Paula Monteiro", "Ethel Pinella"]
 
