@@ -68,36 +68,24 @@ CROSS = chr(0x38)   # Zapf-Dingbats heavy ballot X
 def pv(present): return CHECK if present else CROSS
 def pc(present): return GREEN if present else RED
 
-LOGO_H_CONTENT = 60   # logo height in content area (pt)
-LOGO_W_CONTENT = LOGO_H_CONTENT * (330 / 160)
-LOGO_MARGIN    = 10   # vertical gap between logo and title
-
 def draw_header(c, pw, ph, hdr_h=90):
     # Solid black band
     c.setFillColor(BLACK)
     c.rect(0, ph - hdr_h, pw, hdr_h, fill=1, stroke=0)
-    # "METTA" text in the band
-    c.setFont("Helvetica-Bold", 22)
-    c.setFillColor(GOLD)
-    c.drawCentredString(pw/2, ph - hdr_h + 38, "S I M O N E  F A R A H")
-    c.setFont("Helvetica", 11)
-    c.setFillColor(WHITE)
-    c.drawCentredString(pw/2, ph - hdr_h + 20, "M E N T O R I A   M E T T A")
+    # Logo centered in band (dark logo blends on black background)
+    logo_h = 70
+    logo_w = logo_h * (330 / 160)
+    logo_x = (pw - logo_w) / 2
+    logo_y = ph - hdr_h + (hdr_h - logo_h) / 2
+    c.drawImage(ImageReader(LOGO_PATH), logo_x, logo_y,
+                width=logo_w, height=logo_h, mask='auto')
     # Gold separator line
     c.setStrokeColor(GOLD)
     c.setLineWidth(2)
     c.line(0, ph - hdr_h, pw, ph - hdr_h)
 
 def draw_subtitle(c, pw, ph, hdr_h, title, sub):
-    # Logo in content area (white background)
-    logo_x = (pw - LOGO_W_CONTENT) / 2
-    logo_y = ph - hdr_h - LOGO_MARGIN - LOGO_H_CONTENT
-    try:
-        c.drawImage(ImageReader(LOGO_PATH), logo_x, logo_y,
-                    width=LOGO_W_CONTENT, height=LOGO_H_CONTENT, mask='auto')
-    except Exception:
-        pass  # if logo fails, skip — header text is already there
-    y = logo_y - LOGO_MARGIN - 12
+    y = ph - hdr_h - 20
     c.setFont("Helvetica-Bold", 13)
     c.setFillColor(DARK)
     c.drawCentredString(pw/2, y, title)
