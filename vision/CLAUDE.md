@@ -43,6 +43,27 @@ A Fletic Vision é o produto de maior complexidade e maior ticket da Fletic. Cad
 
 ---
 
+---
+
+## Fluxo: Diagnóstico de Maturidade → Proposta Comercial
+
+Quando a Tamires ou qualquer agente receber respostas de um questionário de diagnóstico de uma instituição, deve seguir o fluxo completo documentado em:
+
+**`vision/fluxo-diagnostico-proposta.md`**
+
+Resumo do fluxo:
+1. Mapear respostas nos **30 critérios / 5 Pilares** (com racional documentado por critério)
+2. Calcular score por pilar e **score final ponderado** (25/20/15/20/20%)
+3. Classificar o **nível de maturidade** (Inicial → Referência)
+4. Escrever o **diagnóstico narrativo** (gaps e oportunidades em linguagem executiva)
+5. Construir a **proposta comercial** em 2 fases, com os módulos derivados dos gaps
+6. Apresentar os **2 modelos comerciais** (Fixo e Risco Compartilhado) lado a lado
+7. Gerar os **3 entregáveis**: Planilha XLSX, Apresentação PPTX, Proposta PDF
+
+**Regra:** nada na proposta é genérico — cada módulo e valor deriva de um achado específico do diagnóstico.
+
+---
+
 ## Contexto Operacional
 
 | Item | Detalhe |
