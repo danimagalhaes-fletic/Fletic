@@ -224,6 +224,114 @@ ETHEL = {
     "output": "/tmp/relatorio_diagnostico_ethel_pinella_v2.pdf",
 }
 
+DANIELA_BORGES = {
+    "nome": "Daniela Borges",
+    "clinica": "Imagecor",
+    "especialidade": "Cardiologia",
+    "cidade": "Catete, Rio de Janeiro – RJ",
+    "faturamento_mensal": "até R$ 30.000",
+    "mes_ano": "Junho 2026",
+    "score_final": 0.61,
+    "nivel": "Inicial",
+    "nivel_desc": "Operação artesanal, sem estrutura digital relevante",
+    "pilares": [
+        {
+            "num": "01", "nome": "Estratégia & Modelo Assistencial", "peso": "25%",
+            "score": 0.50, "classe": "critico",
+            "criterios": [
+                ("Modelo assistencial híbrido definido", 1, "Somente presencial — sem telemedicina ou plano digital"),
+                ("Segmentação de pacientes por perfil/risco", 1, "Perfil de crônicos identificado informalmente, sem critério formal"),
+                ("Protocolos clínicos digitais estruturados", 0, "'Nenhum desses' — sem protocolos documentados"),
+                ("Integração entre digital e presencial", 0, "'Nenhum desses' — operam completamente isolados"),
+                ("Governança clínica do digital", 0, "Decisões 'na pessoa' — responsabilidade difusa, sem processo formal"),
+                ("Alinhamento estratégico institucional", 1, "Objetivo declarado (novas receitas), mas sem operacionalização"),
+            ],
+            "desc": "Clínica 100% presencial, sem qualquer planejamento ou estrutura digital. Decisões centralizadas na gestora sem processos formais. Foco em exames cardiológicos (Eco/Doppler) é diferencial não explorado estrategicamente."
+        },
+        {
+            "num": "02", "nome": "Operação & Jornada", "peso": "20%",
+            "score": 0.50, "classe": "critico",
+            "criterios": [
+                ("Fluxo de entrada digital estruturado", 1, "Apenas WhatsApp e agenda — sem fluxo multicanal"),
+                ("Integração da agenda (presencial + digital)", 1, "Agenda manual via WhatsApp; 3 salas com 8 de 11 turnos preenchidos"),
+                ("Programas de acompanhamento estruturados", 0, "Nenhum programa ativo — crônicos sem follow-up estruturado"),
+                ("Comunicação com paciente padronizada", 1, "Só WhatsApp — sem padrão, sem rastreabilidade"),
+                ("Experiência do paciente monitorada", 0, "Sem NPS ou pesquisa de satisfação"),
+                ("Gestão de capacidade e demanda", 0, "Ocupação baixa, 3 salas / 8 turnos de 11 — sem gestão ativa"),
+            ],
+            "desc": "Operação reativa e subutilizada — 3 salas com apenas 8 dos 11 turnos possíveis preenchidos e taxa de retorno abaixo de 50%. Pacientes crônicos sem programa de acompanhamento representam receita recorrente não capturada."
+        },
+        {
+            "num": "03", "nome": "Tecnologia & Integração", "peso": "15%",
+            "score": 1.00, "classe": "critico",
+            "criterios": [
+                ("Prontuário eletrônico estruturado", 2, "Possui PEP, nota 6/10 — presente mas subutilizado"),
+                ("Integração entre sistemas", 1, "Agenda e prontuário não integrados, WhatsApp paralelo"),
+                ("Plataforma de telemedicina adequada", 0, "Não usa telemedicina"),
+                ("Interoperabilidade de dados", 1, "Dados em silos — exportação manual possível"),
+                ("Segurança da informação (LGPD)", 1, "Sem menção a política formal — inferência conservadora"),
+                ("Infraestrutura tecnológica", 1, "Improvisada — WhatsApp/agenda como base operacional"),
+            ],
+            "desc": "Prontuário eletrônico existe (nota 6) mas é subutilizado. Infraestrutura improvisada via WhatsApp. Exames de imagem (Eco, Doppler, Holter) geram dados clínicos valiosos que não se transformam em inteligência de gestão."
+        },
+        {
+            "num": "04", "nome": "Dados & Inteligência", "peso": "20%",
+            "score": 0.50, "classe": "critico",
+            "criterios": [
+                ("Coleta estruturada de dados", 1, "Coleta parcial via prontuário — nota 4 para gestão de dados"),
+                ("Indicadores clínicos definidos", 0, "Sem indicadores clínicos formais"),
+                ("Indicadores operacionais definidos", 1, "Ticket médio acompanhado, mas visibilidade parcial"),
+                ("Uso de dados na decisão", 0, "Decisões 'na pessoa' — gestão por percepção"),
+                ("Dashboards gerenciais", 0, "Inexistente — sem painel de controle"),
+                ("Analytics / predição", 0, "Nenhum uso preditivo ou analítico"),
+            ],
+            "desc": "Gestão 100% intuitiva. Apesar de monitorar ticket médio, não há indicadores clínicos, operacionais ou dashboard. A frase 'muito trabalho, pouco controle financeiro' sintetiza a ausência de dados na decisão."
+        },
+        {
+            "num": "05", "nome": "Modelo Econômico & Sustentabilidade", "peso": "20%",
+            "score": 0.67, "classe": "critico",
+            "criterios": [
+                ("Precificação estruturada", 1, "Ticket R$78-80 conhecido, mas nota financeiro = 1"),
+                ("Modelo de receita definido", 1, "Misto 50-50 (plano/particular) com recorrência variável"),
+                ("Previsibilidade financeira", 0, "Dívidas e dificuldade de captação — receita imprevisível"),
+                ("ROI do digital medido", 0, "Nota marketing = 1 — sem mensuração de retorno digital"),
+                ("Alinhamento de incentivos", 1, "Percentual por atendimento — pode desincentivar qualidade"),
+                ("Controle de custos assistenciais", 1, "Controle financeiro 'Sim' mas nota 1 — superficial"),
+            ],
+            "desc": "Modelo econômico frágil com dívidas declaradas. Receita mista (plano/particular) mas imprevisível. Taxa de retorno <50% e 70% de pacientes novos indicam dependência de captação constante — modelo insustentável no médio prazo."
+        },
+    ],
+    "narrativa_paragrafos": [
+        "A Imagecor apresenta score de maturidade <strong>0,61 — nível Inicial</strong>, com uma operação artesanal que concentra todos os riscos na gestora e depende de captação constante de novos pacientes para se sustentar. A frase da própria Daniela resume o diagnóstico: <em>\"muito trabalho, pouco controle financeiro\"</em>.",
+        "O desafio mais urgente é a <strong>ausência de dados na decisão (Pilar 4: 0,50)</strong>: sem indicadores, dashboard ou visibilidade financeira real, é impossível identificar onde estão as perdas, o que está funcionando ou como priorizar os investimentos. A nota 1 para controle financeiro confirma que o problema não é falta de esforço — é falta de sistema.",
+        "Em <strong>Operação (Pilar 2: 0,50)</strong>, a clínica possui 3 salas com apenas 8 dos 11 turnos possíveis preenchidos e taxa de retorno abaixo de 50%. Isso significa que mais da metade dos pacientes cardiológicos — crônicos que deveriam voltar regularmente — não retorna. Esse é o maior vazamento de receita da Imagecor.",
+        "O <strong>Modelo Econômico (Pilar 5: 0,67)</strong> é igualmente crítico: com 70% de pacientes novos, a clínica precisa captar continuamente apenas para manter o faturamento atual. Sem recorrência estruturada e com dívidas declaradas, o crescimento orgânico está bloqueado. A boa notícia: exames de Eco e Doppler + perfil de crônicos são ativos ideais para construir receita recorrente.",
+    ],
+    "alertas": [
+        "Dívidas declaradas + receita imprevisível = risco de ruptura financeira no curto prazo",
+        "Taxa de retorno <50% em cardiologia crônica: o maior vazamento de receita identificado",
+        "3 salas, 8/11 turnos preenchidos: capacidade ociosa gerando custo fixo sem retorno",
+        "70% pacientes novos: modelo insustentável — captação constante como única alavanca",
+    ],
+    "gaps_priorizados": [
+        ("🔴", "Pilares 1, 2 e 4 (0,50)", "Ausência de sistema de gestão — operação por percepção, sem dados, sem processos."),
+        ("🔴", "Retenção de pacientes crônicos (<50% retorno)", "Cardiologia crônica tem natureza recorrente — a não-retenção é receita desperdiçada."),
+        ("🟠", "Pilar 5 — Modelo Econômico (0,67)", "Dívidas + dependência de novos pacientes tornam o crescimento insustentável."),
+        ("🟠", "Capacidade ociosa (8/11 turnos)", "Receita potencial já existe — o problema é gestão, não demanda."),
+    ],
+    "receita_mensal": 30000,
+    "incremento_pct": 15,
+    "fase1_entrada": 8000,
+    "fase1_conclusao": 16000,
+    "fase1_semanas": 4,
+    "fase2_entrada": 8000,
+    "fase2_conclusao": 16000,
+    "fase2_semanas": 8,
+    "fase1_modulos": ["Módulo 01 — Arquitetura Assistencial", "Módulo 02 — Estrutura Operacional & Retenção"],
+    "fase2_modulos": ["Módulo 03 — Modelo Econômico & Receita Recorrente", "Módulo 04 — Arquitetura Tecnológica", "Módulo 05 — Gestão por Indicadores"],
+    "output": "/tmp/relatorio_diagnostico_imagecor.pdf",
+}
+
 # ─── HTML GENERATION ──────────────────────────────────────────────────────────
 
 def score_to_bar_pct(score):
@@ -1127,6 +1235,7 @@ async def gerar_pdf(c):
 async def main():
     await gerar_pdf(ANA_PAULA)
     await gerar_pdf(ETHEL)
+    await gerar_pdf(DANIELA_BORGES)
 
 if __name__ == "__main__":
     asyncio.run(main())
