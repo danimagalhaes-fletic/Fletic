@@ -231,7 +231,7 @@ DANIELA_BORGES = {
     "cidade": "Catete, Rio de Janeiro – RJ",
     "faturamento_mensal": "até R$ 30.000",
     "mes_ano": "Junho 2026",
-    "score_final": 0.61,
+    "score_final": 0.58,
     "nivel": "Inicial",
     "nivel_desc": "Operação artesanal, sem estrutura digital relevante",
     "pilares": [
@@ -276,7 +276,7 @@ DANIELA_BORGES = {
         },
         {
             "num": "04", "nome": "Dados & Inteligência", "peso": "20%",
-            "score": 0.50, "classe": "critico",
+            "score": 0.33, "classe": "critico",
             "criterios": [
                 ("Coleta estruturada de dados", 1, "Coleta parcial via prontuário — nota 4 para gestão de dados"),
                 ("Indicadores clínicos definidos", 0, "Sem indicadores clínicos formais"),
@@ -302,9 +302,9 @@ DANIELA_BORGES = {
         },
     ],
     "narrativa_paragrafos": [
-        "A Imagecor apresenta score de maturidade <strong>0,61 — nível Inicial</strong>, com uma operação artesanal que concentra todos os riscos na gestora e depende de captação constante de novos pacientes para se sustentar. A frase da própria Daniela resume o diagnóstico: <em>\"muito trabalho, pouco controle financeiro\"</em>.",
-        "O desafio mais urgente é a <strong>ausência de dados na decisão (Pilar 4: 0,50)</strong>: sem indicadores, dashboard ou visibilidade financeira real, é impossível identificar onde estão as perdas, o que está funcionando ou como priorizar os investimentos. A nota 1 para controle financeiro confirma que o problema não é falta de esforço — é falta de sistema.",
-        "Em <strong>Operação (Pilar 2: 0,50)</strong>, a clínica possui 3 salas com apenas 8 dos 11 turnos possíveis preenchidos e taxa de retorno abaixo de 50%. Isso significa que mais da metade dos pacientes cardiológicos — crônicos que deveriam voltar regularmente — não retorna. Esse é o maior vazamento de receita da Imagecor.",
+        "A Imagecor apresenta score de maturidade <strong>0,58 — nível Inicial</strong>, com uma operação artesanal que concentra todos os riscos na gestora e depende de captação constante de novos pacientes para se sustentar. A frase da própria Daniela resume o diagnóstico: <em>\"muito trabalho, pouco controle financeiro\"</em>.",
+        "O desafio mais urgente é a <strong>ausência de dados na decisão (Pilar 4: 0,33)</strong>: sem indicadores, dashboard ou visibilidade financeira real, é impossível identificar onde estão as perdas, o que está funcionando ou como priorizar os investimentos. A nota 1 para controle financeiro confirma que o problema não é falta de esforço — é falta de sistema.",
+        "Em <strong>Operações (Pilar 2: 0,50)</strong>, a clínica possui 3 salas com apenas 8 dos 11 turnos possíveis preenchidos e taxa de retorno abaixo de 50%. Isso significa que mais da metade dos pacientes cardiológicos — crônicos que deveriam voltar regularmente — não retorna. Esse é o maior vazamento de receita da Imagecor.",
         "O <strong>Modelo Econômico (Pilar 5: 0,67)</strong> é igualmente crítico: com 70% de pacientes novos, a clínica precisa captar continuamente apenas para manter o faturamento atual. Sem recorrência estruturada e com dívidas declaradas, o crescimento orgânico está bloqueado. A boa notícia: exames de Eco e Doppler + perfil de crônicos são ativos ideais para construir receita recorrente.",
     ],
     "alertas": [
