@@ -441,9 +441,8 @@ def gerar_html(c):
   /* Linear scale bar */
   .scale-wrap {{ margin-top:12px; }}
   .scale-label-row {{ display:flex; justify-content:space-between; font-size:7.5pt; color:var(--text-light); margin-bottom:4px; }}
-  .scale-track {{ background:var(--gray-mid); border-radius:4px; height:8px; position:relative; }}
-  .scale-fill {{ height:8px; border-radius:4px; background:var(--teal); position:absolute; left:0; top:0; }}
-  .scale-marker {{ width:12px; height:12px; border-radius:50%; background:var(--teal); border:2px solid white; position:absolute; top:-2px; transform:translateX(-50%); box-shadow:0 0 0 2px var(--teal); }}
+  .scale-track {{ background:linear-gradient(to right,#C0392B 0%,#E67E22 32%,#F1C40F 52%,#27AE60 72%,#0F7173 100%); border-radius:4px; height:10px; position:relative; }}
+  .scale-marker {{ width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid #1A1A2E; position:absolute; top:-2px; transform:translateX(-50%); box-shadow:0 1px 4px rgba(0,0,0,0.35); }}
   .scale-ticks {{ display:flex; justify-content:space-between; font-size:7pt; color:var(--text-light); margin-top:5px; }}
   .scale-levels {{ display:flex; justify-content:space-between; font-size:6.5pt; color:var(--text-light); margin-top:2px; }}
 
@@ -588,7 +587,6 @@ def gerar_html(c):
       <div class="scale-wrap">
         <div class="scale-label-row"><span>0,00</span><span>5,00</span></div>
         <div class="scale-track">
-          <div class="scale-fill" style="width:{score_pct}%"></div>
           <div class="scale-marker" style="left:{score_pct}%"></div>
         </div>
         <div class="scale-ticks"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
@@ -831,17 +829,6 @@ def gerar_html_v2(c):
           <div><strong>{titulo}</strong><br>{desc}</div>
         </li>"""
 
-    # ROI calc
-    rec = c["receita_mensal"]
-    inc_pct = c["incremento_pct"]
-    incremento_anual = rec * 12 * (inc_pct / 100)
-    investimento_total = c["fase1_entrada"] + c["fase1_conclusao"] + c["fase2_entrada"] + c["fase2_conclusao"]
-    roi = incremento_anual / investimento_total
-    payback = round(investimento_total / (incremento_anual / 12), 1)
-
-    fase1_mods = "".join(f"<li>✔ {m}</li>" for m in c["fase1_modulos"])
-    fase2_mods = "".join(f"<li>✔ {m}</li>" for m in c["fase2_modulos"])
-
     calc_rows = "".join(
         f'<div class="calc-row"><span class="calc-label">{p["num"]}. {p["nome"]} ({p["peso"]})</span><span class="calc-val">{p["score"]:.2f}</span></div>'
         for p in c["pilares"]
@@ -914,9 +901,8 @@ def gerar_html_v2(c):
   .score-nivel-desc {{ font-size:9pt; color:var(--text-mid); margin-top:4px; }}
   .scale-wrap {{ margin-top:12px; }}
   .scale-label-row {{ display:flex; justify-content:space-between; font-size:7.5pt; color:var(--text-light); margin-bottom:4px; }}
-  .scale-track {{ background:var(--gray-mid); border-radius:4px; height:8px; position:relative; }}
-  .scale-fill {{ height:8px; border-radius:4px; background:var(--teal); position:absolute; left:0; top:0; }}
-  .scale-marker {{ width:12px; height:12px; border-radius:50%; background:var(--teal); border:2px solid white; position:absolute; top:-2px; transform:translateX(-50%); box-shadow:0 0 0 2px var(--teal); }}
+  .scale-track {{ background:linear-gradient(to right,#C0392B 0%,#E67E22 32%,#F1C40F 52%,#27AE60 72%,#0F7173 100%); border-radius:4px; height:10px; position:relative; }}
+  .scale-marker {{ width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid #1A1A2E; position:absolute; top:-2px; transform:translateX(-50%); box-shadow:0 1px 4px rgba(0,0,0,0.35); }}
   .scale-ticks {{ display:flex; justify-content:space-between; font-size:7pt; color:var(--text-light); margin-top:5px; }}
   .scale-levels {{ display:flex; justify-content:space-between; font-size:6.5pt; color:var(--text-light); margin-top:2px; }}
 
@@ -1025,7 +1011,6 @@ def gerar_html_v2(c):
       <div class="scale-wrap">
         <div class="scale-label-row"><span>0,00</span><span>5,00</span></div>
         <div class="scale-track">
-          <div class="scale-fill" style="width:{score_pct}%"></div>
           <div class="scale-marker" style="left:{score_pct}%"></div>
         </div>
         <div class="scale-ticks"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
@@ -1110,67 +1095,6 @@ def gerar_html_v2(c):
     <div class="footer-logo">FleticVision</div>
     <div>Diagnóstico de Maturidade · {c['clinica']} · Confidencial · {c['mes_ano']}</div>
     <div>Pág. 5</div>
-  </div>
-</div>
-
-<!-- PAGE 6: PROPOSTA -->
-<div class="page inner-page">
-  <div class="inner-header">
-    <div class="inner-header-title">Fletic Vision · Proposta de Intervenção</div>
-    <div class="inner-header-client">{c['nome']} · {c['clinica']}</div>
-  </div>
-  <div class="section-header">
-    <div class="section-num">04</div>
-    <div>
-      <div class="section-title">Plano de Intervenção</div>
-      <div class="section-sub">Estruturado em 2 fases — cada módulo derivado de um gap identificado</div>
-    </div>
-  </div>
-  <div class="fase-block">
-    <div class="fase-title">Fase 1 — Fundação Operacional · {c['fase1_semanas']} semanas</div>
-    <div class="fase-sub">Menor risco, menor ticket, gera confiança para a Fase 2</div>
-    <ul class="fase-mods">{fase1_mods}</ul>
-    <div class="fase-payment">
-      <div class="payment-chip">Entrada: R$ {c['fase1_entrada']:,.0f}</div>
-      <div class="payment-chip">Conclusão: R$ {c['fase1_conclusao']:,.0f}</div>
-      <div class="payment-chip">Total Fase 1: R$ {c['fase1_entrada']+c['fase1_conclusao']:,.0f}</div>
-    </div>
-  </div>
-  <div class="fase-block">
-    <div class="fase-title">Fase 2 — Crescimento Sustentável · {c['fase2_semanas']} semanas adicionais</div>
-    <div class="fase-sub">Onde o ROI real se materializa — tecnologia, dados e modelo econômico</div>
-    <ul class="fase-mods">{fase2_mods}</ul>
-    <div class="fase-payment">
-      <div class="payment-chip">Entrada: R$ {c['fase2_entrada']:,.0f}</div>
-      <div class="payment-chip">Conclusão: R$ {c['fase2_conclusao']:,.0f}</div>
-      <div class="payment-chip">Total Fase 2: R$ {c['fase2_entrada']+c['fase2_conclusao']:,.0f}</div>
-    </div>
-  </div>
-  <div class="roi-section">
-    <div class="roi-box">
-      <div class="roi-box-title">Investimento Total</div>
-      <div class="roi-number">R$ {investimento_total:,.0f}</div>
-      <div class="roi-label">5 módulos · 12 semanas · Fixo</div>
-    </div>
-    <div class="roi-box">
-      <div class="roi-box-title">Incremento Anual Projetado</div>
-      <div class="roi-number">R$ {incremento_anual:,.0f}</div>
-      <div class="roi-label">+{inc_pct}% s/ faturamento atual (conservador)</div>
-    </div>
-    <div class="roi-box">
-      <div class="roi-box-title">ROI Estimado</div>
-      <div class="roi-number">{roi:.1f}×</div>
-      <div class="roi-label">Payback em ~{payback:.0f} meses</div>
-    </div>
-  </div>
-  <div style="margin-top:16px;background:#E8F4F4;border-radius:6px;padding:12px 16px;font-size:8pt;color:var(--text-mid);">
-    <strong style="color:var(--teal-dark)">Modelo Comercial: Fixo</strong> — Pagamento em 4 parcelas (entrada + conclusão por fase).
-    Premissas de crescimento declaradas como conservadoras. Valores reais dependem da implementação.
-  </div>
-  <div class="footer">
-    <div class="footer-logo">FleticVision</div>
-    <div>Diagnóstico de Maturidade · {c['clinica']} · Confidencial · {c['mes_ano']}</div>
-    <div>Pág. 6</div>
   </div>
 </div>
 
