@@ -11,7 +11,7 @@ Leia o arquivo `vision/fluxo-diagnostico-proposta.md` para ter acesso à metodol
 ## O que fazer com as respostas recebidas
 
 **Passo 1 — Identificação**
-Pergunte (ou extraia das respostas) o nome da instituição e a receita mensal atual — esses dois dados são obrigatórios para o cálculo de ROI da proposta.
+Extraia das respostas: nome, especialidade, cidade/bairro e faturamento mensal. Para o campo faturamento na capa do PDF, use o formato **"até R$ XX.000"** quando o cliente informar um teto (ex: "até 30k" → "até R$ 30.000"). Esses dados alimentam o dicionário do cliente em `vision/templates/gera_relatorio.py`.
 
 **Passo 2 — Pontuação dos 30 critérios**
 Para cada um dos 5 pilares, avalie os 6 critérios de 0 a 5, com uma frase de racional baseada nas respostas. Use inferência conservadora quando não houver evidência direta.
@@ -39,7 +39,7 @@ Monte a proposta com:
 - Fase 2 (~8 semanas): módulos derivados dos gaps de Pilar 3, 4 e 5
 - Investimento baseado na receita real do cliente (nunca invente valores)
 - ROI e payback usando incremento conservador de 15% ao ano
-- Dois modelos comerciais lado a lado: Fixo e Risco Compartilhado
+- Modelo comercial: **Fixo apenas** para faturamento < R$50k/mês · **Fixo + Risco Compartilhado** para ≥ R$50k/mês (ver regra matemática em `vision/fluxo-diagnostico-proposta.md`)
 - Encerre com 3 próximos passos concretos com prazo
 
 ## Regras obrigatórias
