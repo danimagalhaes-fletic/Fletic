@@ -57,7 +57,7 @@ Resumo do fluxo:
 3. Classificar o **nível de maturidade** (Inicial → Referência)
 4. Escrever o **diagnóstico narrativo** (gaps e oportunidades em linguagem executiva)
 5. Construir a **proposta comercial** em 2 fases, com os módulos derivados dos gaps
-6. Apresentar os **2 modelos comerciais** (Fixo e Risco Compartilhado) lado a lado
+6. Apresentar os modelos comerciais: **só o Fixo** para clientes com faturamento < R$50k/mês; **Fixo + Risco Compartilhado** para ≥ R$50k/mês
 7. Gerar os **3 entregáveis**: Planilha XLSX, Apresentação PPTX, Proposta PDF
 
 **Regra:** nada na proposta é genérico — cada módulo e valor deriva de um achado específico do diagnóstico.

@@ -162,10 +162,19 @@ O questionário usa perguntas abertas e operacionais (ex: "como funciona sua age
 
 | Modelo | Lógica | Quando oferecer |
 |--------|--------|-----------------|
-| **Fixo** | Preço total definido — entrada (Fase 1) + saldo (conclusão Fase 2) | Cliente avesso a risco, prefere previsibilidade |
-| **Risco Compartilhado** | Entrada menor + success fee (% sobre faturamento incremental acima de uma linha-base) | Cliente com caixa apertado, mas alto potencial |
+| **Fixo** | Preço total definido — entrada (Fase 1) + saldo (conclusão Fase 2) | **Regra padrão.** Sempre usar para clientes com faturamento < R$50k/mês |
+| **Risco Compartilhado** | Entrada + success fee (% sobre faturamento acima da linha-base) | Apenas para clientes com faturamento **≥ R$50k/mês** |
 
-> Apresente sempre os dois modelos lado a lado. Isso desloca a decisão do cliente de "contratar ou não" para "qual modelo prefiro" (ancoragem por escolha).
+**Por que o threshold de R$50k?**
+
+Com success fee de 15% e crescimento de 20%:
+- Base R$30k → incremento R$6k/mês → 15% = R$900/mês = **R$10.800/ano** — abaixo dos R$16k fixos. Fletic perde.
+- Base R$50k → incremento R$10k/mês → 15% = R$1.500/mês = **R$18.000/ano** — acima dos R$16k fixos. Fletic ganha.
+- Ponto de equilíbrio real: ~R$44k/mês. Usamos R$50k como margem de segurança.
+
+**Regra operacional:** abaixo de R$50k/mês, o sucesso fee não cobre o custo de oportunidade do modelo fixo. Apresente apenas o modelo fixo nesses casos — sem segunda opção na proposta.
+
+> Para clientes ≥ R$50k/mês: apresente os dois modelos lado a lado (ancoragem por escolha). Para clientes < R$50k/mês: apresente apenas o modelo fixo, sem mencionar success fee.
 
 ---
 
