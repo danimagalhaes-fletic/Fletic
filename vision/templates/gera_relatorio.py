@@ -1206,6 +1206,84 @@ def gerar_html_v2(c):
   </div>
 </div>
 
+<!-- PAGE 6: ASSINATURA -->
+<div class="page" style="background:#fff;display:flex;flex-direction:column;justify-content:space-between;">
+
+  <!-- topo com barra navy -->
+  <div style="background:var(--navy);padding:28px 36px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <div>
+      <div style="font-size:8pt;font-weight:700;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">FleticVision</div>
+      <div style="font-size:18pt;font-weight:800;color:#fff;line-height:1.2;">Responsabilidade Técnica</div>
+      <div style="font-size:9pt;color:rgba(255,255,255,0.6);margin-top:4px;">Este relatório foi elaborado pela equipe Fletic e reflete análise independente baseada nas respostas fornecidas.</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:8pt;color:rgba(255,255,255,0.5);">{c['mes_ano']}</div>
+      <div style="font-size:8pt;color:rgba(255,255,255,0.5);">Confidencial</div>
+    </div>
+  </div>
+
+  <!-- corpo central -->
+  <div style="flex:1;padding:32px 36px;display:flex;flex-direction:column;gap:22px;">
+
+    <!-- declaração -->
+    <div style="background:#F7F8FA;border-left:4px solid var(--teal);padding:16px 20px;border-radius:0 6px 6px 0;">
+      <div style="font-size:9pt;color:var(--text);line-height:1.6;">
+        O diagnóstico de maturidade digital <strong>{c['clinica']}</strong> foi conduzido pela Fletic Saúde Digital
+        com base em metodologia proprietária de 30 critérios distribuídos em 5 pilares estratégicos.
+        As análises, pontuações e recomendações apresentadas são de responsabilidade exclusiva das profissionais
+        signatárias e destinam-se ao uso interno da instituição avaliada.
+      </div>
+    </div>
+
+    <!-- assinaturas -->
+    <div style="display:flex;gap:32px;margin-top:8px;">
+
+      <!-- Dani -->
+      <div style="flex:1;border:1px solid #E2E8F0;border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--teal-bg);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+          <span style="font-size:22pt;font-weight:800;color:var(--teal);">D</span>
+        </div>
+        <div style="font-size:12pt;font-weight:800;color:var(--navy);margin-bottom:2px;">Danielle Magalhães</div>
+        <div style="font-size:8.5pt;color:var(--teal);font-weight:600;margin-bottom:4px;">CEO · Co-fundadora</div>
+        <div style="font-size:8pt;color:#64748B;">Fletic Saúde Digital</div>
+        <div style="width:100%;height:1px;background:#E2E8F0;margin:16px 0;"></div>
+        <div style="font-size:7.5pt;color:#94A3B8;">dani.magalhaes@fletic.com.br</div>
+      </div>
+
+      <!-- Simone -->
+      <div style="flex:1;border:1px solid #E2E8F0;border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--teal-bg);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+          <span style="font-size:22pt;font-weight:800;color:var(--teal);">S</span>
+        </div>
+        <div style="font-size:12pt;font-weight:800;color:var(--navy);margin-bottom:2px;">Simone Farah</div>
+        <div style="font-size:8.5pt;color:var(--teal);font-weight:600;margin-bottom:4px;">CMO · Especialista Médica</div>
+        <div style="font-size:8pt;color:#64748B;">Fletic Saúde Digital</div>
+        <div style="width:100%;height:1px;background:#E2E8F0;margin:16px 0;"></div>
+        <div style="font-size:7.5pt;color:#94A3B8;">simone.farah@fletic.com.br</div>
+      </div>
+
+    </div>
+
+    <!-- lgpd note -->
+    <div style="background:#FFF8F0;border:1px solid #FDDCB0;border-radius:6px;padding:12px 16px;">
+      <div style="font-size:7.5pt;color:#92400E;line-height:1.5;">
+        <strong>Confidencialidade e LGPD:</strong> Este documento contém informações estratégicas e operacionais da
+        {c['clinica']}. Sua reprodução, distribuição ou uso fora do contexto da relação entre as partes é
+        vedada sem autorização prévia. Os dados foram tratados em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei 13.709/2018).
+      </div>
+    </div>
+
+  </div>
+
+  <!-- rodapé final -->
+  <div class="footer" style="border-top:2px solid var(--navy);">
+    <div class="footer-logo">FleticVision</div>
+    <div>Diagnóstico de Maturidade · {c['clinica']} · Confidencial · {c['mes_ano']}</div>
+    <div>Pág. 6</div>
+  </div>
+
+</div>
+
 </body>
 </html>"""
     return html

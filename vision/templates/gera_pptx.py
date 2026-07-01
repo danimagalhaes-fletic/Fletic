@@ -190,43 +190,103 @@ def gerar_pptx(c):
     # Pilar table sorted by score ascending
     pilar_sorted = sorted(enumerate(scores), key=lambda x: x[1])
 
-    # ── SLIDE 1 — CAPA ───────────────────────────────────────────────────────
+    # ── SLIDE 1 — CAPA (split layout: navy left / white right) ──────────────
     s = ns(prs)
-    box(s, 0, 0, W, H, fill=WHITE)
-    box(s, 0, 0, W, Inches(0.06), fill=TEAL)
-    box(s, 0, 0, Inches(0.06), H, fill=TEAL)
-
-    txt(s, "FLETICVISION  ·  PROPOSTA COMERCIAL", Inches(0.22), Inches(0.22),
-        Inches(7), Inches(0.28), size=8, bold=True, color=TEAL)
-    rule(s, Inches(0.54), l=Inches(0.22), w=Inches(9.5))
-    txt(s, c["titulo_capa"], Inches(0.22), Inches(0.66), Inches(8.5), Inches(1.1),
-        size=26, bold=True, color=NAVY)
-    txt(s, f"Estrutura em 2 Fases  ·  12 Semanas  ·  {c['mes_ano']}",
-        Inches(0.22), Inches(1.82), Inches(7), Inches(0.3), size=11, color=GRAY)
-    rule(s, Inches(2.28), l=Inches(0.22), w=Inches(9.5))
-
     pc_idx = c["pilar_critico_idx"]
+
+    # Left panel — navy background (~38% width)
+    lp_w = Inches(3.8)
+    box(s, 0, 0, lp_w, H, fill=NAVY)
+    # Teal top accent strip on left panel
+    box(s, 0, 0, lp_w, Inches(0.08), fill=TEAL)
+    # Teal decorative circle (bottom-right of left panel, half-visible)
+    from pptx.util import Emu
+    circ_size = Inches(2.2)
+    box(s, lp_w - circ_size*0.55, H - circ_size*0.55, circ_size, circ_size,
+        fill=RGBColor(0x09, 0x50, 0x52))  # teal_dark, no line — decorative
+
+    # Brand tag
+    txt(s, "FLETICVISION", Inches(0.28), Inches(0.24), lp_w - Inches(0.36),
+        Inches(0.28), size=8, bold=True, color=TEAL)
+    txt(s, "PROPOSTA COMERCIAL", Inches(0.28), Inches(0.50), lp_w - Inches(0.36),
+        Inches(0.22), size=7.5, color=RGBColor(0x94, 0xA3, 0xB8))
+
+    # Divider line
+    box(s, Inches(0.28), Inches(0.80), lp_w - Inches(0.56), Inches(0.025),
+        fill=RGBColor(0x2E, 0x5A, 0x8A))
+
+    # Main title — big white
+    txt(s, c["titulo_capa"], Inches(0.28), Inches(0.98), lp_w - Inches(0.36),
+        Inches(2.0), size=20, bold=True, color=WHITE)
+
+    # Client details
+    txt(s, c["dra"], Inches(0.28), Inches(3.16), lp_w - Inches(0.36),
+        Inches(0.32), size=9.5, bold=True, color=WHITE)
+    txt(s, c["especialidade"], Inches(0.28), Inches(3.50), lp_w - Inches(0.36),
+        Inches(0.26), size=8, color=RGBColor(0x94, 0xA3, 0xB8))
+    txt(s, c["cidade"], Inches(0.28), Inches(3.76), lp_w - Inches(0.36),
+        Inches(0.26), size=8, color=RGBColor(0x94, 0xA3, 0xB8))
+
+    # Month/year at bottom-left
+    txt(s, c["mes_ano"], Inches(0.28), Inches(4.96), lp_w - Inches(0.36),
+        Inches(0.26), size=8, color=RGBColor(0x64, 0x74, 0x8B))
+
+    # Right panel — white
+    rp_l = lp_w
+    rp_w = W - lp_w
+    box(s, rp_l, 0, rp_w, H, fill=WHITE)
+    # Thin teal left border on right panel
+    box(s, rp_l, 0, Inches(0.04), H, fill=TEAL)
+
+    # "12 semanas · 2 Fases" tag
+    txt(s, f"Estrutura em 2 Fases  ·  12 Semanas", rp_l + Inches(0.28),
+        Inches(0.24), rp_w - Inches(0.36), Inches(0.26), size=8, color=GRAY)
+    box(s, rp_l + Inches(0.28), Inches(0.56), rp_w - Inches(0.56), Inches(0.02),
+        fill=GRAY_LINE)
+
+    # 4 metric boxes (2×2 grid)
     mets = [
         ("Score de Maturidade", f"{sfmt} / 5,0", "Nível Inicial", TEAL),
-        ("Pilar Crítico", PILAR_NAMES[pc_idx], f"{score_fmt(scores[pc_idx])} / 5,0", RED),
-        ("Receita mensal", f"até R$ {rec:,}".replace(",","."), "base de referência", TEAL),
-        ("Payback projetado", f"~{pb:.0f} meses", "estimativa conservadora", TEAL),
+        ("Pilar Crítico",        PILAR_CODES[pc_idx] + " — " + PILAR_NAMES[pc_idx].split(" &")[0],
+         f"Score {score_fmt(scores[pc_idx])}", RED),
+        ("Faturamento",         f"até R$ {rec:,}".replace(",", "."), "base conservadora", TEAL),
+        ("Payback projetado",   f"~{pb:.0f} meses", "estimativa conservadora", TEAL),
     ]
-    mw = Inches(2.2)
+    mcols, mrows = 2, 2
+    mw2 = (rp_w - Inches(0.56) - Inches(0.16)) / 2
+    mh2 = Inches(1.3)
     for i, (lab, val, sub, col) in enumerate(mets):
-        ml = Inches(0.22) + i * (mw + Inches(0.12))
-        txt(s, lab, ml, Inches(2.42), mw, Inches(0.24), size=8, color=GRAY)
-        txt(s, val, ml, Inches(2.68), mw, Inches(0.52), size=16, bold=True, color=col)
-        txt(s, sub, ml, Inches(3.24), mw, Inches(0.24), size=8, color=GRAY)
+        mc = i % mcols; mr = i // mcols
+        ml2 = rp_l + Inches(0.28) + mc * (mw2 + Inches(0.16))
+        mt2 = Inches(0.74) + mr * (mh2 + Inches(0.14))
+        box(s, ml2, mt2, mw2, mh2, fill=GRAY_BG)
+        box(s, ml2, mt2, Inches(0.04), mh2, fill=col)
+        txt(s, lab, ml2 + Inches(0.14), mt2 + Inches(0.1), mw2 - Inches(0.18),
+            Inches(0.26), size=7.5, color=GRAY)
+        txt(s, val, ml2 + Inches(0.14), mt2 + Inches(0.38), mw2 - Inches(0.18),
+            Inches(0.56), size=14, bold=True, color=col)
+        txt(s, sub, ml2 + Inches(0.14), mt2 + Inches(0.98), mw2 - Inches(0.18),
+            Inches(0.24), size=7.5, color=GRAY)
 
-    rule(s, Inches(3.58), l=Inches(0.22), w=Inches(9.5))
-    txt(s, f"{c['dra']}  ·  {c['especialidade']}  ·  {c['cidade']}",
-        Inches(0.22), Inches(3.7), Inches(8), Inches(0.28), size=9, color=NAVY)
+    # Divider
+    box(s, rp_l + Inches(0.28), Inches(3.56), rp_w - Inches(0.56), Inches(0.02),
+        fill=GRAY_LINE)
 
-    box(s, Inches(0.22), Inches(4.18), Inches(9.5), Inches(0.72), fill=TEAL_BG)
-    box(s, Inches(0.22), Inches(4.18), Inches(0.04), Inches(0.72), fill=TEAL)
-    txt(s, c["teaser_text"], Inches(0.36), Inches(4.26), Inches(9.2), Inches(0.58),
-        size=8.5, color=NAVY)
+    # Teaser block
+    box(s, rp_l + Inches(0.28), Inches(3.70), rp_w - Inches(0.56), Inches(1.0),
+        fill=TEAL_BG)
+    box(s, rp_l + Inches(0.28), Inches(3.70), Inches(0.04), Inches(1.0), fill=TEAL)
+    txt(s, c["teaser_text"], rp_l + Inches(0.42), Inches(3.78),
+        rp_w - Inches(0.72), Inches(0.84), size=8.5, color=NAVY)
+
+    # Bottom signature line
+    txt(s, "Danielle Magalhães  ·  Simone Farah  ·  Fletic Saúde Digital",
+        rp_l + Inches(0.28), Inches(4.88), rp_w - Inches(0.36), Inches(0.26),
+        size=8, bold=True, color=NAVY)
+    txt(s, "contato@fletic.com.br  ·  fletic.com.br",
+        rp_l + Inches(0.28), Inches(5.12), rp_w - Inches(0.36), Inches(0.24),
+        size=7.5, color=GRAY)
+
     footer(s, "1", c)
 
     # ── SLIDE 2 — DIAGNÓSTICO ────────────────────────────────────────────────
@@ -627,6 +687,61 @@ def gerar_pptx(c):
     txt(s, "contato@fletic.com.br", Inches(6.1), Inches(5.34),
         Inches(3.5), Inches(0.22), size=8.5, color=GRAY, align=PP_ALIGN.RIGHT)
     footer(s, "12", c)
+
+    # ── SLIDE 13 — PROGRAMA DE ACOMPANHAMENTO & ESCALA (cross-sell) ──────────
+    s = ns(prs)
+    box(s, 0, 0, W, H, fill=WHITE)
+    # Dark navy top band
+    box(s, 0, 0, W, Inches(1.52), fill=NAVY)
+    box(s, 0, 0, W, Inches(0.06), fill=TEAL)
+    txt(s, "FLETICVISION  ·  DEPOIS DO PROJETO", Inches(0.3), Inches(0.18),
+        Inches(7), Inches(0.26), size=8, bold=True, color=TEAL)
+    txt(s, "Programa de Acompanhamento & Escala",
+        Inches(0.3), Inches(0.52), Inches(9.2), Inches(0.72),
+        size=22, bold=True, color=WHITE)
+
+    txt(s, "O que acontece depois das 12 semanas — para quem quer sustentar e ampliar os resultados.",
+        Inches(0.3), Inches(1.58), Inches(9.2), Inches(0.3), size=9, color=GRAY)
+    box(s, Inches(0.3), Inches(1.94), Inches(9.4), Inches(0.02), fill=GRAY_LINE)
+
+    # 4 pillars of the accompaniment program
+    prog_items = [
+        (TEAL,  "Revisão Estratégica Trimestral",
+         "A cada 3 meses, revisamos KPIs, metas e prioridades com base nos dados reais. Nada no piloto automático."),
+        (NAVY,  "Atualização de Dashboards e Indicadores",
+         "Mantemos os painéis vivos: novos dados, novos indicadores conforme a clínica evolui."),
+        (TEAL,  "Suporte a Novas Decisões",
+         "Antes de contratar, investir ou mudar modelo de atendimento — você tem nossa análise técnica."),
+        (NAVY,  "Acesso Direto à Equipe Fletic",
+         "Canal prioritário com Dani e Simone para dúvidas, decisões urgentes e oportunidades não mapeadas."),
+    ]
+    iw = (W - Inches(0.6) - Inches(0.36)) / 4
+    for i, (col, title3, desc4) in enumerate(prog_items):
+        il = Inches(0.3) + i * (iw + Inches(0.12))
+        it = Inches(2.06)
+        ih = Inches(2.68)
+        box(s, il, it, iw, ih, fill=GRAY_BG)
+        box(s, il, it, iw, Inches(0.05), fill=col)
+        # Number badge
+        box(s, il + Inches(0.14), it + Inches(0.18), Inches(0.32), Inches(0.32), fill=col)
+        txt(s, str(i+1), il + Inches(0.14), it + Inches(0.16), Inches(0.32), Inches(0.36),
+            size=11, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+        txt(s, title3, il + Inches(0.14), it + Inches(0.62), iw - Inches(0.22),
+            Inches(0.64), size=9, bold=True, color=NAVY)
+        txt(s, desc4, il + Inches(0.14), it + Inches(1.34), iw - Inches(0.22),
+            Inches(1.22), size=8, color=GRAY)
+
+    # Pricing note / positioning block
+    box(s, Inches(0.3), Inches(4.86), Inches(5.5), Inches(0.52), fill=TEAL_BG)
+    box(s, Inches(0.3), Inches(4.86), Inches(0.04), Inches(0.52), fill=TEAL)
+    txt(s, "Investimento anual definido ao final da Fase 2, com base nos resultados alcançados e nas metas de crescimento da clínica.",
+        Inches(0.44), Inches(4.92), Inches(5.16), Inches(0.38), size=8, italic=True, color=TEAL_DARK)
+
+    box(s, Inches(6.0), Inches(4.86), Inches(3.7), Inches(0.52), fill=GRAY_BG, line=GRAY_LINE, lw=Pt(0.75))
+    txt(s, "Conversamos sobre isso no encerramento da Fase 2.",
+        Inches(6.14), Inches(4.92), Inches(3.44), Inches(0.38), size=9, bold=True, color=NAVY)
+
+    footer(s, "13", c)
 
     prs.save(c["output"])
     print(f"PPT gerado: {c['output']}  ({len(list(prs.slides))} slides)")
