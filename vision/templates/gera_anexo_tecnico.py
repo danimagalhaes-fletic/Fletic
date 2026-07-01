@@ -461,35 +461,35 @@ body {{
 .mbt {{ font-size: 7pt; color: #718096; margin-top: 3px; line-height: 1.35; }}
 
 /* ── MODULE ── */
-.mod {{ margin-bottom: 7mm; }}
+.mod {{ margin-bottom: 5mm; }}
 .mh {{
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 10px;
   background: #edf2f7;
-  padding: 9px 12px;
+  padding: 7px 12px;
   border-left: none;
 }}
 .mn {{
   background: #0F7173;
   color: #fff;
-  font-size: 15pt; font-weight: 800;
-  min-width: 40px; height: 40px;
+  font-size: 13pt; font-weight: 800;
+  min-width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }}
 .mi {{ }}
-.mt {{ font-size: 10pt; font-weight: 800; color: #1B3A5C; }}
-.mo {{ font-size: 8.5pt; color: #718096; font-style: italic; margin-top: 2px; }}
+.mt {{ font-size: 9.5pt; font-weight: 800; color: #1B3A5C; }}
+.mo {{ font-size: 8pt; color: #718096; font-style: italic; margin-top: 2px; }}
 
 /* ENTREGAVEIS */
 .es {{ border: 1px solid #e2e8f0; border-top: none; }}
-.el {{ background: #1B3A5C; color: #fff; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; padding: 5px 12px; }}
-.eb {{ padding: 2px 0; }}
+.el {{ background: #1B3A5C; color: #fff; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; padding: 4px 12px; }}
+.eb {{ padding: 1px 0; }}
 .sep {{ height: 1px; background: #e2e8f0; margin: 0 12px; }}
-.ei {{ padding: 7px 12px; display: flex; align-items: flex-start; gap: 9px; }}
-.di {{ color: #0F7173; font-size: 10pt; flex-shrink: 0; margin-top: 1px; }}
-.et {{ font-size: 9pt; font-weight: 700; color: #2d3748; line-height: 1.45; }}
-.sub {{ list-style: none; margin: 5px 0 0 0; padding: 0; }}
-.sub li {{ font-size: 8.5pt; color: #718096; padding: 2px 0 2px 16px; position: relative; line-height: 1.4; }}
+.ei {{ padding: 5px 12px; display: flex; align-items: flex-start; gap: 9px; }}
+.di {{ color: #0F7173; font-size: 9.5pt; flex-shrink: 0; margin-top: 1px; }}
+.et {{ font-size: 8.5pt; font-weight: 700; color: #2d3748; line-height: 1.4; }}
+.sub {{ list-style: none; margin: 4px 0 0 0; padding: 0; }}
+.sub li {{ font-size: 8pt; color: #718096; padding: 1.5px 0 1.5px 16px; position: relative; line-height: 1.35; }}
 .sub li::before {{ content: "—"; position: absolute; left: 0; color: #a0aec0; }}
 
 /* ── CRONOGRAMA ── */
