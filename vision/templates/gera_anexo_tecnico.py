@@ -538,7 +538,7 @@ body {{
 </head>
 <body>
 
-<!-- ═══════════ PAGE 1: título · objetivo · metodologia · M01 ═══════════ -->
+<!-- ═══════════ PAGE 1: título · objetivo · metodologia ═══════════ -->
 <div class="page">
   {ph(1)}
   <div class="ct">
@@ -572,15 +572,19 @@ body {{
     </div>
 
     <div class="sh">ESCOPO DETALHADO</div>
-    {mod_html(c["modulos"][0])}
+    <div class="met-p" style="margin-bottom:0">
+      As próximas páginas detalham os entregáveis de cada módulo, o cronograma de execução
+      e os critérios de sucesso do projeto.
+    </div>
   </div>
   {pf(1)}
 </div>
 
-<!-- ═══════════ PAGE 2: M02 · M03 ═══════════ -->
+<!-- ═══════════ PAGE 2: M01 · M02 · M03 ═══════════ -->
 <div class="page">
   {ph(2)}
   <div class="ct">
+    {mod_html(c["modulos"][0])}
     {mod_html(c["modulos"][1])}
     {mod_html(c["modulos"][2])}
   </div>
