@@ -233,65 +233,90 @@ def gerar_pptx(c):
     txt(s, "Proposta válida por 30 dias", Inches(0.28), Inches(4.99), lp_w - Inches(0.36),
         Inches(0.22), size=7.5, italic=True, color=RGBColor(0x94, 0xA3, 0xB8))
 
-    # Right panel — white
+    # Right panel — white, clean (no data on cover)
     rp_l = lp_w
     rp_w = W - lp_w
     box(s, rp_l, 0, rp_w, H, fill=WHITE)
-    # Thin teal left border on right panel
     box(s, rp_l, 0, Inches(0.04), H, fill=TEAL)
 
-    # "12 semanas · 2 Fases" tag
-    txt(s, f"Estrutura em 2 Fases  ·  12 Semanas", rp_l + Inches(0.28),
-        Inches(0.24), rp_w - Inches(0.36), Inches(0.26), size=8, color=GRAY)
-    box(s, rp_l + Inches(0.28), Inches(0.56), rp_w - Inches(0.56), Inches(0.02),
+    # Tagline / positioning statement centrado
+    txt(s, "Diagnóstico de Maturidade Digital", rp_l + Inches(0.32),
+        Inches(0.56), rp_w - Inches(0.44), Inches(0.32), size=9, color=GRAY)
+    box(s, rp_l + Inches(0.32), Inches(0.94), rp_w - Inches(0.64), Inches(0.02),
         fill=GRAY_LINE)
 
-    # 4 metric boxes (2×2 grid)
-    mets = [
-        ("Score de Maturidade", f"{sfmt} / 5,0", "Nível Inicial", TEAL),
-        ("Pilar Crítico",        PILAR_CODES[pc_idx] + " — " + PILAR_NAMES[pc_idx].split(" &")[0],
-         f"Score {score_fmt(scores[pc_idx])}", RED),
-        ("Faturamento",         f"até R$ {rec:,}".replace(",", "."), "base conservadora", TEAL),
-        ("Payback projetado",   f"~{pb:.0f} meses", "estimativa conservadora", TEAL),
+    # Visual statement — large centered text
+    txt(s, "Transformação digital estruturada.\nResultados mensuráveis.",
+        rp_l + Inches(0.32), Inches(1.18), rp_w - Inches(0.44), Inches(1.44),
+        size=18, bold=True, color=NAVY)
+
+    # Feature pillars (clean icon-less list)
+    features = [
+        "5 módulos  ·  2 Fases  ·  12 semanas",
+        "Escopo fechado  ·  sem custo variável",
+        "Entregáveis práticos desde a semana 1",
     ]
-    mcols, mrows = 2, 2
-    mw2 = (rp_w - Inches(0.56) - Inches(0.16)) / 2
-    mh2 = Inches(1.3)
-    for i, (lab, val, sub, col) in enumerate(mets):
-        mc = i % mcols; mr = i // mcols
-        ml2 = rp_l + Inches(0.28) + mc * (mw2 + Inches(0.16))
-        mt2 = Inches(0.74) + mr * (mh2 + Inches(0.14))
-        box(s, ml2, mt2, mw2, mh2, fill=GRAY_BG)
-        box(s, ml2, mt2, Inches(0.04), mh2, fill=col)
-        txt(s, lab, ml2 + Inches(0.14), mt2 + Inches(0.1), mw2 - Inches(0.18),
-            Inches(0.26), size=7.5, color=GRAY)
-        txt(s, val, ml2 + Inches(0.14), mt2 + Inches(0.38), mw2 - Inches(0.18),
-            Inches(0.56), size=14, bold=True, color=col)
-        txt(s, sub, ml2 + Inches(0.14), mt2 + Inches(0.98), mw2 - Inches(0.18),
-            Inches(0.24), size=7.5, color=GRAY)
+    for fi, feat in enumerate(features):
+        ft = Inches(2.82) + fi * Inches(0.44)
+        box(s, rp_l + Inches(0.32), ft + Inches(0.1), Inches(0.04), Inches(0.24), fill=TEAL)
+        txt(s, feat, rp_l + Inches(0.48), ft + Inches(0.04), rp_w - Inches(0.6),
+            Inches(0.34), size=9, color=DARK)
 
-    # Divider
-    box(s, rp_l + Inches(0.28), Inches(3.56), rp_w - Inches(0.56), Inches(0.02),
+    box(s, rp_l + Inches(0.32), Inches(4.26), rp_w - Inches(0.64), Inches(0.02),
         fill=GRAY_LINE)
 
-    # Teaser block
-    box(s, rp_l + Inches(0.28), Inches(3.70), rp_w - Inches(0.56), Inches(1.0),
-        fill=TEAL_BG)
-    box(s, rp_l + Inches(0.28), Inches(3.70), Inches(0.04), Inches(1.0), fill=TEAL)
-    txt(s, c["teaser_text"], rp_l + Inches(0.42), Inches(3.78),
-        rp_w - Inches(0.72), Inches(0.84), size=8.5, color=NAVY)
-
-    # Bottom signature line
-    txt(s, "Danielle Magalhães  ·  Simone Farah  ·  Fletic Saúde Digital",
-        rp_l + Inches(0.28), Inches(4.88), rp_w - Inches(0.36), Inches(0.26),
-        size=8, bold=True, color=NAVY)
-    txt(s, "contato@fletic.com.br  ·  fletic.com.br",
-        rp_l + Inches(0.28), Inches(5.12), rp_w - Inches(0.36), Inches(0.24),
-        size=7.5, color=GRAY)
+    # Signature block at bottom
+    txt(s, "Danielle Magalhães  ·  Simone Farah",
+        rp_l + Inches(0.32), Inches(4.38), rp_w - Inches(0.44), Inches(0.28),
+        size=9, bold=True, color=NAVY)
+    txt(s, "Fletic Saúde Digital  ·  contato@fletic.com.br",
+        rp_l + Inches(0.32), Inches(4.66), rp_w - Inches(0.44), Inches(0.24),
+        size=8, color=GRAY)
 
     footer(s, "1", c)
 
-    # ── SLIDE 2 — DIAGNÓSTICO ────────────────────────────────────────────────
+    # ── SLIDE 2 — SNAPSHOT (dados que saíram da capa) ────────────────────────
+    s = ns(prs)
+    box(s, 0, 0, W, H, fill=WHITE)
+    slide_header(s, "VISÃO GERAL", "Resumo do Diagnóstico",
+                 f"Onde {c['a_clinica']} está hoje e o que esta proposta endereça")
+
+    # 4 metrics em faixa horizontal
+    mets = [
+        ("Score de Maturidade",  f"{sfmt} / 5,0",  "Nível Inicial",               TEAL),
+        ("Pilar Crítico",        PILAR_CODES[pc_idx] + " — " + PILAR_NAMES[pc_idx].split(" &")[0],
+         f"Score {score_fmt(scores[pc_idx])}",                                     RED),
+        ("Faturamento mensal",   f"até R$ {rec:,}".replace(",","."), "referência", TEAL),
+        ("Payback projetado",    f"~{pb:.0f} meses", "estimativa conservadora",    TEAL),
+    ]
+    mw4 = (W - Inches(0.6) - Inches(0.36)) / 4
+    mh4 = Inches(1.36)
+    for i, (lab, val, sub, col) in enumerate(mets):
+        ml4 = Inches(0.3) + i * (mw4 + Inches(0.12))
+        mt4 = Inches(1.38)
+        box(s, ml4, mt4, mw4, mh4, fill=GRAY_BG)
+        box(s, ml4, mt4, Inches(0.04), mh4, fill=col)
+        txt(s, lab, ml4+Inches(0.14), mt4+Inches(0.1),  mw4-Inches(0.18), Inches(0.26), size=7.5, color=GRAY)
+        txt(s, val, ml4+Inches(0.14), mt4+Inches(0.38), mw4-Inches(0.18), Inches(0.56), size=14, bold=True, color=col)
+        txt(s, sub, ml4+Inches(0.14), mt4+Inches(0.98), mw4-Inches(0.18), Inches(0.24), size=7.5, color=GRAY)
+
+    rule(s, Inches(2.92))
+
+    # Teaser block
+    box(s, Inches(0.3), Inches(3.04), Inches(9.4), Inches(1.1), fill=TEAL_BG)
+    box(s, Inches(0.3), Inches(3.04), Inches(0.04), Inches(1.1), fill=TEAL)
+    txt(s, c["teaser_text"], Inches(0.44), Inches(3.14), Inches(9.1), Inches(0.9),
+        size=9, color=NAVY)
+
+    # Estrutura resumo
+    txt(s, "Estrutura da proposta:", Inches(0.3), Inches(4.26),
+        Inches(2.2), Inches(0.26), size=8, bold=True, color=NAVY)
+    txt(s, "Fase 1 (4 semanas)  ·  Fase 2 (8 semanas)  ·  5 módulos  ·  Investimento total R$ 24.000",
+        Inches(0.3), Inches(4.54), Inches(9.4), Inches(0.24), size=8.5, color=GRAY)
+
+    footer(s, "2", c)
+
+    # ── SLIDE 3 — DIAGNÓSTICO ────────────────────────────────────────────────
     s = ns(prs)
     box(s, 0, 0, W, H, fill=WHITE)
     slide_header(s, "DIAGNÓSTICO", "Diagnóstico Atual",
@@ -316,9 +341,9 @@ def gerar_pptx(c):
     txt(s, f"Pilar mais crítico: {PILAR_NAMES[pc_idx]}  {score_fmt(scores[pc_idx])}/5",
         Inches(5.8), H-Inches(0.72), Inches(3.8), Inches(0.3),
         size=8.5, bold=True, color=RED, align=PP_ALIGN.RIGHT)
-    footer(s, "2", c)
+    footer(s, "3", c)
 
-    # ── SLIDE 3 — SPIDER ─────────────────────────────────────────────────────
+    # ── SLIDE 4 — SPIDER ─────────────────────────────────────────────────────
     s = ns(prs)
     box(s, 0, 0, W, H, fill=WHITE)
     slide_header(s, "MATURIDADE", "Score de Maturidade por Pilar",
@@ -350,9 +375,9 @@ def gerar_pptx(c):
     box(s, tl, tt+Inches(3.58), tw, Inches(0.34), fill=TEAL_BG)
     txt(s, "Nível INICIAL — Operação artesanal, sem estrutura digital relevante",
         tl+Inches(0.1), tt+Inches(3.62), tw-Inches(0.15), Inches(0.26), size=8, color=NAVY)
-    footer(s, "3", c)
+    footer(s, "4", c)
 
-    # ── SLIDE 4 — MODELO ATUAL vs ESTRUTURADO ────────────────────────────────
+    # ── SLIDE 5 — MODELO ATUAL vs ESTRUTURADO ────────────────────────────────
     s = ns(prs)
     box(s, 0, 0, W, H, fill=WHITE)
     slide_header(s, "VISÃO", "Modelo Atual vs. Modelo Estruturado",
@@ -382,7 +407,7 @@ def gerar_pptx(c):
 
     box(s, Inches(0.3), H-Inches(0.62), Inches(9.4), Inches(0.3), fill=TEAL_BG)
     txt(s, c["resultado_line"], Inches(0.44), H-Inches(0.6), Inches(9.1), Inches(0.26), size=8, color=NAVY)
-    footer(s, "4", c)
+    footer(s, "5", c)
 
     # ── SLIDE 5 — O QUE SERÁ CONSTRUÍDO ──────────────────────────────────────
     s = ns(prs)
@@ -411,7 +436,7 @@ def gerar_pptx(c):
             it = mt+Inches(1.42)+j*Inches(0.54)
             txt(s, "▸", ml+Inches(0.1), it, Inches(0.22), Inches(0.4), size=8, bold=True, color=cor)
             txt(s, item, ml+Inches(0.3), it, mw3-Inches(0.4), Inches(0.4), size=8, color=GRAY)
-    footer(s, "5", c)
+    footer(s, "6", c)
 
     # ── SLIDE 6 — CRONOGRAMA ─────────────────────────────────────────────────
     s = ns(prs)
@@ -464,7 +489,7 @@ def gerar_pptx(c):
     box(s, gl, H-Inches(0.66), W-gl*2, Inches(0.28), fill=TEAL_BG)
     txt(s, "▸  Programa de Acompanhamento & Escala: conversa que acontece ao final da Fase 2 — para clínicas que queiram continuar evoluindo.",
         gl+Inches(0.1), H-Inches(0.64), W-gl*2-Inches(0.15), Inches(0.26), size=8, color=TEAL)
-    footer(s, "6", c)
+    footer(s, "7", c)
 
     # ── SLIDE 7 — FASE 1 DETALHE ─────────────────────────────────────────────
     s = ns(prs)
@@ -488,7 +513,7 @@ def gerar_pptx(c):
             jt = ct3+Inches(1.32)+j*Inches(0.44)
             txt(s, "▸", ml+Inches(0.15), jt, Inches(0.22), Inches(0.38), size=9, bold=True, color=TEAL)
             txt(s, item, ml+Inches(0.38), jt, cw3-Inches(0.48), Inches(0.38), size=8.5, color=DARK)
-    footer(s, "7", c)
+    footer(s, "8", c)
 
     # ── SLIDE 8 — FASE 2 DETALHE ─────────────────────────────────────────────
     s = ns(prs)
@@ -514,7 +539,7 @@ def gerar_pptx(c):
             jt = mt4+Inches(1.32)+j*Inches(0.46)
             txt(s, "▸", ml+Inches(0.15), jt, Inches(0.22), Inches(0.4), size=9, bold=True, color=NAVY)
             txt(s, item, ml+Inches(0.38), jt, mw4-Inches(0.48), Inches(0.4), size=8.5, color=DARK)
-    footer(s, "8", c)
+    footer(s, "9", c)
 
     # ── SLIDE 9 — ESTRUTURA GERAL ────────────────────────────────────────────
     s = ns(prs)
@@ -549,7 +574,7 @@ def gerar_pptx(c):
         box(s, fl+Inches(0.14), ft+Inches(2.82), fw-Inches(0.28), Inches(0.02), fill=GRAY_LINE)
         txt(s, valor, fl+Inches(0.14), ft+Inches(2.94), fw-Inches(0.18), Inches(0.5), size=15, bold=True, color=cor)
         txt(s, nota,  fl+Inches(0.14), ft+Inches(3.46), fw-Inches(0.18), Inches(0.3), size=7.5, color=GRAY, italic=True)
-    footer(s, "9", c)
+    footer(s, "10", c)
 
     # ── SLIDE 10 — IMPACTO FINANCEIRO ────────────────────────────────────────
     s = ns(prs)
@@ -593,7 +618,7 @@ def gerar_pptx(c):
     txt(s, "⚠  Premissas conservadoras:", Inches(0.44), Inches(4.32), Inches(2.2), Inches(0.24),
         size=8.5, bold=True, color=NAVY)
     txt(s, c["premissas_text"], Inches(0.44), Inches(4.56), Inches(9.1), Inches(0.22), size=7.5, color=GRAY)
-    footer(s, "10", c)
+    footer(s, "11", c)
 
     # ── SLIDE 11 — MODELO COMERCIAL ──────────────────────────────────────────
     s = ns(prs)
@@ -646,7 +671,7 @@ def gerar_pptx(c):
         jt2 = ot2 + Inches(0.46) + j2 * Inches(0.52)
         txt(s, "✔", rl2+Inches(0.16), jt2, Inches(0.24), Inches(0.38), size=9, bold=True, color=TEAL)
         txt(s, item2, rl2+Inches(0.42), jt2, rw-Inches(0.54), Inches(0.38), size=8.5, color=DARK)
-    footer(s, "11", c)
+    footer(s, "12", c)
 
     # ── SLIDE 12 — PRÓXIMOS PASSOS ────────────────────────────────────────────
     s = ns(prs)
@@ -688,7 +713,7 @@ def gerar_pptx(c):
         Inches(3.5), Inches(0.24), size=9, bold=True, color=NAVY, align=PP_ALIGN.RIGHT)
     txt(s, "contato@fletic.com.br  ·  Proposta válida por 30 dias", Inches(6.1), Inches(5.34),
         Inches(3.5), Inches(0.22), size=8, color=GRAY, align=PP_ALIGN.RIGHT)
-    footer(s, "12", c)
+    footer(s, "13", c)
 
     # ── SLIDE 13 — PROGRAMA DE ACOMPANHAMENTO & ESCALA (cross-sell) ──────────
     s = ns(prs)
@@ -708,10 +733,10 @@ def gerar_pptx(c):
 
     # 4 pillars of the accompaniment program
     prog_items = [
-        (TEAL,  "Revisão Estratégica Trimestral",
-         "A cada 3 meses, revisamos KPIs, metas e prioridades com base nos dados reais. Nada no piloto automático."),
-        (NAVY,  "Atualização de Dashboards e Indicadores",
-         "Mantemos os painéis vivos: novos dados, novos indicadores conforme a clínica evolui."),
+        (TEAL,  "Reunião Estratégica Mensal",
+         "Todo mês revisamos KPIs, metas e prioridades com base nos dados reais. Decisões fundamentadas, não no piloto automático."),
+        (NAVY,  "Acompanhamento de Indicadores Mensal",
+         "Mantemos os painéis vivos com atualização mensal: novos dados, novos indicadores conforme a clínica evolui."),
         (TEAL,  "Suporte a Novas Decisões",
          "Antes de contratar, investir ou mudar modelo de atendimento — você tem nossa análise técnica."),
         (NAVY,  "Acesso Direto à Equipe Fletic",
@@ -743,7 +768,7 @@ def gerar_pptx(c):
     txt(s, "Conversamos sobre isso no encerramento da Fase 2.",
         Inches(6.14), Inches(4.92), Inches(3.44), Inches(0.38), size=9, bold=True, color=NAVY)
 
-    footer(s, "13", c)
+    footer(s, "14", c)
 
     prs.save(c["output"])
     print(f"PPT gerado: {c['output']}  ({len(list(prs.slides))} slides)")
