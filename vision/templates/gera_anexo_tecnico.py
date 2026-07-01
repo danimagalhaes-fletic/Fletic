@@ -10,15 +10,15 @@ from playwright.async_api import async_playwright
 # ── CLIENT DATA ────────────────────────────────────────────────────────────────
 
 ANA_PAULA = {
-    "nome":         "Ana Paula Rodrigues",
+    "nome":         "Ana Paula Monteiro",
     "clinica":      "APR LTDA",
-    "dra":          "Dra. Ana Paula Rodrigues",
+    "dra":          "Dra. Ana Paula Monteiro",
     "especialidade":"Cardiologia & Cuidados Paliativos",
     "cidade":       "Rio de Janeiro – RJ",
     "mes_ano":      "Junho 2026",
     "objetivo": (
         "Desenvolver um modelo assistencial híbrido estruturado para a prática de cardiologia e "
-        "cuidados paliativos da Dra. Ana Paula Rodrigues, transformando a operação presencial atual "
+        "cuidados paliativos da Dra. Ana Paula Monteiro, transformando a operação presencial atual "
         "em um sistema recorrente, com dados e governança, visando:"
     ),
     "objetivos_bullets": [

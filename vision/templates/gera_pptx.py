@@ -778,8 +778,8 @@ def gerar_pptx(c):
 
 ANA_PAULA = {
     "key":              "ana_paula",
-    "nome":             "Ana Paula Rodrigues",
-    "dra":              "Dra. Ana Paula Rodrigues",
+    "nome":             "Ana Paula Monteiro",
+    "dra":              "Dra. Ana Paula Monteiro",
     "a_clinica":        "a APR LTDA",
     "clinica":          "APR LTDA",
     "especialidade":    "Cardiologia & Cuidados Paliativos",
@@ -790,7 +790,7 @@ ANA_PAULA = {
     "scores":           [0.67, 1.00, 1.00, 0.33, 0.83],
     "score_final":      0.76,
     "pilar_critico_idx": 3,  # P4 Dados & Inteligência
-    "titulo_capa":      "Estruturação do Modelo Assistencial\nda Dra. Ana Paula Rodrigues",
+    "titulo_capa":      "Estruturação do Modelo Assistencial\nda Dra. Ana Paula Monteiro",
     "teaser_text":      ("A Dra. Ana Paula tem o perfil e a disposição para mudança — carteira de pacientes crônicos "
                          "e especialidade de alto valor em cardiologia e cuidados paliativos. O que falta é a estrutura "
                          "que transforma essa base em operação previsível, recorrente e que funciona sem depender exclusivamente dela."),

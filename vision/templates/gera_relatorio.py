@@ -11,7 +11,7 @@ from playwright.async_api import async_playwright
 # ─── CLIENT DATA STRUCTURES ───────────────────────────────────────────────────
 
 ANA_PAULA = {
-    "nome": "Ana Paula Rodrigues",
+    "nome": "Ana Paula Monteiro",
     "clinica": "APR LTDA",
     "especialidade": "Cardiologia & Cuidados Paliativos",
     "cidade": "Rio de Janeiro – RJ",
