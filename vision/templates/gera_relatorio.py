@@ -1256,7 +1256,7 @@ def gerar_html_v2(c):
           <span style="font-size:22pt;font-weight:800;color:var(--teal);">S</span>
         </div>
         <div style="font-size:12pt;font-weight:800;color:var(--navy);margin-bottom:2px;">Simone Farah</div>
-        <div style="font-size:8.5pt;color:var(--teal);font-weight:600;margin-bottom:4px;">CMO · Especialista Médica</div>
+        <div style="font-size:8.5pt;color:var(--teal);font-weight:600;margin-bottom:4px;">CMO · Co-fundadora</div>
         <div style="font-size:8pt;color:#64748B;">Fletic Saúde Digital</div>
         <div style="width:100%;height:1px;background:#E2E8F0;margin:16px 0;"></div>
         <div style="font-size:7.5pt;color:#94A3B8;">simone.farah@fletic.com.br</div>

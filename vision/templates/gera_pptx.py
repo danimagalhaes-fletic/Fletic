@@ -227,9 +227,11 @@ def gerar_pptx(c):
     txt(s, c["cidade"], Inches(0.28), Inches(3.76), lp_w - Inches(0.36),
         Inches(0.26), size=8, color=RGBColor(0x94, 0xA3, 0xB8))
 
-    # Month/year at bottom-left
-    txt(s, c["mes_ano"], Inches(0.28), Inches(4.96), lp_w - Inches(0.36),
-        Inches(0.26), size=8, color=RGBColor(0x64, 0x74, 0x8B))
+    # Month/year + validity at bottom-left
+    txt(s, c["mes_ano"], Inches(0.28), Inches(4.78), lp_w - Inches(0.36),
+        Inches(0.22), size=8, color=RGBColor(0x64, 0x74, 0x8B))
+    txt(s, "Proposta válida por 30 dias", Inches(0.28), Inches(4.99), lp_w - Inches(0.36),
+        Inches(0.22), size=7.5, italic=True, color=RGBColor(0x94, 0xA3, 0xB8))
 
     # Right panel — white
     rp_l = lp_w
@@ -684,8 +686,8 @@ def gerar_pptx(c):
         size=8.5, bold=True, color=NAVY)
     txt(s, "Dani Magalhães  ·  Simone Farah", Inches(6.1), Inches(5.12),
         Inches(3.5), Inches(0.24), size=9, bold=True, color=NAVY, align=PP_ALIGN.RIGHT)
-    txt(s, "contato@fletic.com.br", Inches(6.1), Inches(5.34),
-        Inches(3.5), Inches(0.22), size=8.5, color=GRAY, align=PP_ALIGN.RIGHT)
+    txt(s, "contato@fletic.com.br  ·  Proposta válida por 30 dias", Inches(6.1), Inches(5.34),
+        Inches(3.5), Inches(0.22), size=8, color=GRAY, align=PP_ALIGN.RIGHT)
     footer(s, "12", c)
 
     # ── SLIDE 13 — PROGRAMA DE ACOMPANHAMENTO & ESCALA (cross-sell) ──────────
