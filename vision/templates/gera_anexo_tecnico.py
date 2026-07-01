@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 Fletic Vision — Anexo Técnico (Estrutura do Projeto)
-Layout: Medicina Vaccaro reference document.
-4 pages: Cover/Objetivo/Metodologia/M01 | M02-M04 | M04-M05 | Cronograma/Critérios/Assinatura
+Layout: Medicina Vaccaro reference. 4 pages A4.
 """
 
 import asyncio
@@ -45,10 +44,10 @@ ANA_PAULA = {
             "objetivo": "Transformar o modelo em operação",
             "entregaveis": [
                 ("Protocolos assistenciais por etapa", ["Pré-consulta", "Consulta cardíaca", "Pós-consulta e follow-up"]),
-                ("Scripts operacionais e fluxos por função", ["Recepção", "Médico"]),
+                ("Scripts operacionais da equipe", []),
+                ("Fluxos internos por função", ["Recepção", "Médico"]),
                 ("Organização da agenda", ["Blocos presenciais", "Blocos digitais", "Blocos de retorno programado"]),
-                ("Regras de alocação de capacidade e gestão de lista de espera", []),
-                ("Definição de responsabilidades — base para estruturação da equipe", []),
+                ("Definição de responsabilidades por função", []),
             ],
         },
         {
@@ -56,20 +55,20 @@ ANA_PAULA = {
             "objetivo": "Estruturar crescimento sustentável",
             "entregaveis": [
                 ("Análise do modelo de receita atual — avulso vs. recorrente", []),
-                ("Programas de acompanhamento cardíaco longitudinal", ["Contratos de cuidado", "Planos de retorno periódico"]),
-                ("Estrutura de precificação por complexidade", ["Cardiologia geral", "Cuidados paliativos"]),
+                ("Definição de novos produtos e programas", ["Programas de acompanhamento cardíaco longitudinal", "Contratos de cuidado recorrente"]),
+                ("Estrutura de precificação", ["Ticket por serviço", "Ticket por programa"]),
                 ("Simulação de impacto financeiro e projeção de receita recorrente", []),
-                ("Estratégia de retenção e aumento do LTV por paciente", []),
+                ("Estratégia de aumento de ticket médio e LTV por paciente", []),
             ],
         },
         {
             "num": "04", "titulo": "Arquitetura Tecnológica",
             "objetivo": "Suportar o modelo com eficiência",
             "entregaveis": [
-                ("Seleção de plataforma de telemedicina para acompanhamento cardíaco", []),
-                ("Fluxos digitais estruturados", ["Pré-consulta automatizada", "Follow-up pós-consulta"]),
-                ("Integração entre prontuário eletrônico e agenda digital", []),
-                ("Padronização de uso das ferramentas pela equipe", []),
+                ("Definição da arquitetura tecnológica", ["Prontuário eletrônico", "Plataforma de telemedicina", "Comunicação (WhatsApp / automatizado)"]),
+                ("Desenho de fluxos digitais", ["Pré-consulta automatizada", "Follow-up pós-consulta"]),
+                ("Definição de integrações necessárias", []),
+                ("Padronização de uso das ferramentas", []),
                 ("Política de segurança da informação — LGPD", []),
             ],
         },
@@ -88,7 +87,7 @@ ANA_PAULA = {
         "Jornada cardíaca e de cuidados paliativos estruturada e operante",
         "Protocolos implementados e utilizados pela equipe",
         "Programa de acompanhamento de crônicos cardíacos com pacientes ativos",
-        "Modelo econômico ativo — serviços precificados e ofertados com recorrência",
+        "Modelo econômico ativo — serviços e programas precificados e ofertados",
         "Indicadores sendo acompanhados em rotina definida",
         "Dashboard funcional com decisões baseadas em dados",
     ],
@@ -130,10 +129,10 @@ ETHEL = {
             "objetivo": "Transformar o modelo em operação",
             "entregaveis": [
                 ("Protocolos assistenciais por etapa", ["Pré-consulta", "Consulta nutrológica", "Pós-endoscopia e follow-up"]),
-                ("Scripts operacionais e fluxos por função", ["Recepção", "Médico"]),
+                ("Scripts operacionais da equipe", []),
+                ("Fluxos internos por função", ["Recepção", "Médico"]),
                 ("Organização da agenda", ["Blocos presenciais", "Blocos digitais", "Blocos de retorno programado"]),
-                ("Regras de alocação de capacidade e gestão de lista de espera", []),
-                ("Definição de responsabilidades — base para contratação de equipe", []),
+                ("Definição de responsabilidades por função", []),
             ],
         },
         {
@@ -142,7 +141,7 @@ ETHEL = {
             "entregaveis": [
                 ("Análise do modelo de receita atual — avulso vs. recorrente", []),
                 ("Definição de novos produtos e programas", ["Programas de acompanhamento nutrológico mensal", "Pacotes pós-endoscopia", "Programas de longevidade e performance"]),
-                ("Estrutura de precificação por complexidade", ["Nutrologia e longevidade", "Endoscopia e pós-procedimento"]),
+                ("Estrutura de precificação", ["Ticket por serviço", "Ticket por programa"]),
                 ("Simulação de impacto financeiro e projeção de receita recorrente", []),
                 ("Estratégia de aumento de ticket médio por paciente", []),
             ],
@@ -151,10 +150,10 @@ ETHEL = {
             "num": "04", "titulo": "Arquitetura Tecnológica",
             "objetivo": "Suportar o modelo com eficiência",
             "entregaveis": [
-                ("Seleção de plataforma de telemedicina dedicada para nutrologia e follow-up", []),
-                ("Fluxos digitais estruturados", ["Pré-consulta automatizada", "Follow-up pós-consulta e pós-procedimento"]),
-                ("Integração entre prontuário eletrônico e agenda digital", []),
-                ("Padronização de uso das ferramentas pela equipe", []),
+                ("Definição da arquitetura tecnológica", ["Prontuário eletrônico", "Plataforma de telemedicina para nutrologia", "Comunicação (WhatsApp / automatizado)"]),
+                ("Desenho de fluxos digitais", ["Pré-consulta automatizada", "Follow-up pós-consulta e pós-procedimento"]),
+                ("Definição de integrações necessárias", []),
+                ("Padronização de uso das ferramentas", []),
                 ("Política de segurança da informação — LGPD", []),
             ],
         },
@@ -205,8 +204,8 @@ DANIELA_BORGES = {
             "entregaveis": [
                 ("Mapeamento da jornada atual (AS-IS) dos pacientes cardíacos e pós-exame", []),
                 ("Desenho da jornada ideal (TO-BE) com protocolo de retorno pós-Eco e Holter", []),
-                ("Segmentação da carteira", ["Crônicos cardíacos", "Pacientes pós-procedimento", "Novos encaminhamentos"]),
-                ("Estruturação dos serviços por tipo e frequência esperada de retorno", []),
+                ("Segmentação da carteira de pacientes", ["Crônicos cardíacos", "Pacientes pós-procedimento", "Novos encaminhamentos"]),
+                ("Estruturação dos serviços por tipo e frequência de retorno esperada", []),
                 ("Critérios de elegibilidade para telemedicina vs. presencial", []),
             ],
         },
@@ -215,10 +214,10 @@ DANIELA_BORGES = {
             "objetivo": "Transformar o modelo em operação",
             "entregaveis": [
                 ("Protocolos de retorno pós-exame", ["Eco e Doppler", "Holter e MAPA", "Consulta de acompanhamento"]),
-                ("Scripts de comunicação com pacientes via agenda e WhatsApp", []),
-                ("Organização das 3 salas / 11 turnos disponíveis", ["Regras de alocação por tipo de atendimento", "Priorização de crônicos e retornos", "Criação de lista de espera ativa"]),
+                ("Scripts de comunicação com pacientes", []),
+                ("Organização das 3 salas / 11 turnos disponíveis", ["Regras de alocação por tipo de atendimento", "Priorização de crônicos e retornos", "Lista de espera ativa"]),
                 ("Gestão de capacidade — eliminação da ociosidade", []),
-                ("Definição de fluxos independentes da Dra. Daniela", []),
+                ("Definição de fluxos operacionais independentes da Dra. Daniela", []),
             ],
         },
         {
@@ -226,8 +225,8 @@ DANIELA_BORGES = {
             "objetivo": "Estruturar crescimento sustentável",
             "entregaveis": [
                 ("Análise do modelo de receita atual — avulso vs. recorrente", []),
-                ("Programas de acompanhamento cardíaco recorrente", ["Contratos de cuidado para crônicos", "Pacotes pós-exame com retorno programado"]),
-                ("Estrutura de precificação por complexidade e valor percebido", []),
+                ("Definição de programas de acompanhamento cardíaco recorrente", ["Contratos de cuidado para crônicos", "Pacotes pós-exame com retorno programado"]),
+                ("Estrutura de precificação", ["Ticket por serviço", "Ticket por programa"]),
                 ("Simulação de impacto financeiro e estratégia de equilíbrio das dívidas", []),
                 ("Estratégia de aumento de ticket e receita sem ampliar captação", []),
             ],
@@ -236,10 +235,10 @@ DANIELA_BORGES = {
             "num": "04", "titulo": "Arquitetura Tecnológica",
             "objetivo": "Suportar o modelo com eficiência",
             "entregaveis": [
-                ("Integração do prontuário eletrônico com agenda e resultados de exames", []),
-                ("Plataforma de telemedicina para follow-up cardiológico", []),
-                ("Fluxos digitais estruturados", ["Pré-consulta automatizada", "Entrega de resultados de exames", "Follow-up pós-consulta"]),
-                ("Padronização de uso das ferramentas pela equipe", []),
+                ("Definição da arquitetura tecnológica", ["Prontuário eletrônico e resultados de exames", "Plataforma de telemedicina cardiológica", "Comunicação (WhatsApp / automatizado)"]),
+                ("Desenho de fluxos digitais", ["Pré-consulta automatizada", "Entrega de resultados de exames", "Follow-up pós-consulta"]),
+                ("Definição de integrações necessárias", []),
+                ("Padronização de uso das ferramentas", []),
                 ("Política de segurança da informação — LGPD", []),
             ],
         },
@@ -257,7 +256,7 @@ DANIELA_BORGES = {
     "criterios_sucesso": [
         "Jornada cardiológica e pós-exame estruturada e operante",
         "Protocolos implementados e utilizados pela equipe",
-        "Taxa de retorno de pacientes cardíacos acima de 70% e ocupação das 3 salas acima de 90%",
+        "Taxa de retorno de pacientes acima de 70% e ocupação das 3 salas acima de 90%",
         "Modelo econômico ativo — programas de acompanhamento precificados e ativos",
         "Indicadores sendo acompanhados em rotina definida",
         "Dashboard funcional com decisões baseadas em dados",
@@ -266,579 +265,378 @@ DANIELA_BORGES = {
 }
 
 
-# ── HTML generator ─────────────────────────────────────────────────────────────
+# ── HTML builder helpers ───────────────────────────────────────────────────────
 
-def build_entregaveis_html(entregaveis):
-    rows = []
+def ent_html(entregaveis):
+    parts = []
     for i, (main, subs) in enumerate(entregaveis):
-        sep = '<div class="ent-sep"></div>' if i > 0 else ''
-        sub_html = ""
+        sep = '<div class="sep"></div>' if i > 0 else ''
+        sub_block = ""
         if subs:
-            sub_html = "<ul class='sub-list'>" + "".join(f"<li>{s}</li>" for s in subs) + "</ul>"
-        rows.append(f"{sep}<div class='ent-item'><span class='diamond'>◆</span><span class='ent-main'>{main}</span>{sub_html}</div>")
-    return "\n".join(rows)
+            items = "".join(f"<li>{s}</li>" for s in subs)
+            sub_block = f"<ul class='sub'>{items}</ul>"
+        parts.append(f"{sep}<div class='ei'><span class='di'>◆</span><span class='et'>{main}</span>{sub_block}</div>")
+    return "\n".join(parts)
 
 
-def build_modulo_html(m):
-    ent_html = build_entregaveis_html(m["entregaveis"])
-    return f"""
-<div class="modulo-block">
-  <div class="modulo-header">
-    <div class="modulo-num">{m["num"]}</div>
-    <div class="modulo-info">
-      <div class="modulo-title">{m["titulo"].upper()}</div>
-      <div class="modulo-obj">Objetivo: {m["objetivo"]}</div>
+def mod_html(m):
+    return f"""<div class="mod">
+  <div class="mh">
+    <div class="mn">{m["num"]}</div>
+    <div class="mi">
+      <div class="mt">{m["titulo"].upper()}</div>
+      <div class="mo">Objetivo: {m["objetivo"]}</div>
     </div>
   </div>
-  <div class="ent-section">
-    <div class="ent-label">ENTREGÁVEIS</div>
-    <div class="ent-list">
-      {ent_html}
-    </div>
+  <div class="es">
+    <div class="el">ENTREGÁVEIS</div>
+    <div class="eb">{ent_html(m["entregaveis"])}</div>
   </div>
-</div>
-"""
+</div>"""
 
 
-CRONOGRAMA_ROWS = [
+CRON = [
     ("Sem. 1–2",  "DIAGNÓSTICO PROFUNDO",
-     ["Entrevistas com equipe e liderança", "Análise da operação atual", "Coleta de dados financeiros e operacionais", "Mapeamento AS-IS"],
+     ["Entrevistas com equipe e liderança", "Análise da operação atual",
+      "Coleta de dados financeiros e operacionais", "Mapeamento AS-IS"],
      ["Relatório de diagnóstico detalhado", "Principais gaps estruturados"]),
     ("Sem. 3–4",  "ARQUITETURA ASSISTENCIAL",
-     ["Desenho da jornada TO-BE", "Definição de serviços assistenciais", "Estruturação do modelo híbrido"],
+     ["Desenho da jornada TO-BE", "Definição de serviços assistenciais",
+      "Estruturação do modelo híbrido"],
      ["Jornada completa documentada", "Modelo assistencial definido"]),
     ("Sem. 5–6",  "ESTRUTURA OPERACIONAL",
-     ["Criação de protocolos por etapa", "Definição de fluxos internos", "Organização da agenda"],
+     ["Criação de protocolos por etapa", "Definição de fluxos internos",
+      "Organização da agenda"],
      ["Protocolos prontos", "Fluxos operacionais definidos"]),
     ("Sem. 7–8",  "MODELO ECONÔMICO",
-     ["Definição de programas de acompanhamento", "Estrutura de precificação", "Simulação financeira"],
+     ["Definição de programas de acompanhamento", "Estrutura de precificação",
+      "Simulação financeira"],
      ["Modelo de receita estruturado", "Estratégia de monetização"]),
     ("Sem. 9–10", "TECNOLOGIA & INTEGRAÇÃO",
-     ["Definição da arquitetura tecnológica", "Estruturação de fluxos digitais", "Alinhamento de ferramentas"],
+     ["Definição da arquitetura tecnológica", "Estruturação de fluxos digitais",
+      "Alinhamento de ferramentas"],
      ["Arquitetura tecnológica definida", "Fluxos digitais estruturados"]),
     ("Sem. 11–12","INDICADORES & IMPLEMENTAÇÃO",
-     ["Definição de KPIs por dimensão", "Construção do dashboard", "Ajuste final do modelo e entrega"],
+     ["Definição de KPIs por dimensão", "Construção do dashboard",
+      "Ajuste final do modelo e entrega"],
      ["Dashboard funcional", "Rotina de gestão definida"]),
 ]
 
 
+# ── Main HTML ──────────────────────────────────────────────────────────────────
+
 def gerar_html(c):
-    modulos_html = "\n".join(build_modulo_html(m) for m in c["modulos"])
+    obj_bullets = "\n".join(f"<li><strong>{b}</strong></li>" for b in c["objetivos_bullets"])
 
-    objetivos_html = "\n".join(
-        f'<li><strong>{b}</strong></li>' for b in c["objetivos_bullets"]
+    cron_rows = ""
+    for per, fase, ativ, entregas in CRON:
+        av = "".join(f"<div class='ca'>— {a}</div>" for a in ativ)
+        ev = "".join(f"<div class='ce'>✔ {e}</div>" for e in entregas)
+        cron_rows += f"<tr><td class='cp'>{per}</td><td class='cf'>{fase}</td><td>{av}</td><td>{ev}</td></tr>"
+
+    crit_html = "\n".join(
+        f'<div class="cr"><span class="ck">✔</span> {x}</div>'
+        for x in c["criterios_sucesso"]
     )
 
-    cron_rows_html = ""
-    for per, fase, ativ, entregas in CRONOGRAMA_ROWS:
-        ativ_html  = "".join(f"<div class='cron-item'>— {a}</div>" for a in ativ)
-        entre_html = "".join(f"<div class='cron-check'>✔ {e}</div>" for e in entregas)
-        cron_rows_html += f"""
-<tr>
-  <td class="cron-per">{per}</td>
-  <td class="cron-fase">{fase}</td>
-  <td>{ativ_html}</td>
-  <td>{entre_html}</td>
-</tr>"""
+    ph_left  = f"FLETIC VISION · Estrutura do Projeto {c['clinica']} · Confidencial"
+    ph_right = f"{c['clinica']} · Confidencial"
 
-    criterios_html = "\n".join(
-        f'<div class="criterio"><span class="check-icon">✔</span> {cr}</div>'
-        for cr in c["criterios_sucesso"]
-    )
+    def ph(pg):
+        return f"""<div class="ph">
+      <span class="phl">{ph_left}</span>
+      <span class="phr">{ph_right}</span>
+    </div>"""
+
+    def pf(n, total=4):
+        return f"""<div class="pf">
+      <span>Framework Fletic — Versão 1.0 · fletic.com.br</span>
+      <span>Página {n} de {total}</span>
+    </div>"""
 
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
 <style>
-  @page {{ size: A4; margin: 0; }}
-  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+@page {{ size: A4; margin: 0; }}
+* {{ box-sizing: border-box; margin: 0; padding: 0; }}
+body {{
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9.5pt;
+  color: #2d3748;
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+}}
 
-  body {{
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 9.5pt;
-    color: #1a1a2e;
-    background: #fff;
-  }}
+/* PAGE */
+.page {{
+  width: 210mm;
+  min-height: 297mm;
+  padding-bottom: 14mm;
+  page-break-after: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}}
+.page:last-child {{ page-break-after: avoid; }}
 
-  /* ── PAGE WRAPPER ── */
-  .page {{
-    width: 210mm;
-    min-height: 297mm;
-    padding: 0 0 12mm 0;
-    page-break-after: always;
-    position: relative;
-  }}
-  .page:last-child {{ page-break-after: avoid; }}
+/* PAGE HEADER */
+.ph {{
+  display: flex;
+  justify-content: space-between;
+  padding: 5mm 15mm 3.5mm;
+  border-bottom: 1px solid #cbd5e0;
+  margin-bottom: 7mm;
+  flex-shrink: 0;
+}}
+.phl {{ font-size: 7pt; font-weight: 600; color: #2d3748; }}
+.phr {{ font-size: 7pt; color: #718096; }}
 
-  /* ── PAGE HEADER (top bar) ── */
-  .page-header {{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6mm 14mm 4mm;
-    border-bottom: 1px solid #E2E8F0;
-    margin-bottom: 7mm;
-  }}
-  .page-header-left {{ font-size: 7.5pt; color: #1B3A5C; font-weight: 600; }}
-  .page-header-right {{ font-size: 7.5pt; color: #64748B; }}
+/* CONTENT */
+.ct {{ flex: 1; padding: 0 15mm; }}
 
-  /* ── PAGE FOOTER ── */
-  .page-footer {{
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    border-top: 1px solid #E2E8F0;
-    padding: 3mm 14mm;
-    display: flex;
-    justify-content: space-between;
-    font-size: 7pt;
-    color: #94A3B8;
-  }}
+/* PAGE FOOTER */
+.pf {{
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  border-top: 1px solid #cbd5e0;
+  padding: 2.5mm 15mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 7pt;
+  color: #a0aec0;
+}}
 
-  /* ── CONTENT AREA ── */
-  .content {{ padding: 0 14mm; }}
+/* ── TITLE BLOCK ── */
+.tag {{ font-size: 7.5pt; font-weight: 700; color: #0F7173; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }}
+.title {{ font-size: 24pt; font-weight: 800; color: #1B3A5C; line-height: 1.1; margin-bottom: 3px; }}
+.sub {{ font-size: 10.5pt; color: #718096; font-style: italic; margin-bottom: 7mm; }}
 
-  /* ── TITLE BLOCK (page 1) ── */
-  .tag-label {{
-    font-size: 7.5pt;
-    font-weight: 700;
-    color: #0F7173;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }}
-  .doc-title {{
-    font-size: 22pt;
-    font-weight: 800;
-    color: #1B3A5C;
-    line-height: 1.1;
-    margin-bottom: 2px;
-  }}
-  .doc-subtitle {{
-    font-size: 10pt;
-    color: #64748B;
-    font-style: italic;
-    margin-bottom: 8mm;
-  }}
+/* ── META TABLE ── */
+.meta {{
+  display: flex;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 8mm;
+}}
+.mc {{ flex: 1; padding: 9px 14px; border-right: 1px solid #e2e8f0; }}
+.mc:last-child {{ border-right: none; }}
+.ml {{ font-size: 6.5pt; font-weight: 700; color: #718096; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }}
+.mv {{ font-size: 10pt; font-weight: 700; color: #1B3A5C; }}
 
-  /* ── META TABLE ── */
-  .meta-table {{
-    display: flex;
-    border: 1px solid #E2E8F0;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 8mm;
-  }}
-  .meta-cell {{
-    flex: 1;
-    padding: 8px 14px;
-    border-right: 1px solid #E2E8F0;
-  }}
-  .meta-cell:last-child {{ border-right: none; }}
-  .meta-label {{
-    font-size: 7pt;
-    font-weight: 700;
-    color: #64748B;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 3px;
-  }}
-  .meta-value {{ font-size: 10pt; font-weight: 700; color: #1B3A5C; }}
+/* ── SECTION HEADER ── */
+.sh {{
+  background: #1B3A5C;
+  color: #fff;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 7px 12px;
+  margin-bottom: 5mm;
+}}
 
-  /* ── SECTION HEADER ── */
-  .section-hdr {{
-    background: #1B3A5C;
-    color: #fff;
-    font-size: 8.5pt;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 7px 12px;
-    margin-bottom: 6mm;
-    border-radius: 2px;
-  }}
+/* ── OBJETIVO ── */
+.obj {{
+  border-left: 3px solid #0F7173;
+  background: #f7fafc;
+  padding: 10px 14px;
+  margin-bottom: 8mm;
+  border-radius: 0 3px 3px 0;
+}}
+.obj p {{ font-size: 9.5pt; color: #2d3748; line-height: 1.6; margin-bottom: 8px; }}
+.obj ul {{ list-style: none; padding: 0; }}
+.obj ul li {{
+  font-size: 9.5pt; color: #1B3A5C;
+  padding: 3px 0 3px 18px;
+  position: relative; line-height: 1.5;
+}}
+.obj ul li::before {{ content: "▸"; position: absolute; left: 0; color: #0F7173; font-weight: 700; }}
 
-  /* ── OBJETIVO ── */
-  .objetivo-block {{
-    border-left: 3px solid #0F7173;
-    padding: 8px 12px;
-    background: #F7F8FA;
-    margin-bottom: 8mm;
-    border-radius: 0 4px 4px 0;
-  }}
-  .objetivo-texto {{ font-size: 9.5pt; color: #1a1a2e; line-height: 1.55; margin-bottom: 8px; }}
-  .objetivo-block ul {{
-    list-style: none;
-    padding: 0; margin: 0;
-  }}
-  .objetivo-block ul li {{
-    font-size: 9.5pt;
-    color: #1B3A5C;
-    padding: 3px 0 3px 16px;
-    position: relative;
-  }}
-  .objetivo-block ul li::before {{
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: #0F7173;
-    font-weight: 700;
-  }}
+/* ── METODOLOGIA ── */
+.met-p {{ font-size: 9.5pt; color: #2d3748; line-height: 1.6; margin-bottom: 5mm; }}
+.mf {{ display: flex; margin-bottom: 8mm; border: 1px solid #e2e8f0; }}
+.mb {{ flex: 1; text-align: center; padding: 9px 6px; border-right: 1px solid #e2e8f0; }}
+.mb:last-child {{ border-right: none; }}
+.mbn {{ font-size: 15pt; font-weight: 800; color: #1B3A5C; }}
+.mbt {{ font-size: 7pt; color: #718096; margin-top: 3px; line-height: 1.35; }}
 
-  /* ── METODOLOGIA ── */
-  .met-intro {{ font-size: 9.5pt; color: #1a1a2e; margin-bottom: 5mm; line-height: 1.5; }}
-  .met-flow {{
-    display: flex;
-    gap: 0;
-    margin-bottom: 8mm;
-  }}
-  .met-box {{
-    flex: 1;
-    border: 1px solid #E2E8F0;
-    border-right: none;
-    text-align: center;
-    padding: 8px 4px;
-  }}
-  .met-box:last-child {{ border-right: 1px solid #E2E8F0; }}
-  .met-num {{ font-size: 14pt; font-weight: 800; color: #1B3A5C; }}
-  .met-name {{ font-size: 7pt; color: #64748B; margin-top: 3px; line-height: 1.3; }}
+/* ── MODULE ── */
+.mod {{ margin-bottom: 7mm; }}
+.mh {{
+  display: flex; align-items: center; gap: 12px;
+  background: #edf2f7;
+  padding: 9px 12px;
+  border-left: none;
+}}
+.mn {{
+  background: #0F7173;
+  color: #fff;
+  font-size: 15pt; font-weight: 800;
+  min-width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}}
+.mi {{ }}
+.mt {{ font-size: 10pt; font-weight: 800; color: #1B3A5C; }}
+.mo {{ font-size: 8.5pt; color: #718096; font-style: italic; margin-top: 2px; }}
 
-  /* ── MÓDULO BLOCK ── */
-  .modulo-block {{ margin-bottom: 7mm; break-inside: avoid; }}
-  .modulo-header {{
-    display: flex;
-    align-items: flex-start;
-    background: #F0F4F8;
-    border-left: 5px solid #1B3A5C;
-    padding: 8px 12px;
-    margin-bottom: 0;
-    gap: 12px;
-  }}
-  .modulo-num {{
-    background: #1B3A5C;
-    color: #fff;
-    font-size: 14pt;
-    font-weight: 800;
-    min-width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    flex-shrink: 0;
-  }}
-  .modulo-info {{ padding-top: 2px; }}
-  .modulo-title {{ font-size: 10pt; font-weight: 800; color: #1B3A5C; }}
-  .modulo-obj {{ font-size: 8.5pt; color: #64748B; font-style: italic; margin-top: 2px; }}
+/* ENTREGAVEIS */
+.es {{ border: 1px solid #e2e8f0; border-top: none; }}
+.el {{ background: #1B3A5C; color: #fff; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; padding: 5px 12px; }}
+.eb {{ padding: 2px 0; }}
+.sep {{ height: 1px; background: #e2e8f0; margin: 0 12px; }}
+.ei {{ padding: 7px 12px; display: flex; align-items: flex-start; gap: 9px; }}
+.di {{ color: #0F7173; font-size: 10pt; flex-shrink: 0; margin-top: 1px; }}
+.et {{ font-size: 9pt; font-weight: 700; color: #2d3748; line-height: 1.45; }}
+.sub {{ list-style: none; margin: 5px 0 0 0; padding: 0; }}
+.sub li {{ font-size: 8.5pt; color: #718096; padding: 2px 0 2px 16px; position: relative; line-height: 1.4; }}
+.sub li::before {{ content: "—"; position: absolute; left: 0; color: #a0aec0; }}
 
-  /* ── ENTREGÁVEIS ── */
-  .ent-section {{ border: 1px solid #E2E8F0; border-top: none; }}
-  .ent-label {{
-    background: #1B3A5C;
-    color: #fff;
-    font-size: 7.5pt;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 5px 12px;
-  }}
-  .ent-list {{ padding: 4px 0; }}
-  .ent-sep {{ height: 1px; background: #E2E8F0; margin: 0 12px; }}
-  .ent-item {{ padding: 6px 12px; display: flex; align-items: flex-start; gap: 8px; }}
-  .diamond {{ color: #0F7173; font-size: 10pt; flex-shrink: 0; margin-top: 1px; }}
-  .ent-main {{ font-size: 9pt; font-weight: 700; color: #1a1a2e; line-height: 1.4; }}
-  .sub-list {{
-    list-style: none;
-    margin: 4px 0 0 0;
-    padding: 0;
-  }}
-  .sub-list li {{
-    font-size: 8.5pt;
-    color: #64748B;
-    padding: 1px 0 1px 14px;
-    position: relative;
-  }}
-  .sub-list li::before {{
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: #94A3B8;
-  }}
+/* ── CRONOGRAMA ── */
+.ct-table {{ width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 8mm; }}
+.ct-table thead tr {{ background: #1B3A5C; color: #fff; }}
+.ct-table thead th {{ padding: 7px 10px; text-align: left; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.3px; }}
+.ct-table tbody tr {{ border-bottom: 1px solid #e2e8f0; }}
+.ct-table tbody tr:nth-child(even) {{ background: #f7fafc; }}
+.ct-table td {{ padding: 8px 10px; vertical-align: top; }}
+.cp {{ font-weight: 700; color: #1B3A5C; white-space: nowrap; font-size: 8.5pt; }}
+.cf {{ font-weight: 700; color: #1B3A5C; font-size: 8pt; }}
+.ca {{ color: #718096; padding: 1.5px 0; font-size: 8pt; }}
+.ce {{ color: #2d3748; padding: 2px 0; font-size: 8pt; }}
 
-  /* ── CRONOGRAMA ── */
-  .cron-table {{
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 8.5pt;
-    margin-bottom: 8mm;
-  }}
-  .cron-table thead tr {{
-    background: #1B3A5C;
-    color: #fff;
-  }}
-  .cron-table thead th {{
-    padding: 7px 10px;
-    text-align: left;
-    font-size: 7.5pt;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-  }}
-  .cron-table tbody tr {{ border-bottom: 1px solid #E2E8F0; }}
-  .cron-table tbody tr:nth-child(even) {{ background: #F7F8FA; }}
-  .cron-table td {{ padding: 8px 10px; vertical-align: top; }}
-  .cron-per {{ font-weight: 700; color: #1B3A5C; white-space: nowrap; }}
-  .cron-fase {{ font-weight: 700; color: #1B3A5C; font-size: 8pt; }}
-  .cron-item {{ color: #64748B; padding: 1px 0; font-size: 8pt; }}
-  .cron-check {{ color: #1B3A5C; padding: 2px 0; font-size: 8pt; }}
-  .cron-check::first-letter {{ color: #0F7173; font-weight: 700; }}
+/* ── CRITÉRIOS ── */
+.cri {{ font-size: 9pt; color: #718096; font-style: italic; line-height: 1.6;
+       border-left: 3px solid #0F7173; background: #f7fafc;
+       padding: 7px 12px; margin-bottom: 5mm; border-radius: 0 3px 3px 0; }}
+.cr {{ font-size: 9.5pt; color: #2d3748; padding: 7px 0; border-bottom: 1px solid #e2e8f0;
+      display: flex; align-items: flex-start; gap: 9px; }}
+.cr:last-child {{ border-bottom: none; }}
+.ck {{ color: #0F7173; font-weight: 700; flex-shrink: 0; }}
 
-  /* ── CRITÉRIOS ── */
-  .criterios-intro {{
-    font-size: 9pt;
-    color: #64748B;
-    font-style: italic;
-    margin-bottom: 5mm;
-    line-height: 1.5;
-    border-left: 3px solid #0F7173;
-    padding: 6px 12px;
-    background: #F7F8FA;
-    border-radius: 0 4px 4px 0;
-  }}
-  .criterio {{
-    font-size: 9.5pt;
-    color: #1a1a2e;
-    padding: 6px 12px 6px 0;
-    border-bottom: 1px solid #E2E8F0;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }}
-  .criterio:last-child {{ border-bottom: none; }}
-  .check-icon {{ color: #0F7173; font-weight: 700; flex-shrink: 0; }}
+/* ── NOTA ── */
+.nota {{
+  font-size: 8pt; color: #718096; font-style: italic; line-height: 1.65;
+  margin-top: 6mm; padding-top: 5mm; border-top: 1px solid #e2e8f0;
+}}
 
-  /* ── NOTA FINAL ── */
-  .nota-final {{
-    font-size: 8pt;
-    color: #64748B;
-    font-style: italic;
-    line-height: 1.6;
-    margin-top: 7mm;
-    padding-top: 5mm;
-    border-top: 1px solid #E2E8F0;
-  }}
+/* ── ASSINATURAS ── */
+.assin {{
+  display: flex; gap: 24mm;
+  margin-top: 9mm; padding-top: 7mm;
+  border-top: 2px solid #1B3A5C;
+}}
+.ap {{ flex: 1; }}
+.al {{ height: 1px; background: #1B3A5C; width: 75%; margin-bottom: 7px; }}
+.an {{ font-size: 10pt; font-weight: 800; color: #1B3A5C; margin-bottom: 2px; }}
+.ac {{ font-size: 8.5pt; color: #0F7173; font-weight: 600; margin-bottom: 2px; }}
+.ae {{ font-size: 8pt; color: #718096; }}
+.aemail {{ font-size: 7.5pt; color: #a0aec0; margin-top: 3px; }}
 
-  /* ── ASSINATURA ── */
-  .assinatura-block {{
-    display: flex;
-    gap: 20mm;
-    margin-top: 10mm;
-    padding-top: 8mm;
-    border-top: 2px solid #1B3A5C;
-  }}
-  .assinatura-pessoa {{ flex: 1; }}
-  .assin-line {{
-    height: 1px;
-    background: #1B3A5C;
-    margin-bottom: 6px;
-    width: 80%;
-  }}
-  .assin-nome {{ font-size: 10pt; font-weight: 800; color: #1B3A5C; margin-bottom: 2px; }}
-  .assin-cargo {{ font-size: 8.5pt; color: #0F7173; font-weight: 600; margin-bottom: 2px; }}
-  .assin-empresa {{ font-size: 8pt; color: #64748B; }}
-  .assin-email {{ font-size: 7.5pt; color: #94A3B8; margin-top: 3px; }}
-
-  /* ── DOC FOOTER LINE ── */
-  .doc-footer-line {{
-    text-align: center;
-    margin-top: 9mm;
-    font-size: 8pt;
-    color: #64748B;
-    padding-top: 5mm;
-    border-top: 1px solid #E2E8F0;
-  }}
+/* ── DOC CLOSING ── */
+.dc {{ text-align: center; margin-top: 8mm; font-size: 8pt; color: #718096; padding-top: 5mm; border-top: 1px solid #e2e8f0; }}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════════════
-     PÁGINA 1: Capa, Objetivo, Metodologia, Módulo 01
-════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════ PAGE 1: título · objetivo · metodologia · M01 ═══════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="page-header-left">FLETIC VISION · Estrutura do Projeto {c["clinica"]} · Confidencial</div>
-    <div class="page-header-right">{c["clinica"]} · Confidencial</div>
-  </div>
+  {ph(1)}
+  <div class="ct">
+    <div class="tag">ANEXO TÉCNICO</div>
+    <div class="title">Estrutura do Projeto</div>
+    <div class="sub">Fletic Vision · {c["clinica"]}</div>
 
-  <div class="content">
-
-    <!-- Title block -->
-    <div class="tag-label">ANEXO TÉCNICO</div>
-    <div class="doc-title">Estrutura do Projeto</div>
-    <div class="doc-subtitle">Fletic Vision · {c["clinica"]}</div>
-
-    <!-- Meta -->
-    <div class="meta-table">
-      <div class="meta-cell">
-        <div class="meta-label">Cliente</div>
-        <div class="meta-value">{c["clinica"]}</div>
-      </div>
-      <div class="meta-cell">
-        <div class="meta-label">Duração</div>
-        <div class="meta-value">12 semanas</div>
-      </div>
-      <div class="meta-cell">
-        <div class="meta-label">Modalidade</div>
-        <div class="meta-value">Consultoria estruturada</div>
-      </div>
-      <div class="meta-cell">
-        <div class="meta-label">Especialidade</div>
-        <div class="meta-value">{c["especialidade"]}</div>
-      </div>
+    <div class="meta">
+      <div class="mc"><div class="ml">Cliente</div><div class="mv">{c["clinica"]}</div></div>
+      <div class="mc"><div class="ml">Duração</div><div class="mv">12 semanas</div></div>
+      <div class="mc"><div class="ml">Modalidade</div><div class="mv">Consultoria estruturada</div></div>
     </div>
 
-    <!-- Objetivo -->
-    <div class="section-hdr">OBJETIVO DO PROJETO</div>
-    <div class="objetivo-block" style="margin-bottom:8mm;">
-      <div class="objetivo-texto">{c["objetivo"]}</div>
-      <ul>{objetivos_html}</ul>
+    <div class="sh">OBJETIVO DO PROJETO</div>
+    <div class="obj">
+      <p>{c["objetivo"]}</p>
+      <ul>{obj_bullets}</ul>
     </div>
 
-    <!-- Metodologia -->
-    <div class="section-hdr">METODOLOGIA</div>
-    <div class="met-intro">
+    <div class="sh">METODOLOGIA</div>
+    <div class="met-p">
       O projeto é conduzido em 5 módulos sequenciais e integrados.
       Cada módulo possui entregáveis definidos, validados com a clínica ao final de cada etapa.
     </div>
-    <div class="met-flow">
-      <div class="met-box"><div class="met-num">01</div><div class="met-name">Arquitetura<br>Assistencial</div></div>
-      <div class="met-box"><div class="met-num">02</div><div class="met-name">Estrutura<br>Operacional</div></div>
-      <div class="met-box"><div class="met-num">03</div><div class="met-name">Modelo<br>Econômico</div></div>
-      <div class="met-box"><div class="met-num">04</div><div class="met-name">Arquitetura<br>Tecnológica</div></div>
-      <div class="met-box"><div class="met-num">05</div><div class="met-name">Gestão por<br>Indicadores</div></div>
+    <div class="mf">
+      <div class="mb"><div class="mbn">01</div><div class="mbt">Arquitetura<br>Assistencial</div></div>
+      <div class="mb"><div class="mbn">02</div><div class="mbt">Estrutura<br>Operacional</div></div>
+      <div class="mb"><div class="mbn">03</div><div class="mbt">Modelo<br>Econômico</div></div>
+      <div class="mb"><div class="mbn">04</div><div class="mbt">Arquitetura<br>Tecnológica</div></div>
+      <div class="mb"><div class="mbn">05</div><div class="mbt">Gestão por<br>Indicadores</div></div>
     </div>
 
-    <!-- Escopo header -->
-    <div class="section-hdr">ESCOPO DETALHADO</div>
-
-    <!-- Módulo 01 -->
-    {build_modulo_html(c["modulos"][0])}
-
+    <div class="sh">ESCOPO DETALHADO</div>
+    {mod_html(c["modulos"][0])}
   </div>
-
-  <div class="page-footer">
-    <span>Framework Fletic — Versão 1.0 · fletic.com.br</span>
-    <span>Página 1 de 4</span>
-  </div>
+  {pf(1)}
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════
-     PÁGINA 2: Módulos 02, 03 e 04
-════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════ PAGE 2: M02 · M03 ═══════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="page-header-left">FLETIC VISION · Estrutura do Projeto {c["clinica"]} · Confidencial</div>
-    <div class="page-header-right">{c["clinica"]} · Confidencial</div>
+  {ph(2)}
+  <div class="ct">
+    {mod_html(c["modulos"][1])}
+    {mod_html(c["modulos"][2])}
   </div>
-
-  <div class="content">
-    {build_modulo_html(c["modulos"][1])}
-    {build_modulo_html(c["modulos"][2])}
-    {build_modulo_html(c["modulos"][3])}
-  </div>
-
-  <div class="page-footer">
-    <span>Framework Fletic — Versão 1.0 · fletic.com.br</span>
-    <span>Página 2 de 4</span>
-  </div>
+  {pf(2)}
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════
-     PÁGINA 3: Módulo 05
-════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════ PAGE 3: M04 · M05 ═══════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="page-header-left">FLETIC VISION · Estrutura do Projeto {c["clinica"]} · Confidencial</div>
-    <div class="page-header-right">{c["clinica"]} · Confidencial</div>
+  {ph(3)}
+  <div class="ct">
+    {mod_html(c["modulos"][3])}
+    {mod_html(c["modulos"][4])}
   </div>
-
-  <div class="content">
-    {build_modulo_html(c["modulos"][4])}
-  </div>
-
-  <div class="page-footer">
-    <span>Framework Fletic — Versão 1.0 · fletic.com.br</span>
-    <span>Página 3 de 4</span>
-  </div>
+  {pf(3)}
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════
-     PÁGINA 4: Cronograma, Critérios de Sucesso, Assinaturas
-════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════ PAGE 4: cronograma · critérios · assinaturas ═══════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="page-header-left">FLETIC VISION · Estrutura do Projeto {c["clinica"]} · Confidencial</div>
-    <div class="page-header-right">{c["clinica"]} · Confidencial</div>
-  </div>
-
-  <div class="content">
-
-    <!-- Cronograma -->
-    <div class="section-hdr">CRONOGRAMA — SEMANA A SEMANA</div>
-    <table class="cron-table">
-      <thead>
-        <tr>
-          <th>PERÍODO</th>
-          <th>FASE</th>
-          <th>ATIVIDADES</th>
-          <th>ENTREGAS</th>
-        </tr>
-      </thead>
-      <tbody>{cron_rows_html}</tbody>
+  {ph(4)}
+  <div class="ct">
+    <div class="sh">CRONOGRAMA — SEMANA A SEMANA</div>
+    <table class="ct-table">
+      <thead><tr><th>PERÍODO</th><th>FASE</th><th>ATIVIDADES</th><th>ENTREGAS</th></tr></thead>
+      <tbody>{cron_rows}</tbody>
     </table>
 
-    <!-- Critérios -->
-    <div class="section-hdr">CRITÉRIOS DE SUCESSO</div>
-    <div class="criterios-intro">
-      O projeto será considerado bem-sucedido quando todos os critérios abaixo estiverem operantes:
-    </div>
-    <div style="margin-bottom:8mm;">
-      {criterios_html}
-    </div>
+    <div class="sh">CRITÉRIOS DE SUCESSO</div>
+    <div class="cri">O projeto será considerado bem-sucedido quando todos os critérios abaixo estiverem operantes:</div>
+    <div style="margin-bottom:7mm">{crit_html}</div>
 
-    <!-- Nota final -->
-    <div class="nota-final">
+    <div class="nota">
       Este documento é parte integrante da proposta Fletic Vision e tem caráter técnico-operacional.
       As informações aqui descritas refletem o escopo padrão do projeto, podendo ser ajustadas em função
       do diagnóstico inicial da clínica e das prioridades identificadas na reunião de alinhamento.
     </div>
 
-    <!-- Assinaturas -->
-    <div class="assinatura-block">
-      <div class="assinatura-pessoa">
-        <div class="assin-line"></div>
-        <div class="assin-nome">Danielle Magalhães</div>
-        <div class="assin-cargo">CEO · Co-Fundadora</div>
-        <div class="assin-empresa">Fletic Saúde Digital</div>
-        <div class="assin-email">dani.magalhaes@fletic.com.br</div>
+    <div class="assin">
+      <div class="ap">
+        <div class="al"></div>
+        <div class="an">Danielle Magalhães</div>
+        <div class="ac">CEO · Co-Fundadora</div>
+        <div class="ae">Fletic Saúde Digital</div>
+        <div class="aemail">dani.magalhaes@fletic.com.br</div>
       </div>
-      <div class="assinatura-pessoa">
-        <div class="assin-line"></div>
-        <div class="assin-nome">Simone Farah</div>
-        <div class="assin-cargo">CMO · Fundadora</div>
-        <div class="assin-empresa">Fletic Saúde Digital</div>
-        <div class="assin-email">simone.farah@fletic.com.br</div>
+      <div class="ap">
+        <div class="al"></div>
+        <div class="an">Simone Farah</div>
+        <div class="ac">CMO · Fundadora</div>
+        <div class="ae">Fletic Saúde Digital</div>
+        <div class="aemail">simone.farah@fletic.com.br</div>
       </div>
     </div>
 
-    <!-- Doc footer line -->
-    <div class="doc-footer-line">
-      Fletic Vision · fletic.com.br · Versão 1.0 · {c["mes_ano"]}
-    </div>
-
+    <div class="dc">Fletic Vision · fletic.com.br · Versão 1.0 · {c["mes_ano"]}</div>
   </div>
-
-  <div class="page-footer">
-    <span>Framework Fletic — Versão 1.0 · fletic.com.br</span>
-    <span>Página 4 de 4</span>
-  </div>
+  {pf(4)}
 </div>
 
 </body>
@@ -847,23 +645,21 @@ def gerar_html(c):
 
 async def gerar_pdf(c):
     html = gerar_html(c)
-    html_path = c["output"].replace(".pdf", ".html")
-    with open(html_path, "w", encoding="utf-8") as f:
+    hp = c["output"].replace(".pdf", ".html")
+    with open(hp, "w", encoding="utf-8") as f:
         f.write(html)
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             executable_path="/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
         )
         page = await browser.new_page()
-        await page.goto(f"file://{html_path}", wait_until="networkidle")
+        await page.goto(f"file://{hp}", wait_until="networkidle")
         await page.pdf(
-            path=c["output"],
-            format="A4",
-            print_background=True,
+            path=c["output"], format="A4", print_background=True,
             margin={"top": "0", "right": "0", "bottom": "0", "left": "0"},
         )
         await browser.close()
-    print(f"Anexo Técnico gerado: {c['output']}")
+    print(f"Gerado: {c['output']}")
 
 
 async def main():
