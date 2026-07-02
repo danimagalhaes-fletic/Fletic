@@ -6,7 +6,7 @@
 Pelo presente instrumento particular, celebrado de forma eletrônica, de um lado:
 
 **CONTRATADA:**
-FLETIC — Gestão Estratégica de Inovação em Saúde Ltda., inscrita no CNPJ sob nº 57.625.870/0001-73, com sede na Rua Trinta e Um de Março, nº 18, Itaipava, Petrópolis – RJ, CEP 25.740-140, neste ato representada por sua co-fundadora e CEO **Danielle Gonzaga Morais Magalhães**, doravante denominada **CONTRATADA**;
+FLETIC — Gestão Estratégica de Inovação em Saúde Ltda., inscrita no CNPJ sob nº 57.625.870/0001-73, com sede na Rua Trinta e Um de Março, nº 18, Itaipava, Petrópolis – RJ, CEP 25.740-140, neste ato representada por suas sócias-fundadoras **Danielle Gonzaga Morais Magalhães** (CEO · Co-Fundadora) e **Simone Farah** (CMO · Fundadora), doravante denominada **CONTRATADA**;
 
 **CONTRATANTE:**
 **Ana Paula Carneiro Monteiro**, médica, pessoa física inscrita no CPF sob nº 083.584.837-08, e-mail: apcmonteiro55@hotmail.com, telefone: (21) 98221-1848, doravante denominada **CONTRATANTE**;
@@ -154,6 +154,17 @@ _______________________________________________
 **CONTRATADA**
 Danielle Gonzaga Morais Magalhães
 CEO · Co-Fundadora
+FLETIC Gestão Estratégica de Inovação em Saúde Ltda.
+CNPJ: 57.625.870/0001-73
+
+&nbsp;
+
+&nbsp;
+
+_______________________________________________
+**CONTRATADA**
+Simone Farah
+CMO · Fundadora
 FLETIC Gestão Estratégica de Inovação em Saúde Ltda.
 CNPJ: 57.625.870/0001-73
 
