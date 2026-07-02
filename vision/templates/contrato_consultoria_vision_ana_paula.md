@@ -37,8 +37,8 @@ As partes resolvem celebrar o presente **CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE
 
 **2.1.** Pelos serviços descritos na Cláusula Primeira, a CONTRATANTE pagará à CONTRATADA o valor total de **R$ 24.000,00 (vinte e quatro mil reais)**, estruturado em duas fases:
 
-- **Fase 1 (Módulos 01, 02 e 03):** R$ 8.000,00 (oito mil reais);
-- **Fase 2 (Módulos 04 e 05):** R$ 16.000,00 (dezesseis mil reais).
+- **Fase 1 (Módulos 01 e 02):** R$ 8.000,00 (oito mil reais);
+- **Fase 2 (Módulos 03, 04 e 05):** R$ 16.000,00 (dezesseis mil reais).
 
 **2.2.** A CONTRATANTE optou pelo pagamento parcelado em **3 (três) parcelas de R$ 8.000,00 (oito mil reais)** cada, com vencimentos nos dias **05 de julho, 05 de agosto e 05 de setembro de 2026**, realizadas via **transferência PIX** para chave a ser informada pela CONTRATADA.
 
@@ -182,4 +182,4 @@ Médica — CRM: ___________
 
 ---
 
-*Este documento foi gerado pela Fletic · fletic.com.br · Versão para revisão jurídica*
+*Fletic · fletic.com.br*
