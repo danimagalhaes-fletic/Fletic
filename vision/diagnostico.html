@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAP FLETIC — Diagnóstico de Maturidade do Consultório</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --surface2: #222222;
+    --border: #2a2a2a;
+    --border2: #333;
+    --text: #f0f0f0;
+    --text2: #9a9a9a;
+    --text3: #5c5c5c;
+    --accent: #028090;
+    --accent-light: #05a6ba;
+    --accent-dim: rgba(2,128,144,0.12);
+    --accent-border: rgba(2,128,144,0.4);
+    --n1: #ff6b6b; --n1-bg: rgba(255,107,107,0.1); --n1-border: rgba(255,107,107,0.3);
+    --n2: #ffb347; --n2-bg: rgba(255,179,71,0.1); --n2-border: rgba(255,179,71,0.3);
+    --n3: #4fc3f7; --n3-bg: rgba(79,195,247,0.1); --n3-border: rgba(79,195,247,0.3);
+    --n4: #02c39a; --n4-bg: rgba(2,195,154,0.12); --n4-border: rgba(2,195,154,0.4);
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+    padding: 3rem 1.25rem 5rem;
+  }
+  .container { max-width: 620px; margin: 0 auto; }
+
+  /* Header */
+  header { text-align: center; margin-bottom: 2.75rem; }
+  .eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-size: clamp(26px, 5vw, 34px); font-weight: 500; color: var(--text);
+    line-height: 1.25; margin-bottom: 1rem;
+  }
+  header p {
+    color: var(--text2); font-size: 15px; max-width: 480px; margin: 0 auto; line-height: 1.7;
+  }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 1.75rem; }
+  .progress-track {
+    height: 4px; background: var(--surface2); border-radius: 4px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--accent); width: 0%; transition: width 0.35s ease;
+  }
+  .progress-label {
+    font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--text3);
+    letter-spacing: 0.06em; margin-top: 0.5rem; text-align: right;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    padding: 1.5rem 1.5rem; margin-bottom: 1rem;
+  }
+  .field-label {
+    font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 0.75rem;
+  }
+  input[type=text], input[type=tel] {
+    width: 100%; background: var(--surface2); border: 0.5px solid var(--border2);
+    border-radius: var(--radius); padding: 12px 14px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s;
+  }
+  input[type=text]:focus, input[type=tel]:focus { border-color: var(--accent); }
+  input::placeholder { color: var(--text3); }
+  .hint { font-size: 12px; color: var(--text3); margin-top: 0.5rem; }
+
+  .q-num {
+    font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--text3);
+    letter-spacing: 0.08em; margin-bottom: 0.5rem;
+  }
+  .q-text { font-size: 16px; color: var(--text); font-weight: 400; margin-bottom: 1.1rem; line-height: 1.5; }
+
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option {
+    display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
+    background: var(--surface2); border: 0.5px solid var(--border2); border-radius: var(--radius);
+    cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  }
+  .option:hover { border-color: var(--border2); background: #272727; }
+  .option.selected { border-color: var(--accent-border); background: var(--accent-dim); }
+  .option input { accent-color: var(--accent); margin-top: 3px; flex-shrink: 0; }
+  .option span { font-size: 14px; color: var(--text2); line-height: 1.5; }
+  .option.selected span { color: var(--text); }
+
+  .btn {
+    width: 100%; padding: 14px 16px; border-radius: var(--radius); border: none;
+    background: var(--accent); font-family: 'DM Sans', sans-serif; font-size: 15px;
+    font-weight: 500; cursor: pointer; color: #fff; transition: background 0.15s, opacity 0.15s;
+    margin-top: 0.5rem;
+  }
+  .btn:hover { background: var(--accent-light); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn:disabled:hover { background: var(--accent); }
+  .error-msg {
+    font-size: 13px; color: var(--n1); margin-top: 0.85rem; text-align: center; display: none;
+  }
+  .error-msg.show { display: block; }
+
+  /* Result */
+  #page-resultado { display: none; }
+  #page-resultado.active { display: block; }
+  #page-form.hidden { display: none; }
+
+  .result-badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px;
+    border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface2);
+    font-size: 13px; color: var(--text2); margin-bottom: 1.5rem;
+  }
+  .nivel-tag { font-size: 11px; font-family: 'DM Mono', monospace; padding: 3px 9px; border-radius: 5px; }
+  .n1-tag { background: var(--n1-bg); color: var(--n1); border: 0.5px solid var(--n1-border); }
+  .n2-tag { background: var(--n2-bg); color: var(--n2); border: 0.5px solid var(--n2-border); }
+  .n3-tag { background: var(--n3-bg); color: var(--n3); border: 0.5px solid var(--n3-border); }
+  .n4-tag { background: var(--n4-bg); color: var(--n4); border: 0.5px solid var(--n4-border); }
+
+  .result-text { font-size: 15.5px; color: var(--text); line-height: 1.85; white-space: pre-wrap; margin-bottom: 1.75rem; }
+
+  .cta-card {
+    background: var(--accent-dim); border: 0.5px solid var(--accent-border); border-radius: var(--radius-lg);
+    padding: 1.5rem; text-align: center;
+  }
+  .cta-card p { font-size: 14px; color: var(--text2); margin-bottom: 1rem; }
+  .btn-wa {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 14px 16px; border-radius: var(--radius); border: none;
+    background: #25D366; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; color: #06110c; text-decoration: none; transition: opacity 0.15s;
+  }
+  .btn-wa:hover { opacity: 0.88; }
+
+  .footer {
+    margin-top: 3rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 10px;
+    color: var(--text3); letter-spacing: 0.1em; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="eyebrow">MAP · FLETIC</div>
+    <h1>Diagnóstico de Maturidade do Consultório</h1>
+    <p>9 perguntas rápidas para entender em que nível seu consultório está hoje — e o que muda quando ele se torna estruturado e previsível.</p>
+  </header>
+
+  <div id="page-form">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-label" id="progress-label">0 de 9 respondidas</div>
+    </div>
+
+    <div class="card">
+      <div class="field-label">Nome completo</div>
+      <input type="text" id="nome" placeholder="Ex: Dra. Marília Cardoso" oninput="atualizarProgresso()" autocomplete="name" />
+    </div>
+
+    <div class="card">
+      <div class="field-label">WhatsApp</div>
+      <input type="tel" id="whatsapp" placeholder="Ex: 11999999999" oninput="atualizarProgresso()" autocomplete="tel" />
+      <div class="hint">Somente números, com DDD, sem espaço.</div>
+    </div>
+
+    <div id="perguntas"></div>
+
+    <button class="btn" id="btn-enviar" onclick="enviarDiagnostico()" disabled>Ver meu diagnóstico</button>
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <div id="page-resultado">
+    <div class="result-badge" id="result-badge"></div>
+    <div class="result-text" id="result-text"></div>
+    <div class="cta-card">
+      <p>Quer entender como isso se aplica na prática no seu consultório?</p>
+      <a class="btn-wa" id="btn-wa-cta" target="_blank" rel="noopener">Falar com a Fletic Vision no WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="footer">Fletic Vision — Arquitetura Institucional para Saúde Digital<br>MAP FLETIC · Diagnóstico de Maturidade</div>
+</div>
+
+<script>
+/* ===================== CONFIGURAÇÃO ===================== */
+// Cole aqui a URL do Apps Script Web App (ver apps-script.gs) depois de implantado.
+const GAS_ENDPOINT = "COLE_AQUI_A_URL_DO_APPS_SCRIPT_WEB_APP";
+// Número de WhatsApp da Fletic Vision que vai receber a mensagem do lead (formato: 55DDDNUMERO, sem espaços/símbolos).
+const FLETIC_WHATSAPP = "COLE_AQUI_O_NUMERO_DA_FLETIC_VISION";
+/* =========================================================== */
+
+const perguntas = [
+  {
+    texto: "Como você organiza o acompanhamento dos seus pacientes?",
+    opcoes: [
+      "Não organizo, depende do paciente voltar",
+      "Organizo informalmente",
+      "Tenho protocolo parcial",
+      "Processo estruturado e ativo"
+    ]
+  },
+  {
+    texto: "Sua receita hoje depende principalmente de:",
+    opcoes: [
+      "Volume de consultas avulsas",
+      "Mix de consulta e alguns programas",
+      "Programas e acompanhamento com alguma recorrência",
+      "Modelo de recorrência estruturado"
+    ]
+  },
+  {
+    texto: "Como você utiliza o digital no seu consultório hoje?",
+    opcoes: [
+      "Quase não uso",
+      "Uso para comunicação básica",
+      "Uso comunicação e algum monitoramento",
+      "Uso integrado com fluxo de cuidado"
+    ]
+  },
+  {
+    texto: "Hoje você sente que seu consultório é:",
+    opcoes: [
+      "Totalmente reativo",
+      "Em fase de organização",
+      "Parcialmente estruturado",
+      "Estruturado e previsível"
+    ]
+  },
+  {
+    texto: "Seu modelo de cuidado hoje é mais:",
+    opcoes: [
+      "Consulta pontual sem acompanhamento",
+      "Parcialmente organizado",
+      "Acompanhamento em alguns casos",
+      "Acompanhamento contínuo estruturado"
+    ]
+  },
+  {
+    texto: "Você acompanha indicadores do seu consultório?",
+    opcoes: [
+      "Não acompanho nada",
+      "Só faturamento",
+      "Faturamento e alguns dados clínicos",
+      "Indicadores clínicos e financeiros integrados"
+    ]
+  },
+  {
+    texto: "Se você pudesse mudar uma coisa hoje no seu consultório, seria:",
+    opcoes: [
+      "Ter mais pacientes",
+      "Organizar melhor o fluxo",
+      "Ter mais previsibilidade de receita",
+      "Escalar sem depender do meu tempo"
+    ]
+  }
+];
+
+const nivelNomes = {1:"N1 — Operacional", 2:"N2 — Desorganizado", 3:"N3 — Estruturando", 4:"N4 — Escalável"};
+const nivelCls = {1:"n1-tag", 2:"n2-tag", 3:"n3-tag", 4:"n4-tag"};
+
+// Textos por nível (Movimento 2 — Diagnóstico + Movimento 3 — Convite), mesmo conteúdo usado no Gerador de Script interno.
+const scripts = {
+  1: {
+    diagnostico: "Com base no seu MAP, seu consultório hoje opera em um nível predominantemente operacional.\n\nIsso significa que o crescimento está diretamente ligado ao tempo e à agenda de vocês, sem uma estrutura clara de acompanhamento e organização da jornada do paciente.\n\nEsse padrão costuma gerar esforço contínuo, baixa previsibilidade e limitação de escala.\n\nO ponto central não é falta de paciente, mas ausência de modelo estruturado. Sem isso, qualquer crescimento exige mais trabalho, não mais eficiência.",
+    convite: "Analisando seu MAP com mais cuidado, fica claro que você já tem consciência do problema — e isso é o primeiro passo.\n\nO que falta é um modelo. E modelo se constrói com direção, não com mais esforço.\n\nSe fizer sentido, podemos te mostrar como isso se traduziria diretamente no seu consultório. É uma conversa rápida, sem enrolação."
+  },
+  2: {
+    diagnostico: "Seu MAP mostra um consultório acima da média, mas ainda sem estrutura consolidada.\n\nExiste crescimento, mas sem previsibilidade. Existe esforço, mas sem sustentação.\n\nIsso geralmente acontece quando há iniciativas isoladas, sem um modelo claro integrando acompanhamento, jornada e estratégia.\n\nO potencial de crescimento é alto, mas hoje ainda depende de ajustes constantes.\n\nQuando o modelo é estruturado, o crescimento deixa de ser esforço e passa a ser previsível.",
+    convite: "Analisando seu MAP com mais cuidado, fica claro que você já está em um nível acima da média — mas ainda com um gap importante de estrutura.\n\nEsse é exatamente o tipo de cenário onde pequenas mudanças geram grande impacto, principalmente em previsibilidade e receita.\n\nO ponto aqui não é trabalhar mais, mas organizar o modelo."
+  },
+  3: {
+    diagnostico: "Pelo seu MAP, você já entendeu o jogo e começou a estruturar o consultório.\n\nO desafio agora não é mais iniciar, mas integrar.\n\nExiste valor no que já é feito, mas ainda falta conexão entre as partes para permitir escala real.\n\nSem essa integração, o crescimento tende a estagnar ou depender de esforço adicional.\n\nQuando o modelo se organiza, acontece ganho de previsibilidade, eficiência e controle.",
+    convite: "Analisando seu MAP com mais cuidado, fica claro que você já está em um nível acima da média — mas ainda com um gap importante de estrutura.\n\nEsse é exatamente o tipo de cenário onde pequenas mudanças geram grande impacto, principalmente em previsibilidade e escala.\n\nVocê já tem a base. O que falta é afinar o modelo."
+  },
+  4: {
+    diagnostico: "Seu MAP mostra um nível avançado de estrutura.\n\nVocê já não depende exclusivamente de volume e já construiu uma base consistente.\n\nO próximo passo não é organizar, mas otimizar e escalar.\n\nPequenos ajustes estratégicos aqui tendem a gerar impactos significativos em eficiência e crescimento.\n\nEsse é um perfil que se beneficia de refinamento e direcionamento mais estratégico.",
+    convite: "Pelo seu MAP, você está num ponto onde o jogo é outro — não é mais estrutura básica, é alavancagem.\n\nA Fletic trabalha com poucos consultórios nesse nível justamente porque a conversa é diferente.\n\nSe fizer sentido, podemos te mostrar o que seria possível a partir do seu cenário atual. É uma conversa rápida e direta."
+  }
+};
+
+let respostas = new Array(perguntas.length).fill(null);
+
+const pg = document.getElementById('perguntas');
+perguntas.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="q-num">Pergunta ${i + 1} de ${perguntas.length}</div>
+    <div class="q-text">${p.texto}</div>
+    <div class="options" id="opts-${i}">
+      ${p.opcoes.map((op, v) => `
+        <label class="option" id="opt-${i}-${v + 1}">
+          <input type="radio" name="q${i}" value="${v + 1}" onchange="setResposta(${i}, ${v + 1})" />
+          <span>${op}</span>
+        </label>
+      `).join('')}
+    </div>
+  `;
+  pg.appendChild(card);
+});
+
+function setResposta(i, valor) {
+  respostas[i] = valor;
+  document.querySelectorAll(`#opts-${i} .option`).forEach(el => el.classList.remove('selected'));
+  document.getElementById(`opt-${i}-${valor}`).classList.add('selected');
+  atualizarProgresso();
+}
+
+function atualizarProgresso() {
+  const nome = document.getElementById('nome').value.trim();
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const respondidas = respostas.filter(r => r !== null).length;
+  const total = perguntas.length + 2; // nome + whatsapp + perguntas
+  const feitas = (nome ? 1 : 0) + (whatsapp ? 1 : 0) + respondidas;
+
+  document.getElementById('progress-fill').style.width = `${(feitas / total) * 100}%`;
+  document.getElementById('progress-label').textContent = `${feitas} de ${total} respondidas`;
+
+  const completo = nome.length > 1 && /^\d{10,11}$/.test(whatsapp) && respondidas === perguntas.length;
+  document.getElementById('btn-enviar').disabled = !completo;
+}
+
+function calcularNivel() {
+  const count = {1:0, 2:0, 3:0, 4:0};
+  respostas.forEach(r => count[r]++);
+  const max = Math.max(...Object.values(count));
+  const vencedores = Object.keys(count).filter(k => count[k] === max).map(Number);
+  return vencedores.length === 1 ? vencedores[0] : respostas[1];
+}
+
+function enviarDiagnostico() {
+  const nome = document.getElementById('nome').value.trim();
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const errorEl = document.getElementById('error-msg');
+
+  if (!nome || !/^\d{10,11}$/.test(whatsapp) || respostas.includes(null)) {
+    errorEl.textContent = 'Preencha seu nome, um WhatsApp válido (com DDD, só números) e todas as perguntas.';
+    errorEl.classList.add('show');
+    return;
+  }
+  errorEl.classList.remove('show');
+
+  const nivel = calcularNivel();
+  const payload = {
+    nome, whatsapp, respostas, nivel,
+    timestamp: new Date().toISOString(),
+    origem: 'Site - /diagnostico'
+  };
+
+  notificar(payload);
+  mostrarResultado(nome, nivel, whatsapp);
+}
+
+function notificar(payload) {
+  if (!GAS_ENDPOINT || GAS_ENDPOINT.indexOf('COLE_AQUI') === 0) return;
+  try {
+    fetch(GAS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) { /* notificação é best-effort, não bloqueia o resultado do lead */ }
+}
+
+function mostrarResultado(nome, nivel, whatsapp) {
+  document.getElementById('page-form').classList.add('hidden');
+  const resultado = document.getElementById('page-resultado');
+  resultado.classList.add('active');
+
+  document.getElementById('result-badge').innerHTML =
+    `<span class="nivel-tag ${nivelCls[nivel]}">${nivelNomes[nivel]}</span>`;
+
+  const s = scripts[nivel];
+  document.getElementById('result-text').textContent =
+    `Oi, ${nome}!\n\n${s.diagnostico}\n\n${s.convite}`;
+
+  const waTexto = encodeURIComponent(
+    `Oi! Acabei de fazer o diagnóstico MAP FLETIC. Meu nome é ${nome} e meu nível foi ${nivelNomes[nivel]}. Quero entender melhor como isso se aplica no meu consultório.`
+  );
+  const waLink = document.getElementById('btn-wa-cta');
+  if (FLETIC_WHATSAPP && FLETIC_WHATSAPP.indexOf('COLE_AQUI') !== 0) {
+    waLink.href = `https://wa.me/${FLETIC_WHATSAPP}?text=${waTexto}`;
+  } else {
+    waLink.href = `https://wa.me/?text=${waTexto}`;
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
