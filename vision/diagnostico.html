@@ -21,10 +21,10 @@
     --accent-grad: linear-gradient(135deg, #0556db 0%, #12c7e4 100%);
     --accent-dim: rgba(5,86,219,0.07);
     --accent-border: rgba(5,86,219,0.28);
-    --n1: #e0563f; --n1-bg: rgba(224,86,63,0.08); --n1-border: rgba(224,86,63,0.25);
-    --n2: #dd9a1f; --n2-bg: rgba(221,154,31,0.09); --n2-border: rgba(221,154,31,0.28);
-    --n3: #0d8fd1; --n3-bg: rgba(13,143,209,0.08); --n3-border: rgba(13,143,209,0.28);
-    --n4: #0fa876; --n4-bg: rgba(15,168,118,0.09); --n4-border: rgba(15,168,118,0.28);
+    --n1: #e0563f; --n1-text: #e0563f; --n1-bg: rgba(224,86,63,0.08); --n1-border: rgba(224,86,63,0.25);
+    --n2: #dd9a1f; --n2-text: #b8790a; --n2-bg: rgba(221,154,31,0.09); --n2-border: rgba(221,154,31,0.28);
+    --n3: #0d8fd1; --n3-text: #0d8fd1; --n3-bg: rgba(13,143,209,0.08); --n3-border: rgba(13,143,209,0.28);
+    --n4: #0fa876; --n4-text: #0c8a5e; --n4-bg: rgba(15,168,118,0.09); --n4-border: rgba(15,168,118,0.28);
     --radius: 10px;
     --radius-lg: 16px;
     --shadow: 0 1px 2px rgba(16,35,63,0.04), 0 8px 24px rgba(16,35,63,0.05);
@@ -142,14 +142,17 @@
     flex: 1; height: 10px; border-radius: 6px; background: var(--surface2);
     border: 1px solid var(--border2); transition: background 0.4s ease, border-color 0.4s ease;
   }
-  .meter-seg.filled { background: var(--accent-grad); border-color: transparent; }
+  .meter-seg.n1 { background: var(--n1); border-color: transparent; }
+  .meter-seg.n2 { background: var(--n2); border-color: transparent; }
+  .meter-seg.n3 { background: var(--n3); border-color: transparent; }
+  .meter-seg.n4 { background: var(--n4); border-color: transparent; }
   .saudacao { font-size: 15px; color: var(--text2); margin-bottom: 0.5rem; }
   .nivel-eyebrow {
     font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text3); margin-bottom: 1.1rem;
   }
   .nivel-titulo { font-size: 26px; font-weight: 500; margin-bottom: 0.4rem; }
-  .n1-cor { color: var(--n1); } .n2-cor { color: var(--n2); } .n3-cor { color: var(--n3); } .n4-cor { color: var(--n4); }
+  .n1-cor { color: var(--n1-text); } .n2-cor { color: var(--n2-text); } .n3-cor { color: var(--n3-text); } .n4-cor { color: var(--n4-text); }
   .nivel-nome { font-size: 15px; color: var(--text2); }
 
   .insight-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem; }
@@ -159,10 +162,14 @@
     box-shadow: var(--shadow);
   }
   .insight-num {
-    flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-dim);
-    color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
     display: flex; align-items: center; justify-content: center;
   }
+  .insight-num.n1 { background: var(--n1-bg); color: var(--n1-text); }
+  .insight-num.n2 { background: var(--n2-bg); color: var(--n2-text); }
+  .insight-num.n3 { background: var(--n3-bg); color: var(--n3-text); }
+  .insight-num.n4 { background: var(--n4-bg); color: var(--n4-text); }
   .insight-card p { font-size: 14.5px; color: var(--text); line-height: 1.6; padding-top: 3px; }
 
   .convite-card {
@@ -459,20 +466,21 @@ function mostrarResultado(nome, nivel, whatsapp) {
 
   document.getElementById('saudacao').textContent = `Oi, ${nome.split(' ')[0]}!`;
 
+  const nivelKey = `n${nivel}`;
   const [tituloN, nomeN] = nivelNomes[nivel].split(' — ');
   document.getElementById('nivel-titulo').textContent = tituloN;
-  document.getElementById('nivel-titulo').className = `nivel-titulo ${nivelCls[nivel].replace('-tag', '-cor')}`;
+  document.getElementById('nivel-titulo').className = `nivel-titulo ${nivelKey}-cor`;
   document.getElementById('nivel-nome').textContent = nomeN;
 
   document.querySelectorAll('#nivel-meter .meter-seg').forEach((seg, i) => {
-    seg.classList.toggle('filled', i < nivel);
+    seg.className = i < nivel ? `meter-seg n${i + 1}` : 'meter-seg';
   });
 
   const s = scripts[nivel];
   const paragrafos = s.diagnostico.split('\n\n');
   document.getElementById('insight-list').innerHTML = paragrafos.map((p, i) => `
     <div class="insight-card">
-      <div class="insight-num">${i + 1}</div>
+      <div class="insight-num ${nivelKey}">${i + 1}</div>
       <p>${p}</p>
     </div>
   `).join('');
