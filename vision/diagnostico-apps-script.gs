@@ -45,6 +45,8 @@ function doPost(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+const PRIORIDADE_POR_NIVEL = { 1: 'A qualificar', 2: 'A qualificar', 3: 'Média', 4: 'Alta' };
+
 function registrarResposta_(data) {
   const sheet = getSheet_();
   const respostas = data.respostas || [];
@@ -57,7 +59,8 @@ function registrarResposta_(data) {
     respostas[4] || '', respostas[5] || '', respostas[6] || '',
     'N' + data.nivel,
     'Novo',
-    '', '', ''
+    PRIORIDADE_POR_NIVEL[data.nivel] || '',
+    '', ''
   ]);
 }
 
