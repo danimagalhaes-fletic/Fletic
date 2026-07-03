@@ -12,22 +12,34 @@
  *    - Quem pode acessar: Qualquer pessoa
  * 4. Autorize o script quando solicitado (só na primeira vez).
  * 5. Copie a URL do Web App gerada e cole na constante GAS_ENDPOINT em vision/diagnostico.html.
+ *
+ * PARA ATUALIZAR DEPOIS DE UMA EDIÇÃO NESTE CÓDIGO:
+ * Salvar (Ctrl+S) sozinho NÃO atualiza a URL que já está publicada. É preciso:
+ * Implantar > Gerenciar implantações > ícone de lápis na implantação ativa >
+ * em "Versão" escolha "Nova versão" > Implantar.
  */
 
 const SHEET_NAME = 'Respostas';
 const NOTIFY_EMAIL = 'contato@fletic.com.br';
 
 function doPost(e) {
+  let resultado = { ok: true };
   try {
     const data = JSON.parse(e.postData.contents);
     registrarResposta_(data);
-    enviarNotificacao_(data);
-    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    try {
+      enviarNotificacao_(data);
+    } catch (mailErr) {
+      // Isola falha de email: o lead já foi registrado na planilha mesmo se o email falhar.
+      console.error('Falha ao enviar email de notificação: ' + mailErr);
+      resultado = { ok: true, emailError: String(mailErr) };
+    }
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    console.error('Falha no doPost: ' + err);
+    resultado = { ok: false, error: String(err) };
   }
+  return ContentService.createTextOutput(JSON.stringify(resultado))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function registrarResposta_(data) {
