@@ -190,13 +190,13 @@
 
     <div class="card">
       <div class="field-label">WhatsApp</div>
-      <input type="tel" id="whatsapp" placeholder="Ex: 11999999999" oninput="atualizarProgresso()" autocomplete="tel" />
-      <div class="hint">Somente números, com DDD, sem espaço.</div>
+      <input type="tel" id="whatsapp" placeholder="Ex: (11) 99999-9999" oninput="limparWhatsapp(); atualizarProgresso()" autocomplete="tel" />
+      <div class="hint">Pode digitar com ou sem formatação — a gente ajusta sozinho.</div>
     </div>
 
     <div id="perguntas"></div>
 
-    <button class="btn" id="btn-enviar" onclick="enviarDiagnostico()" disabled>Ver meu diagnóstico</button>
+    <button class="btn" id="btn-enviar" onclick="enviarDiagnostico()">Ver meu diagnóstico</button>
     <div class="error-msg" id="error-msg"></div>
   </div>
 
@@ -335,6 +335,17 @@ function setResposta(i, valor) {
   atualizarProgresso();
 }
 
+function limparWhatsapp() {
+  const el = document.getElementById('whatsapp');
+  let digitos = el.value.replace(/\D/g, '');
+  // Se veio com DDI 55 (12-13 dígitos), remove pra ficar só DDD + número.
+  if (digitos.length > 11 && digitos.startsWith('55')) {
+    digitos = digitos.slice(2);
+  }
+  digitos = digitos.slice(0, 11);
+  el.value = digitos;
+}
+
 function atualizarProgresso() {
   const nome = document.getElementById('nome').value.trim();
   const whatsapp = document.getElementById('whatsapp').value.trim();
@@ -344,9 +355,6 @@ function atualizarProgresso() {
 
   document.getElementById('progress-fill').style.width = `${(feitas / total) * 100}%`;
   document.getElementById('progress-label').textContent = `${feitas} de ${total} respondidas`;
-
-  const completo = nome.length > 1 && /^\d{10,11}$/.test(whatsapp) && respondidas === perguntas.length;
-  document.getElementById('btn-enviar').disabled = !completo;
 }
 
 function calcularNivel() {
@@ -361,10 +369,20 @@ function enviarDiagnostico() {
   const nome = document.getElementById('nome').value.trim();
   const whatsapp = document.getElementById('whatsapp').value.trim();
   const errorEl = document.getElementById('error-msg');
+  const faltando = [];
 
-  if (!nome || !/^\d{10,11}$/.test(whatsapp) || respostas.includes(null)) {
-    errorEl.textContent = 'Preencha seu nome, um WhatsApp válido (com DDD, só números) e todas as perguntas.';
+  if (!nome || nome.length < 2) faltando.push('seu nome completo');
+  if (!/^\d{10,11}$/.test(whatsapp)) faltando.push('um WhatsApp válido (DDD + número)');
+  const primeiraFaltando = respostas.findIndex(r => r === null);
+  if (primeiraFaltando !== -1) faltando.push(`a pergunta ${primeiraFaltando + 1}`);
+
+  if (faltando.length > 0) {
+    errorEl.textContent = 'Falta preencher: ' + faltando.join(', ') + '.';
     errorEl.classList.add('show');
+    const alvo = primeiraFaltando !== -1
+      ? document.getElementById(`opts-${primeiraFaltando}`).closest('.card')
+      : (!nome ? document.getElementById('nome') : document.getElementById('whatsapp'));
+    alvo.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
   errorEl.classList.remove('show');
