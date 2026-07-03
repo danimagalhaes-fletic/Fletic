@@ -2,7 +2,10 @@
  * MAP FLETIC — Backend do diagnóstico público (fletic.com.br/diagnostico)
  *
  * O que faz: recebe a resposta do formulário via POST, grava uma linha na planilha
- * a que este script está vinculado e envia um email de notificação para contato@fletic.com.br.
+ * a que este script está vinculado e envia um email de notificação direto para
+ * dani.magalhaes@fletic.com.br e simone.farah@fletic.com.br (enviado sempre pela
+ * conta que implantou o script, por isso vai direto pros dois em vez de usar o
+ * alias contato@fletic.com.br — evita depender de configuração de Grupo).
  *
  * COMO IMPLANTAR:
  * 1. Crie uma Planilha Google nova (ex: "MAP FLETIC — Diagnóstico (Respostas)").
@@ -20,7 +23,7 @@
  */
 
 const SHEET_NAME = 'Respostas';
-const NOTIFY_EMAIL = 'contato@fletic.com.br';
+const NOTIFY_EMAILS = 'dani.magalhaes@fletic.com.br,simone.farah@fletic.com.br';
 
 function doPost(e) {
   let resultado = { ok: true };
@@ -88,5 +91,5 @@ function enviarNotificacao_(data) {
     `Data: ${new Date().toLocaleString('pt-BR')}`
   ].join('\n');
 
-  MailApp.sendEmail(NOTIFY_EMAIL, assunto, corpo);
+  MailApp.sendEmail(NOTIFY_EMAILS, assunto, corpo);
 }
