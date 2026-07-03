@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAP FLETIC — Gerador de Script</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --surface2: #222222;
+    --border: #2a2a2a;
+    --border2: #333;
+    --text: #f0f0f0;
+    --text2: #888;
+    --text3: #555;
+    --accent: #028090;
+    --accent-dim: rgba(2,128,144,0.12);
+    --accent-border: rgba(2,128,144,0.35);
+    --n1: #ff6b6b; --n1-bg: rgba(255,107,107,0.1); --n1-border: rgba(255,107,107,0.25);
+    --n2: #ffb347; --n2-bg: rgba(255,179,71,0.1); --n2-border: rgba(255,179,71,0.25);
+    --n3: #4fc3f7; --n3-bg: rgba(79,195,247,0.1); --n3-border: rgba(79,195,247,0.25);
+    --n4: #02c39a; --n4-bg: rgba(2,195,154,0.12); --n4-border: rgba(2,195,154,0.35);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+  .container { max-width: 640px; margin: 0 auto; }
+  header { margin-bottom: 2.5rem; }
+  .logo { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  h1 { font-size: 22px; font-weight: 500; color: var(--text); }
+  h1 span { color: var(--text2); font-weight: 300; }
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.75rem; }
+  input[type=text] {
+    width: 100%; background: var(--surface2); border: 0.5px solid var(--border2);
+    border-radius: var(--radius); padding: 10px 14px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s;
+  }
+  input[type=text]:focus { border-color: var(--accent); }
+  input[type=text]::placeholder { color: var(--text3); }
+  .grid7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .q-block { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .q-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); }
+  select {
+    width: 100%; background: var(--surface2); border: 0.5px solid var(--border2);
+    border-radius: var(--radius); padding: 7px 4px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; outline: none;
+    cursor: pointer; text-align: center; appearance: none; transition: border-color 0.2s;
+  }
+  select:focus { border-color: var(--accent); }
+  select option { background: #222; }
+  .nivel-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border-radius: var(--radius);
+    border: 0.5px solid var(--border2); background: var(--surface2);
+    font-size: 13px; color: var(--text2);
+  }
+  .nivel-tag { font-size: 11px; font-family: 'DM Mono', monospace; padding: 3px 8px; border-radius: 4px; }
+  .n1-tag { background: var(--n1-bg); color: var(--n1); border: 0.5px solid var(--n1-border); }
+  .n2-tag { background: var(--n2-bg); color: var(--n2); border: 0.5px solid var(--n2-border); }
+  .n3-tag { background: var(--n3-bg); color: var(--n3); border: 0.5px solid var(--n3-border); }
+  .n4-tag { background: var(--n4-bg); color: var(--n4); border: 0.5px solid var(--n4-border); }
+  .mov-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.75rem; }
+  .mov-title .mov-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.05em; margin-right: 6px; }
+  .script-box {
+    background: var(--surface2); border: 0.5px solid var(--border2);
+    border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+    font-size: 14px; line-height: 1.85; color: var(--text);
+    white-space: pre-wrap; min-height: 90px; margin-bottom: 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .script-box.empty { color: var(--text3); font-style: italic; }
+  .btn {
+    width: 100%; padding: 10px 16px; border-radius: var(--radius); border: 0.5px solid var(--border2);
+    background: var(--surface2); font-family: 'DM Sans', sans-serif; font-size: 13px;
+    font-weight: 500; cursor: pointer; color: var(--text2); transition: all 0.15s;
+  }
+  .btn:hover { background: #272727; color: var(--text); }
+  .btn.success { color: var(--accent); border-color: var(--accent-border); background: var(--accent-dim); }
+  .btn-row2 { display: flex; gap: 8px; }
+  .btn-half { flex: 1; width: auto; }
+  .btn-wa { color: #25D366; border-color: rgba(37,211,102,0.35); background: rgba(37,211,102,0.08); }
+  .btn-wa:hover { background: rgba(37,211,102,0.16); color: #25D366; }
+  .btn-wa.success { color: #25D366; border-color: rgba(37,211,102,0.5); background: rgba(37,211,102,0.2); }
+  .tabs { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 1.5rem; }
+  .tab {
+    padding: 10px 20px; font-size: 13px; cursor: pointer; color: var(--text2);
+    border-bottom: 2px solid transparent; margin-bottom: -0.5px;
+    background: none; border-top: none; border-left: none; border-right: none;
+    font-family: 'DM Sans', sans-serif; transition: color 0.15s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .page { display: none; }
+  .page.active { display: block; }
+  .hist-empty { font-size: 14px; color: var(--text3); padding: 2.5rem 0; text-align: center; line-height: 1.8; }
+  .hist-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); margin-bottom: 1rem; letter-spacing: 0.05em; }
+  .hist-item {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 8px;
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px;
+    transition: border-color 0.15s;
+  }
+  .hist-item:hover { border-color: var(--border2); }
+  .hist-nome { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+  .hist-right { text-align: right; }
+  .hist-mov { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.05em; margin-bottom: 3px; }
+  .hist-time { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+  .hist-del {
+    font-size: 11px; color: var(--text3); cursor: pointer;
+    background: none; border: 0.5px solid var(--border); padding: 3px 8px;
+    border-radius: 4px; font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+  }
+  .hist-del:hover { color: var(--n1); border-color: var(--n1-border); background: var(--n1-bg); }
+  .hist-bottom { display: flex; gap: 8px; margin-top: 1rem; }
+  .export-btn {
+    flex: 1; padding: 11px; border-radius: var(--radius); border: 0.5px solid var(--border2);
+    background: var(--surface2); font-family: 'DM Sans', sans-serif; font-size: 13px;
+    font-weight: 500; cursor: pointer; color: var(--text2); transition: all 0.15s;
+  }
+  .export-btn:hover { background: #272727; color: var(--text); }
+  .export-btn.success { color: var(--accent); border-color: var(--accent-border); background: var(--accent-dim); }
+  .clear-btn {
+    padding: 11px 16px; border-radius: var(--radius); border: 0.5px solid var(--border);
+    background: none; font-family: 'DM Sans', sans-serif; font-size: 13px;
+    cursor: pointer; color: var(--text3); transition: all 0.15s;
+  }
+  .clear-btn:hover { color: var(--n1); border-color: var(--n1-border); background: var(--n1-bg); }
+  .persist-note { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); text-align: center; margin-top: 0.75rem; letter-spacing: 0.04em; }
+  .footer { margin-top: 3rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.1em; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">MAP · FLETIC</div>
+    <h1>Gerador de Script <span>/ Consultoria</span></h1>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('gerador', this)">Gerador</button>
+    <button class="tab" onclick="showPage('historico', this)">Histórico <span id="hist-badge"></span></button>
+  </div>
+
+  <div id="page-gerador" class="page active">
+    <div class="card">
+      <div class="section-label">Nome do lead</div>
+      <input type="text" id="nome" placeholder="Ex: Dr. João Lima" oninput="atualizar()" />
+      <div class="section-label" style="margin-top:0.9rem">WhatsApp do lead</div>
+      <input type="tel" id="telefone" placeholder="Ex: 11 91234-5678" oninput="atualizar()" />
+    </div>
+    <div class="card">
+      <div class="section-label">Respostas P1 – P7</div>
+      <div class="grid7" id="perguntas"></div>
+    </div>
+    <div class="card">
+      <div class="section-label">Nível calculado</div>
+      <div class="nivel-badge" id="nivel-display">— selecione todas as respostas</div>
+    </div>
+
+    <div class="card">
+      <div class="mov-title"><span class="mov-num">Movimento 1</span>Abertura</div>
+      <div class="script-box empty" id="script-1">Preencha os campos acima para gerar o script.</div>
+      <div class="btn-row2">
+        <button class="btn btn-half" id="btn-1" onclick="copiarSalvar(1)">Copiar e salvar</button>
+        <button class="btn btn-half btn-wa" id="wa-1" onclick="enviarWhatsapp(1)">Enviar no WhatsApp</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="mov-title"><span class="mov-num">Movimento 2</span>Diagnóstico</div>
+      <div class="script-box empty" id="script-2">Preencha os campos acima para gerar o script.</div>
+      <div class="btn-row2">
+        <button class="btn btn-half" id="btn-2" onclick="copiarSalvar(2)">Copiar e salvar</button>
+        <button class="btn btn-half btn-wa" id="wa-2" onclick="enviarWhatsapp(2)">Enviar no WhatsApp</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="mov-title"><span class="mov-num">Movimento 3</span>Convite</div>
+      <div class="script-box empty" id="script-3">Preencha os campos acima para gerar o script.</div>
+      <div class="btn-row2">
+        <button class="btn btn-half" id="btn-3" onclick="copiarSalvar(3)">Copiar e salvar</button>
+        <button class="btn btn-half btn-wa" id="wa-3" onclick="enviarWhatsapp(3)">Enviar no WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-historico" class="page">
+    <div class="hist-count" id="hist-count"></div>
+    <div id="hist-list"></div>
+    <div class="hist-bottom">
+      <button class="export-btn" id="export-btn" onclick="exportar()">Exportar para planilha</button>
+      <button class="clear-btn" onclick="limparTudo()">Limpar tudo</button>
+    </div>
+    <div class="persist-note">Dados salvos neste navegador — persistem mesmo após fechar o arquivo.</div>
+  </div>
+
+  <div class="footer">Fletic — Gestão Estratégica de Inovação em Saúde<br>MAP FLETIC · Gerador de Script · v1.0</div>
+</div>
+
+<script>
+const STORAGE_KEY = 'map_fletic_historico';
+const ASSINATURA = '\n\n— Danielle & Simone\nFletic';
+const movNomes = {1:"M1 — Abertura",2:"M2 — Diagnóstico",3:"M3 — Convite"};
+const nivelNomes = {1:"N1 — Operacional",2:"N2 — Desorganizado",3:"N3 — Estruturando",4:"N4 — Escalável"};
+const nivelCls = {1:"n1-tag",2:"n2-tag",3:"n3-tag",4:"n4-tag"};
+
+const scripts = {
+  N1:{
+    1:"Pelo seu MAP, identificamos algo importante no seu cenário. Podemos compartilhar?",
+    2:"Com base no seu MAP, seu consultório hoje opera em um nível predominantemente operacional.\n\nIsso significa que o crescimento está diretamente ligado ao tempo e à agenda de vocês, sem uma estrutura clara de acompanhamento e organização da jornada do paciente.\n\nEsse padrão costuma gerar esforço contínuo, baixa previsibilidade e limitação de escala.\n\nO ponto central não é falta de paciente, mas ausência de modelo estruturado. Sem isso, qualquer crescimento exige mais trabalho, não mais eficiência.\n\nEsse é exatamente o tipo de transição que a Fletic trabalha na consultoria. Se fizer sentido, podemos te explicar como isso se aplicaria no seu caso.",
+    3:"Analisando seu MAP com mais cuidado, fica claro que vocês já têm consciência do problema — e isso é o primeiro passo.\n\nO que falta é um modelo. E modelo se constrói com direção, não com mais esforço.\n\nSe fizer sentido, podemos te mostrar como isso se traduziria diretamente no seu consultório. É uma conversa rápida, sem enrolação."
+  },
+  N2:{
+    1:"Pelo seu MAP, identificamos algo importante no seu cenário. Podemos compartilhar?",
+    2:"Seu MAP mostra um consultório acima da média, mas ainda sem estrutura consolidada.\n\nExiste crescimento, mas sem previsibilidade. Existe esforço, mas sem sustentação.\n\nIsso geralmente acontece quando há iniciativas isoladas, sem um modelo claro integrando acompanhamento, jornada e estratégia.\n\nO potencial de crescimento é alto, mas hoje ainda depende de ajustes constantes.\n\nQuando o modelo é estruturado, o crescimento deixa de ser esforço e passa a ser previsível.\n\nEsse é exatamente o ponto que a Fletic trabalha na consultoria. Se fizer sentido, podemos te mostrar como isso se aplicaria no seu cenário.",
+    3:"Analisando seu MAP com mais cuidado, fica claro que vocês já estão em um nível acima da média — mas ainda com um gap importante de estrutura.\n\nEsse é exatamente o tipo de cenário onde pequenas mudanças geram grande impacto, principalmente em previsibilidade e receita.\n\nO ponto aqui não é trabalhar mais, mas organizar o modelo.\n\nSe fizer sentido, podemos te mostrar como isso se traduziria diretamente no seu consultório."
+  },
+  N3:{
+    1:"Pelo seu MAP, identificamos algo importante no seu cenário. Podemos compartilhar?",
+    2:"Pelo seu MAP, vocês já entenderam o jogo e começaram a estruturar o consultório.\n\nO desafio agora não é mais iniciar, mas integrar.\n\nExiste valor no que já é feito, mas ainda falta conexão entre as partes para permitir escala real.\n\nSem essa integração, o crescimento tende a estagnar ou depender de esforço adicional.\n\nQuando o modelo se organiza, acontece ganho de previsibilidade, eficiência e controle.\n\nÉ exatamente essa fase que mais evolui dentro da consultoria da Fletic. Se fizer sentido, podemos te explicar como estruturamos isso.",
+    3:"Analisando seu MAP com mais cuidado, fica claro que vocês já estão em um nível acima da média — mas ainda com um gap importante de estrutura.\n\nEsse é exatamente o tipo de cenário onde pequenas mudanças geram grande impacto, principalmente em previsibilidade e escala.\n\nVocês já têm a base. O que falta é afinar o modelo.\n\nSe fizer sentido, podemos te mostrar como isso se traduziria diretamente no seu consultório."
+  },
+  N4:{
+    1:"Pelo seu MAP, identificamos algo importante no seu cenário. Podemos compartilhar?",
+    2:"Seu MAP mostra um nível avançado de estrutura.\n\nVocês já não dependem exclusivamente de volume e já construíram uma base consistente.\n\nO próximo passo não é organizar, mas otimizar e escalar.\n\nPequenos ajustes estratégicos aqui tendem a gerar impactos significativos em eficiência e crescimento.\n\nEsse é um perfil que se beneficia de refinamento e direcionamento mais estratégico.\n\nSe fizer sentido, podemos te mostrar como isso se aplicaria no seu cenário atual.",
+    3:"Pelo seu MAP, vocês estão num ponto onde o jogo é outro — não é mais estrutura básica, é alavancagem.\n\nA Fletic trabalha com poucos consultórios nesse nível justamente porque a conversa é diferente.\n\nSe fizer sentido, podemos te mostrar o que seria possível a partir do seu cenário atual. É uma conversa rápida e direta."
+  }
+};
+
+let nivel=null;
+let respostas=[null,null,null,null,null,null,null];
+let historico=[];
+
+function carregarHistorico(){
+  try{ const s=localStorage.getItem(STORAGE_KEY); if(s) historico=JSON.parse(s); }catch(e){ historico=[]; }
+}
+function persistirHistorico(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(historico)); }catch(e){}
+}
+
+const pg=document.getElementById('perguntas');
+for(let i=0;i<7;i++){
+  const div=document.createElement('div');
+  div.className='q-block';
+  div.innerHTML=`<span class="q-label">P${i+1}</span><select onchange="setResp(${i}, this.value)"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select>`;
+  pg.appendChild(div);
+}
+
+function setResp(i,v){ respostas[i]=v?parseInt(v):null; calcNivel(); atualizar(); }
+
+function calcNivel(){
+  if(respostas.filter(r=>r!==null).length<7){ nivel=null; return; }
+  const count={1:0,2:0,3:0,4:0};
+  respostas.forEach(r=>count[r]++);
+  const max=Math.max(...Object.values(count));
+  const winners=Object.keys(count).filter(k=>count[k]===max).map(Number);
+  nivel=winners.length===1?winners[0]:respostas[1];
+}
+
+function getMsg(mov){
+  const nome=document.getElementById('nome').value.trim();
+  if(!nivel) return null;
+  let msg=scripts[`N${nivel}`]?.[mov]||'—';
+  if(nome&&mov===1) msg=`Oi, ${nome}! ${msg}`;
+  if(nome&&mov!==1) msg=`${nome}, ${msg.charAt(0).toLowerCase()}${msg.slice(1)}`;
+  if(mov!==1) msg=`${msg}${ASSINATURA}`;
+  return msg;
+}
+
+function atualizar(){
+  const nd=document.getElementById('nivel-display');
+  if(!nivel){
+    nd.innerHTML='— selecione todas as respostas'; nd.className='nivel-badge';
+    [1,2,3].forEach(m=>{
+      const so=document.getElementById(`script-${m}`);
+      so.textContent='Preencha os campos acima para gerar o script.'; so.className='script-box empty';
+    });
+    return;
+  }
+  nd.innerHTML=`<span class="nivel-tag ${nivelCls[nivel]}">${nivelNomes[nivel]}</span>`;
+  nd.className='nivel-badge';
+  [1,2,3].forEach(m=>{
+    const so=document.getElementById(`script-${m}`);
+    so.textContent=getMsg(m); so.className='script-box';
+  });
+}
+
+function telefoneDigits(){
+  let d=document.getElementById('telefone').value.replace(/\D/g,'');
+  if(!d) return null;
+  if(!d.startsWith('55')) d='55'+d;
+  return d;
+}
+
+function registrarHistorico(mov,canal,telefone){
+  const nome=document.getElementById('nome').value.trim();
+  const agora=new Date();
+  historico.unshift({
+    id:Date.now(), nome, nivel, mov, canal, telefone,
+    data:agora.toLocaleDateString('pt-BR'),
+    hora:agora.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),
+    respostas:[...respostas]
+  });
+  persistirHistorico(); renderHistorico();
+}
+
+function copiarSalvar(mov){
+  const nome=document.getElementById('nome').value.trim();
+  const msg=getMsg(mov);
+  if(!msg){ alert('Preencha as 7 respostas antes de copiar.'); return; }
+  if(!nome){ alert('Preencha o nome do lead antes de copiar.'); return; }
+  navigator.clipboard.writeText(msg).then(()=>{
+    registrarHistorico(mov,'Cópia',document.getElementById('telefone').value.trim());
+    const btn=document.getElementById(`btn-${mov}`);
+    btn.textContent='Copiado e salvo!'; btn.classList.add('success');
+    setTimeout(()=>{ btn.textContent='Copiar e salvar'; btn.classList.remove('success'); },1800);
+  });
+}
+
+function enviarWhatsapp(mov){
+  const nome=document.getElementById('nome').value.trim();
+  const msg=getMsg(mov);
+  if(!msg){ alert('Preencha as 7 respostas antes de enviar.'); return; }
+  if(!nome){ alert('Preencha o nome do lead antes de enviar.'); return; }
+  const tel=telefoneDigits();
+  if(!tel||tel.length<12){ alert('Preencha um WhatsApp válido do lead, com DDD.'); return; }
+  const url=`https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
+  window.open(url,'_blank');
+  registrarHistorico(mov,'WhatsApp',document.getElementById('telefone').value.trim());
+  const btn=document.getElementById(`wa-${mov}`);
+  btn.textContent='Enviado!'; btn.classList.add('success');
+  setTimeout(()=>{ btn.textContent='Enviar no WhatsApp'; btn.classList.remove('success'); },1800);
+}
+
+function deletar(id){
+  if(!confirm('Remover este lead do histórico?')) return;
+  historico=historico.filter(h=>h.id!==id);
+  persistirHistorico(); renderHistorico();
+}
+
+function limparTudo(){
+  if(!confirm('Limpar todo o histórico? Esta ação não pode ser desfeita.')) return;
+  historico=[]; persistirHistorico(); renderHistorico();
+}
+
+function renderHistorico(){
+  const list=document.getElementById('hist-list');
+  const count=document.getElementById('hist-count');
+  const badge=document.getElementById('hist-badge');
+  badge.textContent=historico.length>0?`(${historico.length})`:'';
+  count.textContent=historico.length===0?'':`${historico.length} lead${historico.length>1?'s':''} registrado${historico.length>1?'s':''}`;
+  if(historico.length===0){
+    list.innerHTML='<div class="hist-empty">Nenhum lead salvo ainda.<br>Gere um script e clique em "Copiar e salvar".</div>'; return;
+  }
+  list.innerHTML=historico.map(h=>`
+    <div class="hist-item">
+      <div>
+        <div class="hist-nome">${h.nome}</div>
+        <div style="margin-top:4px"><span class="nivel-tag ${nivelCls[h.nivel]}" style="font-size:10px;padding:2px 7px;">${nivelNomes[h.nivel]}</span></div>
+      </div>
+      <div class="hist-right">
+        <div class="hist-mov">${movNomes[h.mov]}${h.canal?` · ${h.canal}`:''}</div>
+        <div class="hist-time">${h.data} · ${h.hora}${h.telefone?` · ${h.telefone}`:''}</div>
+        <button class="hist-del" onclick="deletar(${h.id})">Remover</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function exportar(){
+  if(historico.length===0){ alert('Nenhum lead para exportar.'); return; }
+  const linhas=['Nome\tTelefone\tNível\tMovimento\tCanal\tData\tHora',
+    ...historico.map(h=>`${h.nome}\t${h.telefone||''}\t${nivelNomes[h.nivel]}\t${movNomes[h.mov]}\t${h.canal||''}\t${h.data}\t${h.hora}`)
+  ];
+  navigator.clipboard.writeText(linhas.join('\n')).then(()=>{
+    const btn=document.getElementById('export-btn');
+    btn.textContent='Copiado! Cole direto na planilha.'; btn.classList.add('success');
+    setTimeout(()=>{ btn.textContent='Exportar para planilha'; btn.classList.remove('success'); },2500);
+  });
+}
+
+function showPage(page,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  btn.classList.add('active');
+  if(page==='historico') renderHistorico();
+}
+
+carregarHistorico();
+renderHistorico();
+</script>
+</body>
+</html>
