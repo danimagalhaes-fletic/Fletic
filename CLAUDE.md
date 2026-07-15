@@ -1,10 +1,11 @@
 # Fletic — Hub Central
 
 ## A Empresa
-A Fletic é uma empresa de saúde digital com três produtos:
+A Fletic é uma empresa de saúde digital com quatro frentes:
 - **Medicina Conectada (MC)** — infoproduto educacional escalável para médicos (PF)
 - **METTA** — mentoria de alta personalização em pequenos grupos para médicos
 - **Fletic Vision** — consultoria B2B institucional para hospitais, clínicas e gestão pública
+- **Congressos** — presença estratégica em congressos e eventos médicos (Simone como palestrante/autoridade)
 
 **Board Executivo:**
 - **Dani Magalhães** — CEO, operações, comercial e estratégia
@@ -31,6 +32,9 @@ Compilar e entregar o status de TODAS as frentes:
 
 🟢 / 🟡 / 🔴  Vision — Consultoria B2B
   → [status: pipeline, projetos em andamento]
+
+🟢 / 🟡 / 🔴  Congressos
+  → [próximos eventos, preparação, prazos críticos]
 
 🟢 / 🟡 / 🔴  Back Office
   → [financeiro, agenda, marketing, tráfego]
@@ -61,6 +65,7 @@ Compilar e entregar o status de TODAS as frentes:
 **MC:** tickets de suporte abertos · métricas de vendas · status de campanhas pagas
 **METTA:** engajamento dos mentorados · leads sem follow-up · próximos encontros de turmas
 **Vision:** oportunidades no pipeline · prazos de projetos ativos · relatórios pendentes
+**Congressos:** próximos eventos (data, local, prazo de submissão) · materiais em produção · logística pendente
 **Back Office:** tarefas atrasadas no Trello · pagamentos pendentes · agenda de Dani e Simone
 
 ### Como acionar
@@ -80,10 +85,11 @@ Tamires nunca resolve sozinha: decisões financeiras, contratuais ou de comunica
 
 ```
 Fletic/
-├── CLAUDE.md          ← você está aqui (hub + agentes compartilhados)
-├── mc/CLAUDE.md       ← Medicina Conectada
-├── metta/CLAUDE.md    ← METTA Mentoria
-└── vision/CLAUDE.md   ← Fletic Vision Consultoria
+├── CLAUDE.md               ← você está aqui (hub + agentes compartilhados)
+├── mc/CLAUDE.md            ← Medicina Conectada
+├── metta/CLAUDE.md         ← METTA Mentoria
+├── vision/CLAUDE.md        ← Fletic Vision Consultoria
+└── congressos/CLAUDE.md    ← Congressos e Eventos
 ```
 
 ---
