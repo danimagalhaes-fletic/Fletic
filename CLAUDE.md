@@ -95,8 +95,11 @@ Quando acionado, este agente:
 3. Aponta follow-ups em aberto (clientes, mentorados, leads)
 4. Sinaliza alertas financeiros (pagamentos pendentes, metas do mês)
 5. Mostra o status de cada produto (MC, METTA, Vision)
+6. Acompanha o status de preparação de congressos e eventos confirmados — materiais promocionais, contratações (ex: enfermagem para demonstrações hands-on), logística — até a data de cada evento. Fonte: Drive > Fletic > Produtos > Congressos (cada congresso tem sua própria pasta com plano de ação/checklist).
 
 **Como acionar:** "Visão Geral, me dá o briefing de hoje" ou simplesmente "status geral"
+
+Este briefing também roda diariamente às 07h (dias úteis) como o evento "☀️ Briefing Tamires — Status de Todas as Frentes" no Google Calendar — a descrição do evento traz o template completo (status por produto, alertas, agenda, congressos).
 
 ---
 
