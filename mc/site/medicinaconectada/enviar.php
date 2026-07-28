@@ -153,6 +153,11 @@ $html_lead = "
                 fletic.com.br/medicinaconectada/checklist_mc.pdf
               </a>
             </p>
+            <p style='background:#EAF2EF;border-left:4px solid #C9A84C;padding:14px 18px;margin:16px 0;'>
+              <strong style='color:#143D34;'>Entre na Comunidade Medicina Conectada</strong><br>
+              <span style='font-size:13px;color:#555;'>Grupo exclusivo no WhatsApp para tirar dúvidas, receber novidades e trocar com outros médicos.</span><br><br>
+              <a href='https://chat.whatsapp.com/Lo1alaMU2Qq99KMzezvQPX?mode=gi_t' style='color:#143D34;font-weight:bold;'>Entrar na comunidade agora</a>
+            </p>
             <p>Em breve você receberá todas as informações do lançamento.</p>
             <p>Qualquer dúvida, nos chame no WhatsApp: <strong>(11) 94543-6336</strong></p>
           </td>
@@ -169,7 +174,7 @@ $html_lead = "
 </body>
 </html>";
 
-$texto_lead = "Ola, $primeiro_nome!\n\nSua prioridade esta garantida no Medicina Conectada.\n\nEm anexo: Checklist de Elegibilidade para Telemedicina e Telessaude.\nCom base na Resolucao CFM 2.314/2022.\n\nLink direto: https://fletic.com.br/medicinaconectada/checklist_mc.pdf\n\nEm breve voce recebera as informacoes do lancamento.\n\nDuvidas? WhatsApp: (11) 94543-6336\n\nDra. Simone Farah | Dra. Danielle Magalhaes\nMedicina Conectada - Fletic";
+$texto_lead = "Ola, $primeiro_nome!\n\nSua prioridade esta garantida no Medicina Conectada.\n\nEm anexo: Checklist de Elegibilidade para Telemedicina e Telessaude.\nCom base na Resolucao CFM 2.314/2022.\n\nLink direto: https://fletic.com.br/medicinaconectada/checklist_mc.pdf\n\nEntre na Comunidade Medicina Conectada no WhatsApp:\nhttps://chat.whatsapp.com/Lo1alaMU2Qq99KMzezvQPX?mode=gi_t\n\nEm breve voce recebera as informacoes do lancamento.\n\nDuvidas? WhatsApp: (11) 94543-6336\n\nDra. Simone Farah | Dra. Danielle Magalhaes\nMedicina Conectada - Fletic";
 
 enviar_email($email, 'Sua prioridade esta garantida — Medicina Conectada', $html_lead, $texto_lead, $email_remetente, $checklist_path, $checklist_nome);
 
