@@ -25,7 +25,7 @@ $email_fletic    = 'contato@fletic.com.br';
 $email_remetente = 'contato@fletic.com.br';
 $checklist_path  = __DIR__ . '/checklist_mc.pdf';
 $checklist_nome  = 'Checklist_Elegibilidade_Telemedicina_MC.pdf';
-$icone           = ($interesse === 'fundador') ? 'FUNDADOR' : 'PRIORIDADE';
+$icone           = (strpos($interesse, 'vaga agora') !== false) ? 'ACESSO ANTECIPADO' : 'PRIORIDADE';
 $primeiro_nome   = explode(' ', $nome)[0];
 
 function enviar_email($para, $assunto, $html, $texto, $remetente, $anexo_path = null, $anexo_nome = null) {
