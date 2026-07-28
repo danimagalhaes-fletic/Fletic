@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicina Conectada — Turma Fundadora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#143D34;--verde-m:#1B5E50;--verde-s:#EAF2EF;
+  --dourado:#C9A84C;--dourado-c:#E8C97A;--dourado-e:#A67C2E;
+  --creme:#FAFAF5;--texto:#1A1A1A;--leve:#555;--branco:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--creme);color:var(--texto);overflow-x:hidden;}
+
+/* NAV */
+.nav{background:var(--verde);display:flex;align-items:center;justify-content:space-between;padding:18px 6%;border-bottom:1px solid rgba(201,168,76,.2);position:sticky;top:0;z-index:100;}
+.nav-logo img{height:44px;width:auto;}
+.nav-cta{background:var(--dourado);color:var(--verde);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:11px 24px;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--dourado-c);}
+
+/* HERO */
+.hero{background:var(--verde);min-height:94vh;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 85% 45%,rgba(201,168,76,.09) 0%,transparent 70%),radial-gradient(ellipse 35% 50% at 5% 85%,rgba(201,168,76,.05) 0%,transparent 60%);pointer-events:none;}
+.hero-inner{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;padding:80px 6%;max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:2;}
+
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--dourado-c);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;margin-bottom:22px;}
+.badge::before{content:'';width:6px;height:6px;background:var(--dourado);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,3.7vw,3.4rem);font-weight:600;color:var(--branco);line-height:1.15;margin-bottom:18px;}
+.hero-title em{color:var(--dourado);font-style:italic;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:34px;font-weight:300;}
+.hero-sub strong{color:rgba(255,255,255,.9);font-weight:500;}
+.cta-stack{display:flex;flex-direction:column;gap:12px;}
+.btn-gold{display:block;background:var(--dourado);color:var(--verde);text-align:center;font-weight:700;font-size:15px;padding:18px 32px;text-decoration:none;transition:all .25s;}
+.btn-gold:hover{background:var(--dourado-c);transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,168,76,.28);}
+.btn-gold small{display:block;font-size:11px;font-weight:400;opacity:.7;margin-top:3px;}
+.btn-ghost{display:block;border:1px solid rgba(201,168,76,.35);color:rgba(255,255,255,.75);text-align:center;font-size:14px;padding:15px 32px;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{border-color:var(--dourado);color:var(--dourado-c);background:rgba(201,168,76,.05);}
+
+/* FOTOS HERO — duas professoras lado a lado */
+.profs-hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.prof-card-img{position:relative;overflow:hidden;}
+.prof-card-img img{width:100%;height:320px;object-fit:cover;object-position:top;display:block;filter:brightness(.92);transition:filter .3s;}
+.prof-card-img:hover img{filter:brightness(1);}
+.prof-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent 30%,rgba(20,61,52,.92));padding:18px 16px 16px;}
+.prof-area{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dourado);margin-bottom:4px;}
+.prof-nome{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--branco);margin-bottom:3px;}
+.prof-info{font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;}
+
+/* URGÊNCIA */
+.urgencia{background:var(--dourado);padding:14px 6%;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;}
+.urgencia p{color:var(--verde);font-weight:600;font-size:13px;}
+.urgencia-btn{background:var(--verde);color:var(--dourado);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 20px;text-decoration:none;transition:all .2s;}
+.urgencia-btn:hover{background:var(--verde-m);}
+
+/* SEÇÕES */
+section{padding:90px 6%;}
+.container{max-width:1100px;margin:0 auto;}
+.label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dourado-e);margin-bottom:14px;}
+.h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:600;color:var(--verde);line-height:1.2;margin-bottom:16px;}
+.h2 em{color:var(--dourado-e);font-style:italic;}
+.h2-w{color:var(--branco);}
+.h2-w em{color:var(--dourado);}
+
+/* QUEM SOMOS */
+.quem{background:var(--branco);}
+.quem-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.quem-texto p{font-size:15px;color:var(--leve);line-height:1.85;margin-bottom:20px;}
+.quem-texto p strong{color:var(--texto);font-weight:600;}
+.quem-foto-wrap{position:relative;}
+.quem-foto-wrap img{width:100%;height:480px;object-fit:cover;object-position:top;display:block;}
+.quem-foto-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(20,61,52,.88));padding:24px 20px 20px;}
+.quem-foto-caption p{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6;}
+.quem-foto-caption strong{color:var(--dourado-c);font-weight:600;font-size:13px;display:block;margin-bottom:3px;}
+
+/* O QUE É */
+.oque{background:var(--creme);}
+.oque-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.oque-text p{font-size:15px;color:var(--leve);line-height:1.85;margin-bottom:20px;}
+.oque-text p strong{color:var(--texto);font-weight:600;}
+.pilares{display:flex;flex-direction:column;gap:2px;}
+.pilar{display:flex;gap:18px;padding:18px 20px;border-left:3px solid transparent;transition:all .22s;cursor:default;align-items:flex-start;}
+.pilar:hover{border-left-color:var(--dourado);background:var(--verde-s);}
+.pilar-n{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--dourado);opacity:.35;line-height:1;flex-shrink:0;}
+.pilar h4{font-size:14px;font-weight:600;color:var(--verde);margin-bottom:4px;}
+.pilar p{font-size:13px;color:var(--leve);line-height:1.6;}
+
+/* MÓDULOS */
+.modulos{background:var(--verde-s);}
+.mods-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:44px;}
+.mod{background:var(--branco);padding:26px 22px;transition:all .22s;}
+.mod:hover{background:var(--verde);}
+.mod:hover .mod-n{color:var(--dourado)!important;}
+.mod:hover .mod-t,.mod:hover .mod-d{color:var(--branco)!important;}
+.mod-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:rgba(20,61,52,.1);line-height:1;margin-bottom:12px;transition:color .22s;}
+.mod-t{font-size:13px;font-weight:600;color:var(--verde);margin-bottom:7px;line-height:1.4;transition:color .22s;}
+.mod-d{font-size:12px;color:var(--leve);line-height:1.6;transition:color .22s;}
+
+/* BÔNUS */
+.bonus{background:var(--branco);}
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px;}
+.bonus-card{border:1px solid rgba(201,168,76,.18);padding:30px 26px;position:relative;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--dourado);}
+.bonus-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dourado-e);margin-bottom:10px;}
+.bonus-titulo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--verde);margin-bottom:10px;line-height:1.3;}
+.bonus-desc{font-size:13px;color:var(--leve);line-height:1.7;}
+
+/* INVESTIMENTO */
+.investimento{background:var(--verde);position:relative;overflow:hidden;}
+.investimento::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 55% at 92% 50%,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
+.inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2;}
+.preco-de{font-size:13px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:6px;}
+.preco{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:700;color:var(--dourado);line-height:1;margin-bottom:8px;}
+.preco-obs{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:28px;line-height:1.6;}
+.preco-obs strong{color:var(--dourado-c);}
+.inv-box{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.14);padding:36px 32px;}
+.inv-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--branco);margin-bottom:22px;}
+.inv-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+.inv-list li{display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,.78);line-height:1.5;}
+.inv-list li::before{content:'✓';color:var(--dourado);font-weight:700;flex-shrink:0;}
+.prazo{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.22);padding:12px 16px;font-size:12px;color:var(--dourado-c);text-align:center;margin-top:16px;}
+
+/* FORMULÁRIO */
+.form-section{background:var(--creme);}
+.form-wrap{max-width:580px;margin:0 auto;text-align:center;}
+.form-sub{font-size:15px;color:var(--leve);line-height:1.75;margin-bottom:36px;}
+.form-card{background:var(--branco);border:1px solid rgba(20,61,52,.1);padding:44px 38px;text-align:left;}
+.form-card h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--verde);margin-bottom:26px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--verde);margin-bottom:7px;}
+.fg input,.fg select{width:100%;padding:13px 15px;border:1px solid rgba(20,61,52,.14);background:var(--creme);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--texto);outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.fg input:focus,.fg select:focus{border-color:var(--verde-m);}
+.radio-group{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
+.r-label{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid rgba(20,61,52,.12);cursor:pointer;transition:all .2s;font-size:14px;color:var(--texto);}
+.r-label:hover{border-color:var(--verde);background:var(--verde-s);}
+.r-label.gold{border-color:var(--dourado);background:rgba(201,168,76,.04);}
+.r-label input[type=radio]{accent-color:var(--verde);width:15px;height:15px;flex-shrink:0;}
+.r-badge{margin-left:auto;background:var(--dourado);color:var(--verde);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;white-space:nowrap;}
+.btn-submit{width:100%;background:var(--verde);color:var(--dourado);font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;padding:17px;border:none;cursor:pointer;transition:all .22s;letter-spacing:.03em;}
+.btn-submit:hover{background:var(--verde-m);transform:translateY(-1px);}
+.form-nota{font-size:11px;color:var(--leve);margin-top:12px;text-align:center;}
+.form-success{display:none;background:var(--verde-s);border:1px solid var(--verde);padding:24px;text-align:center;}
+.form-success p{color:var(--verde);font-weight:600;font-size:15px;}
+
+/* FAQ */
+.faq{background:var(--branco);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;margin-top:44px;}
+.faq-item{border-bottom:1px solid rgba(20,61,52,.09);padding:22px 0;cursor:pointer;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:14px;font-weight:500;color:var(--verde);}
+.faq-icon{width:20px;height:20px;border:1px solid var(--dourado);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--dourado);flex-shrink:0;transition:transform .25s;}
+.faq-a{font-size:13px;color:var(--leve);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;}
+.faq-item.open .faq-a{max-height:200px;padding-top:12px;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+
+/* FOOTER */
+footer{background:var(--verde);padding:44px 6%;text-align:center;border-top:1px solid rgba(201,168,76,.15);}
+footer img{height:38px;margin-bottom:16px;opacity:.9;}
+footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
+
+/* WHATSAPP FLUTUANTE */
+.wa-btn{position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:all .25s;}
+.wa-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.55);}
+.wa-btn svg{width:28px;height:28px;fill:white;}
+.wa-tooltip{position:absolute;right:66px;background:var(--verde);color:white;font-size:12px;font-weight:600;padding:7px 14px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;}
+.wa-btn:hover .wa-tooltip{opacity:1;}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:44px;padding:60px 5%;}
+  .profs-hero{grid-template-columns:1fr 1fr;}
+  .quem-grid,.oque-grid,.inv-grid{grid-template-columns:1fr;gap:40px;}
+  .mods-grid{grid-template-columns:repeat(2,1fr);}
+  .bonus-grid{grid-template-columns:1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+  section{padding:70px 5%;}
+}
+@media(max-width:600px){
+  .mods-grid{grid-template-columns:1fr;}
+  .profs-hero{grid-template-columns:1fr;}
+  .form-card{padding:28px 18px;}
+  .preco{font-size:52px;}
+  .wa-btn{bottom:20px;right:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <img src="Logo_MC_final.jpg" alt="Medicina Conectada">
+  </div>
+  <a href="#formulario" class="nav-cta">Garantir minha vaga</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="badge">Turma Fundadora — Vagas Limitadas</div>
+      <h1 class="hero-title">Telemedicina como <em>modelo de negócio,</em> não como improviso</h1>
+      <p class="hero-sub">O único programa que une <strong>telemedicina e gestão de consultório</strong> para médicos que querem escala, sustentabilidade e liberdade financeira com a prática híbrida.</p>
+      <div class="cta-stack">
+        <a href="SEU_LINK_HOTMART_AQUI" class="btn-gold">
+          Entrar como fundador — R$ 1.297
+          <small>Acesso antecipado + bônus exclusivos · Vagas limitadas</small>
+        </a>
+        <a href="#formulario" class="btn-ghost">Quero garantir prioridade no lançamento</a>
+      </div>
+    </div>
+    <div class="profs-hero">
+      <div class="prof-card-img">
+        <img src="foto_simone.jpg" alt="Dra. Simone Farah">
+        <div class="prof-overlay">
+          <div class="prof-area">Telemedicina</div>
+          <div class="prof-nome">Dra. Simone Farah</div>
+          <div class="prof-info">Cardiologista · 1ª Mestre em Telemedicina (UERJ)</div>
+        </div>
+      </div>
+      <div class="prof-card-img">
+        <img src="foto_dani.jpg" alt="Dra. Danielle Magalhães">
+        <div class="prof-overlay">
+          <div class="prof-area">Gestão Médica</div>
+          <div class="prof-nome">Dra. Danielle Magalhães</div>
+          <div class="prof-info">Intensivista · Post-Doctoral Harvard · CEO Fletic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGÊNCIA -->
+<div class="urgencia">
+  <p>⏱ Condição de Turma Fundadora — vagas limitadas, sem data para reabrir</p>
+  <a href="SEU_LINK_HOTMART_AQUI" class="urgencia-btn">Garantir agora</a>
+</div>
+
+<!-- QUEM SOMOS -->
+<section class="quem">
+  <div class="container quem-grid">
+    <div class="quem-texto">
+      <div class="label">As professoras</div>
+      <h2 class="h2">Duas especialistas. <em>Um método.</em></h2>
+      <p>A Dra. Simone Farah é cardiologista, a primeira mestre em Telemedicina e Telessaúde pela UERJ, membro da diretoria da ABTMS e da ISfTeH. Ela conhece a regulação, os protocolos e os erros que destroem consultorios que tentam o digital sem estrutura.</p>
+      <p>A Dra. Danielle Magalhães é intensivista, CEO da Fletic e pesquisadora clínica formada em Harvard. Ela entende gestão médica, modelos de negócio e o que faz um consultório ser sustentável no longo prazo.</p>
+      <p><strong>Juntas, elas cobrem o que nenhum outro programa cobre:</strong> do compliance ao caixa, da primeira teleconsulta à escala do modelo.</p>
+    </div>
+    <div class="quem-foto-wrap">
+      <img src="foto_juntas.jpg" alt="Dra. Simone Farah e Dra. Danielle Magalhães">
+      <div class="quem-foto-caption">
+        <strong>Dra. Simone Farah &amp; Dra. Danielle Magalhães</strong>
+        <p>Fletic Gestão Estratégica de Inovação em Saúde</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE É -->
+<section class="oque">
+  <div class="container oque-grid">
+    <div class="oque-text">
+      <div class="label">O programa</div>
+      <h2 class="h2">Mais do que um curso. Um <em>modelo</em> completo.</h2>
+      <p>A maioria dos médicos entra na telemedicina sem estrutura. Compra plataforma, faz videochamada, e abandona em 6 meses. <strong>Não porque a tecnologia falhou. Porque o modelo nunca existiu.</strong></p>
+      <p>O Medicina Conectada conecta regulação, fluxo clínico e viabilidade financeira em um único método. São <strong>8 módulos e mais de 6 horas de conteúdo</strong> com aplicação prática desde o primeiro acesso.</p>
+    </div>
+    <div class="pilares">
+      <div class="pilar"><div class="pilar-n">01</div><div><h4>Estrutura antes de escalar</h4><p>Regulação, CFM, plataformas e compliance — tudo que você precisa antes do primeiro paciente digital.</p></div></div>
+      <div class="pilar"><div class="pilar-n">02</div><div><h4>Modelo híbrido como alavanca</h4><p>Como integrar presencial e digital para aumentar atendimentos sem aumentar horas trabalhadas.</p></div></div>
+      <div class="pilar"><div class="pilar-n">03</div><div><h4>Viabilidade financeira real</h4><p>Precificação, margem, planos e consulta particular — a conta que poucos médicos fazem.</p></div></div>
+      <div class="pilar"><div class="pilar-n">04</div><div><h4>Liberdade e sustentabilidade</h4><p>Consultório que funciona com escala, consistência e clareza financeira.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="modulos">
+  <div class="container">
+    <div class="label">Conteúdo</div>
+    <h2 class="h2">8 módulos. Do zero à <em>escala.</em></h2>
+    <div class="mods-grid">
+      <div class="mod"><div class="mod-n">01</div><div class="mod-t">Fundamentos da Telemedicina</div><div class="mod-d">O que é telemedicina de verdade, onde pode e onde não pode ser aplicada.</div></div>
+      <div class="mod"><div class="mod-n">02</div><div class="mod-t">Regulação e Conformidade</div><div class="mod-d">Resolução CFM 2.314/2022, responsabilidades legais e como se proteger.</div></div>
+      <div class="mod"><div class="mod-n">03</div><div class="mod-t">Plataformas e Tecnologia</div><div class="mod-d">Como escolher, configurar e usar plataformas com segurança e eficiência.</div></div>
+      <div class="mod"><div class="mod-n">04</div><div class="mod-t">Fluxo Clínico Digital</div><div class="mod-d">Anamnese, TCLE, prontuário eletrônico e receita digital — do jeito certo.</div></div>
+      <div class="mod"><div class="mod-n">05</div><div class="mod-t">Modelo Híbrido</div><div class="mod-d">Como integrar presencial e digital para ganhar escala sem perder qualidade.</div></div>
+      <div class="mod"><div class="mod-n">06</div><div class="mod-t">Gestão Financeira</div><div class="mod-d">Precificação, margem real, planos de saúde e consulta particular.</div></div>
+      <div class="mod"><div class="mod-n">07</div><div class="mod-t">Marketing e Captação</div><div class="mod-d">Como atrair pacientes para o modelo digital sem depender de indicação.</div></div>
+      <div class="mod"><div class="mod-n">08</div><div class="mod-t">Escala e Sustentabilidade</div><div class="mod-d">Indicadores, processos e decisões para crescer com consistência.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BÔNUS -->
+<section class="bonus">
+  <div class="container">
+    <div class="label">Bônus exclusivos — turma fundadora</div>
+    <h2 class="h2">Entregues <em>antes</em> do lançamento oficial</h2>
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div class="bonus-tag">Bônus 01 — Imediato</div>
+        <div class="bonus-titulo">Checklist de Elegibilidade para Telemedicina</div>
+        <div class="bonus-desc">Documento prático com base na Resolução CFM vigente. Responde quando sua teleconsulta é elegível e quando ela cria risco legal e clínico.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-tag">Bônus 02 — Fundador</div>
+        <div class="bonus-titulo">Template de Pré-Teleconsulta</div>
+        <div class="bonus-desc">Ficha completa de pré-atendimento, fluxo de consulta e TCLE digital prontos para usar. Cobre todos os pontos de compliance.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-tag">Bônus 03 — Fundador</div>
+        <div class="bonus-titulo">Encontro ao Vivo com as Professoras</div>
+        <div class="bonus-desc">Sessão exclusiva de dúvidas e casos com a Dra. Simone e a Dra. Danielle. Disponível apenas para a turma fundadora. Não vai para o lançamento oficial.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIMENTO -->
+<section class="investimento">
+  <div class="container inv-grid">
+    <div>
+      <div class="label" style="color:rgba(201,168,76,.65)">Investimento</div>
+      <h2 class="h2 h2-w">Preço de <em>fundador.</em> Uma condição que não volta.</h2>
+      <div style="margin-top:28px">
+        <div class="preco-de">Valor de lançamento: R$ 1.797</div>
+        <div class="preco">R$ 1.297</div>
+        <div class="preco-obs">Condição exclusiva da <strong>Turma Fundadora,</strong> enquanto durarem as vagas.<br>Economia de R$ 500 com acesso antecipado e bônus inclusos.</div>
+        <a href="SEU_LINK_HOTMART_AQUI" class="btn-gold" style="max-width:300px;display:block">
+          Garantir vaga como fundador
+          <small>Pix, cartão ou boleto</small>
+        </a>
+        <div class="prazo">⏱ Vagas limitadas da Turma Fundadora — sem data de reabertura</div>
+      </div>
+    </div>
+    <div class="inv-box">
+      <h3>O que você leva como fundador</h3>
+      <ul class="inv-list">
+        <li>Acesso antecipado ao curso completo — 8 módulos</li>
+        <li>Mais de 6 horas de conteúdo prático e fundamentado</li>
+        <li>Checklist de elegibilidade para telemedicina (imediato)</li>
+        <li>Template completo de pré-teleconsulta</li>
+        <li>Encontro ao vivo exclusivo com as professoras</li>
+        <li>Preço vitalício mais baixo do programa</li>
+        <li>Acesso às atualizações do conteúdo</li>
+      </ul>
+      <a href="#formulario" style="display:block;border:1px solid rgba(201,168,76,.3);color:rgba(255,255,255,.65);text-align:center;padding:13px;text-decoration:none;font-size:13px;transition:all .2s" onmouseover="this.style.borderColor='rgba(201,168,76,.7)'" onmouseout="this.style.borderColor='rgba(201,168,76,.3)'">
+        Prefiro garantir prioridade no lançamento →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="form-section" id="formulario">
+  <div class="container">
+    <div class="form-wrap">
+      <div class="label">Lista de prioridade</div>
+      <h2 class="h2">Ainda não tem certeza? <em>Garanta sua prioridade.</em></h2>
+      <p class="form-sub">Preencha abaixo e você recebe o checklist agora, mais as informações completas do lançamento antes de todo mundo.</p>
+      <div class="form-card">
+        <h3>Entrar na lista de prioridade</h3>
+        <form id="mcForm" action="enviar.php" method="POST">
+          <div class="fg"><label>Nome completo</label><input type="text" name="nome" placeholder="Dr. / Dra." required></div>
+          <div class="fg"><label>WhatsApp com DDD</label><input type="tel" name="whatsapp" placeholder="(11) 99999-9999" required></div>
+          <div class="fg"><label>E-mail</label><input type="email" name="email" placeholder="seu@email.com" required></div>
+          <div class="fg">
+            <label>Momento atual</label>
+            <select name="momento" required>
+              <option value="" disabled selected>Selecione</option>
+              <option>Estudante de medicina</option>
+              <option>Residente</option>
+              <option>Médico — início de carreira</option>
+              <option>Médico — já atendo há mais de 5 anos</option>
+            </select>
+          </div>
+          <div class="label" style="margin-bottom:10px">Meu interesse</div>
+          <div class="radio-group">
+            <label class="r-label gold">
+              <input type="radio" name="interesse" value="Quero entrar como fundador agora — R$ 1.297" required>
+              Quero entrar como fundador agora — R$ 1.297
+              <span class="r-badge">Melhor opção</span>
+            </label>
+            <label class="r-label">
+              <input type="radio" name="interesse" value="Quero receber prioridade no lançamento oficial">
+              Quero receber prioridade no lançamento oficial
+            </label>
+          </div>
+          <button type="submit" class="btn-submit">Garantir minha prioridade</button>
+          <p class="form-nota">Seus dados são confidenciais. Você não receberá spam.</p>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <p>✓ Prioridade garantida! Você receberá o checklist no WhatsApp em breve.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="label">Dúvidas</div>
+    <h2 class="h2">Perguntas <em>frequentes</em></h2>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q">O curso é para qualquer especialidade? <span class="faq-icon">+</span></div><div class="faq-a">Sim. Telemedicina e gestão de consultório se aplicam a qualquer especialidade. O programa foi desenhado para funcionar independente da área de atuação.</div></div>
+      <div class="faq-item"><div class="faq-q">Quando o curso fica disponível? <span class="faq-icon">+</span></div><div class="faq-a">O acesso da Turma Fundadora é liberado assim que sua inscrição é confirmada. O público geral só recebe acesso no lançamento oficial, mais adiante.</div></div>
+      <div class="faq-item"><div class="faq-q">Posso pagar parcelado? <span class="faq-icon">+</span></div><div class="faq-a">Sim. O checkout aceita cartão de crédito parcelado, Pix e boleto bancário.</div></div>
+      <div class="faq-item"><div class="faq-q">O conteúdo tem base legal atualizada? <span class="faq-icon">+</span></div><div class="faq-a">Sim. Todo o conteúdo de regulação é baseado na Resolução CFM 2.314/2022 e nas diretrizes vigentes da ABTMS e ISfTeH.</div></div>
+      <div class="faq-item"><div class="faq-q">Qual é o diferencial em relação a outros cursos? <span class="faq-icon">+</span></div><div class="faq-a">A combinação de especialista em telemedicina e especialista em gestão médica. O MC conecta regulação, fluxo clínico e viabilidade financeira em um único programa.</div></div>
+      <div class="faq-item"><div class="faq-q">O preço de fundador volta depois? <span class="faq-icon">+</span></div><div class="faq-a">Não. R$ 1.297 é o preço exclusivo da Turma Fundadora, válido enquanto durarem as vagas. Depois disso, o valor sobe para R$ 1.797 no lançamento oficial.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="Logo_MC_final.jpg" alt="Medicina Conectada">
+  <p>Dra. Simone Farah &nbsp;|&nbsp; Dra. Danielle Magalhães<br>Fletic Gestão Estratégica de Inovação em Saúde<br><br>Dúvidas? Fale pelo WhatsApp</p>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a class="wa-btn" href="https://wa.me/5511945436336?text=Ol%C3%A1%2C+vim+pelo+site+do+Medicina+Conectada+e+quero+saber+mais." target="_blank" rel="noopener">
+  <span class="wa-tooltip">Fale com a gente</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+// Scroll suave
+document.querySelectorAll('a[href="#formulario"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('#formulario').scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// Redirecionar para Hotmart ao selecionar fundador
+document.querySelectorAll('input[name="interesse"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+    if (this.value.includes('fundador')) {
+      setTimeout(() => { window.location.href = 'SEU_LINK_HOTMART_AQUI'; }, 700);
+    }
+  });
+});
+
+// Submit form via AJAX
+document.getElementById('mcForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn = form.querySelector('.btn-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  fetch('enviar.php', {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(r => r.text())
+  .then(() => {
+    form.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    // Se escolheu fundador, redireciona após 2s
+    const interesse = form.querySelector('input[name="interesse"]:checked');
+    if (interesse && interesse.value.includes('fundador')) {
+      setTimeout(() => { window.location.href = 'SEU_LINK_HOTMART_AQUI'; }, 2000);
+    }
+  })
+  .catch(() => {
+    btn.textContent = 'Garantir minha prioridade';
+    btn.disabled = false;
+    alert('Erro ao enviar. Tente novamente ou nos chame no WhatsApp.');
+  });
+});
+</script>
+</body>
+</html>
