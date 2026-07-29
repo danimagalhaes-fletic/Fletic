@@ -91,16 +91,17 @@ try {
     <div style='padding:32px;color:#333;font-size:15px;line-height:1.8'>
       <p>Ol&aacute;, <strong>$primeiro_nome</strong>!</p>
       <p>Sua prioridade est&aacute; garantida no <strong>Medicina Conectada</strong>.</p>
-      <p>Em anexo voc&ecirc; encontra o seu primeiro entreg&aacute;vel:</p>
+      <p>Seu primeiro entreg&aacute;vel:</p>
       <div style='background:#EAF2EF;border-left:4px solid #143D34;padding:14px 18px;margin:16px 0'>
         <strong style='color:#143D34'>Checklist de Elegibilidade para Telemedicina e Teless&aacute;ude</strong><br>
         <span style='font-size:13px;color:#555'>Com base na Resolu&ccedil;&atilde;o CFM 2.314/2022. Use antes de qualquer teleconsulta.</span>
       </div>
-      <p>Ou acesse pelo link direto:<br>
-        <a href='https://fletic.com.br/medicinaconectada/checklist_mc.pdf' style='color:#143D34;font-weight:bold'>
-          fletic.com.br/medicinaconectada/checklist_mc.pdf
+      <p>Preencha online e veja o resultado na hora:<br>
+        <a href='https://fletic.com.br/medicinaconectada/checklist.html' style='color:#143D34;font-weight:bold'>
+          fletic.com.br/medicinaconectada/checklist.html
         </a>
       </p>
+      <p style='font-size:13px;color:#777'>Tamb&eacute;m anexamos a vers&atilde;o em PDF, caso prefira imprimir.</p>
       <div style='background:#EAF2EF;border-left:4px solid #C9A84C;padding:14px 18px;margin:16px 0'>
         <strong style='color:#143D34'>Entre na Comunidade Medicina Conectada</strong><br>
         <span style='font-size:13px;color:#555'>Grupo exclusivo no WhatsApp para tirar d&uacute;vidas, receber novidades e trocar com outros m&eacute;dicos.</span><br><br>
