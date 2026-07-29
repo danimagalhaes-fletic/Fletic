@@ -118,8 +118,9 @@ section{padding:90px 6%;}
 .investimento{background:var(--verde);position:relative;overflow:hidden;}
 .investimento::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 55% at 92% 50%,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
 .inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2;}
-.preco-de{font-size:13px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:6px;}
+.preco-label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px;}
 .preco{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:700;color:var(--dourado);line-height:1;margin-bottom:8px;}
+.preco small{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:rgba(255,255,255,.6);}
 .preco-obs{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:28px;line-height:1.6;}
 .preco-obs strong{color:var(--dourado-c);}
 .inv-box{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.14);padding:36px 32px;}
@@ -336,11 +337,12 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
       <div class="label" style="color:rgba(201,168,76,.65)">Investimento</div>
       <h2 class="h2 h2-w">Estruture agora. <em>Escale o consultório com telemedicina estratégica.</em></h2>
       <div style="margin-top:28px">
-        <div class="preco">R$ 1.997</div>
-        <div class="preco-obs">Ou <strong>10x de R$ 240,00</strong> no cartão. Acesso completo ao programa por 1 ano, com todos os bônus inclusos.</div>
+        <div class="preco-label">10x de</div>
+        <div class="preco">240<small> /mês</small></div>
+        <div class="preco-obs">Ou <strong>1.997 à vista</strong> no Pix. Acesso completo ao programa por 1 ano, com todos os bônus inclusos.</div>
         <a href="https://pay.hotmart.com/T104438430W?off=qfs1ffn7" class="btn-gold" style="max-width:300px;display:block">
           Garantir minha vaga agora
-          <small>Pix, cartão ou boleto</small>
+          <small>Pix ou cartão</small>
         </a>
       </div>
     </div>
@@ -388,8 +390,8 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
           <div class="label" style="margin-bottom:10px">Meu interesse</div>
           <div class="radio-group">
             <label class="r-label gold">
-              <input type="radio" name="interesse" value="Quero garantir minha vaga agora — R$ 1.997" required>
-              Quero garantir minha vaga agora — R$ 1.997
+              <input type="radio" name="interesse" value="Quero garantir minha vaga agora — 1.997 à vista ou 10x de 240" required>
+              Quero garantir minha vaga agora — 1.997 à vista ou 10x de 240
               <span class="r-badge">Melhor opção</span>
             </label>
             <label class="r-label">
@@ -417,7 +419,7 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
     <div class="faq-grid">
       <div class="faq-item"><div class="faq-q">O curso é para qualquer especialidade? <span class="faq-icon">+</span></div><div class="faq-a">Sim. Telemedicina e gestão de consultório se aplicam a qualquer especialidade. O programa foi desenhado para funcionar independente da área de atuação.</div></div>
       <div class="faq-item"><div class="faq-q">Quando o curso fica disponível? <span class="faq-icon">+</span></div><div class="faq-a">O acesso é liberado assim que sua inscrição é confirmada — não há data de espera.</div></div>
-      <div class="faq-item"><div class="faq-q">Posso pagar parcelado? <span class="faq-icon">+</span></div><div class="faq-a">Sim. O checkout aceita cartão de crédito parcelado, Pix e boleto bancário.</div></div>
+      <div class="faq-item"><div class="faq-q">Posso pagar parcelado? <span class="faq-icon">+</span></div><div class="faq-a">Sim. O checkout aceita cartão de crédito parcelado em até 10x ou Pix à vista.</div></div>
       <div class="faq-item"><div class="faq-q">O conteúdo tem base legal atualizada? <span class="faq-icon">+</span></div><div class="faq-a">Sim. Todo o conteúdo de regulação é baseado na Resolução CFM 2.314/2022 e nas diretrizes vigentes da ABTMS e ISfTeH.</div></div>
       <div class="faq-item"><div class="faq-q">Qual é o diferencial em relação a outros cursos? <span class="faq-icon">+</span></div><div class="faq-a">A combinação de especialista em telemedicina e especialista em gestão médica. O MC conecta regulação, fluxo clínico e viabilidade financeira em um único programa.</div></div>
       <div class="faq-item"><div class="faq-q">Por quanto tempo tenho acesso ao curso? <span class="faq-icon">+</span></div><div class="faq-a">O acesso ao programa completo, incluindo atualizações de conteúdo, é válido por 1 ano a partir da confirmação da inscrição.</div></div>
