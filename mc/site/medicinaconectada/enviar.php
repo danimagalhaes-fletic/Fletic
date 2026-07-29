@@ -26,7 +26,7 @@ if (!$nome || !$email || !$whatsapp || !filter_var($email, FILTER_VALIDATE_EMAIL
 
 $email = htmlspecialchars($email);
 
-$icone         = (strpos($interesse, 'vaga agora') !== false) ? 'ACESSO ANTECIPADO' : 'PRIORIDADE';
+$icone         = (strpos($interesse, 'vaga agora') !== false) ? 'CHECKLIST DE ELEGIBILIDADE' : 'PRIORIDADE';
 $primeiro_nome = explode(' ', $nome)[0];
 $checklist     = __DIR__ . '/checklist_mc.pdf';
 $comunidade    = 'https://chat.whatsapp.com/Lo1alaMU2Qq99KMzezvQPX?mode=gi_t';
@@ -106,7 +106,6 @@ try {
         <span style='font-size:13px;color:#555'>Grupo exclusivo no WhatsApp para tirar d&uacute;vidas, receber novidades e trocar com outros m&eacute;dicos.</span><br><br>
         <a href='$comunidade' style='color:#143D34;font-weight:bold'>Entrar na comunidade agora</a>
       </div>
-      <p>Em breve voc&ecirc; receber&aacute; todas as informa&ccedil;&otilde;es do lan&ccedil;amento.</p>
       <p>D&uacute;vidas? Nos chame no WhatsApp: <strong>(11) 94543-6336</strong></p>
     </div>
     <div style='background:#143D34;padding:20px 32px;text-align:center'>
