@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteio ao Vivo — Medicina Conectada</title>
+<style>
+:root {
+  --bg: #0A0F0D;
+  --surface: #141A17;
+  --surface-2: #1C2420;
+  --text: #E8F0EC;
+  --text-muted: #7A8F83;
+  --accent: #2ECC71;
+  --accent-glow: rgba(46,204,113,0.25);
+  --gold: #F0C75E;
+  --gold-glow: rgba(240,199,94,0.3);
+  --border: #253029;
+  --slot-bg: #0D1210;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  width: 100%;
+  max-width: 680px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.round-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.round-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.4s;
+}
+
+.round-dot.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.round-dot.done {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* Slot machine */
+.slot-machine {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slot-machine::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 40%, transparent 60%, var(--gold));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.slot-machine.spinning::before {
+  opacity: 1;
+}
+
+.slot-window {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--slot-bg);
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.slot-window::before,
+.slot-window::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.slot-window::before {
+  top: 0;
+  background: linear-gradient(var(--slot-bg), transparent);
+}
+
+.slot-window::after {
+  bottom: 0;
+  background: linear-gradient(transparent, var(--slot-bg));
+}
+
+.slot-highlight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0; right: 0;
+  height: 52px;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 30px var(--accent-glow);
+}
+
+.slot-reel {
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+.slot-name {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Winner reveal */
+.winner-reveal {
+  display: none;
+  padding: 20px;
+  animation: revealPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes revealPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.winner-name {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 30px var(--gold-glow);
+  margin-bottom: 4px;
+}
+
+.winner-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.spin-btn {
+  padding: 16px 48px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.3s;
+  letter-spacing: 0.5px;
+}
+
+.spin-btn:hover {
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+.spin-btn:active {
+  transform: scale(0.96);
+}
+
+.spin-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.spin-btn.gold {
+  background: var(--gold);
+}
+
+.load-btn {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.load-btn:hover {
+  border-color: var(--accent);
+}
+
+.participant-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Winners panel */
+.winners-panel {
+  margin-top: 28px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.winner-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 24px;
+  min-width: 180px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.winner-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.winner-card .label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.winner-card .name {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Confetti */
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* File input hidden */
+.file-input { display: none; }
+
+/* All done */
+.all-done {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.all-done h2 {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.all-done p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="eyebrow">Congresso UNI9 — Sorteio ao Vivo</div>
+  <h1>1 Ano Grátis de Medicina Conectada</h1>
+  <p class="subtitle">3 ganhadores sorteados ao vivo</p>
+
+  <div class="round-indicator">
+    <div class="round-dot active" id="r1">1</div>
+    <div class="round-dot" id="r2">2</div>
+    <div class="round-dot" id="r3">3</div>
+  </div>
+
+  <div class="slot-machine" id="slotMachine">
+    <div class="slot-window">
+      <div class="slot-highlight"></div>
+      <div class="slot-reel" id="reel"></div>
+    </div>
+    <div class="winner-reveal" id="winnerReveal">
+      <div class="winner-label">Ganhador</div>
+      <div class="winner-name" id="winnerName"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="spin-btn" id="spinBtn" onclick="spin()" disabled>Sortear</button>
+    <button class="load-btn" id="loadBtn" onclick="document.getElementById('fileInput').click()">Carregar lista de inscritos</button>
+    <input type="file" class="file-input" id="fileInput" accept=".csv,.txt" onchange="loadFile(event)">
+    <div class="participant-count" id="countLabel"></div>
+  </div>
+
+  <div class="winners-panel" id="winnersPanel">
+    <div class="winner-card" id="w1"><div class="label">1º Ganhador</div><div class="name" id="w1name">—</div></div>
+    <div class="winner-card" id="w2"><div class="label">2º Ganhador</div><div class="name" id="w2name">—</div></div>
+    <div class="winner-card" id="w3"><div class="label">3º Ganhador</div><div class="name" id="w3name">—</div></div>
+  </div>
+
+  <div class="all-done" id="allDone">
+    <h2>Parabéns aos ganhadores!</h2>
+    <p>1 ano grátis de Medicina Conectada para cada um.</p>
+  </div>
+
+  <div class="footer">Medicina Conectada &bull; Congresso UNI9 Guarulhos 2025</div>
+</div>
+
+<script>
+var participants = [];
+var winners = [];
+var currentRound = 0;
+var isSpinning = false;
+
+function loadFile(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var text = ev.target.result;
+    var lines = text.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(Boolean);
+    var names = [];
+    lines.forEach(function(line, i) {
+      if (i === 0 && (line.toLowerCase().indexOf('nome') !== -1 || line.indexOf(',') !== -1 && line.toLowerCase().indexOf('email') !== -1)) {
+        return;
+      }
+      var name = line.split(',')[0].trim();
+      if (name) names.push(name);
+    });
+    participants = names;
+    document.getElementById('countLabel').textContent = participants.length + ' inscritos carregados';
+    document.getElementById('spinBtn').disabled = false;
+    document.getElementById('loadBtn').textContent = 'Lista carregada';
+    buildReel();
+  };
+  reader.readAsText(file);
+}
+
+function buildReel() {
+  var reel = document.getElementById('reel');
+  reel.innerHTML = '';
+  var pool = getPool();
+  var repeated = [];
+  for (var i = 0; i < 80; i++) {
+    repeated.push(pool[i % pool.length]);
+  }
+  repeated.forEach(function(name) {
+    var div = document.createElement('div');
+    div.className = 'slot-name';
+    div.textContent = name;
+    reel.appendChild(div);
+  });
+}
+
+function getPool() {
+  return participants.filter(function(n) { return winners.indexOf(n) === -1; });
+}
+
+function spin() {
+  if (isSpinning || currentRound >= 3) return;
+  isSpinning = true;
+
+  var pool = getPool();
+  if (pool.length === 0) return;
+
+  var winnerIdx = Math.floor(Math.random() * pool.length);
+  var winner = pool[winnerIdx];
+
+  document.getElementById('spinBtn').disabled = true;
+  document.getElementById('winnerReveal').style.display = 'none';
+  document.querySelector('.slot-window').style.display = 'block';
+  document.getElementById('slotMachine').classList.add('spinning');
+
+  var reel = document.getElementById('reel');
+  reel.innerHTML = '';
+
+  var totalSlots = 60 + Math.floor(Math.random() * 20);
+  var allNames = [];
+  for (var i = 0; i < totalSlots - 1; i++) {
+    allNames.push(pool[Math.floor(Math.random() * pool.length)]);
+  }
+  var stopIdx = totalSlots - 4;
+  allNames.splice(stopIdx, 0, winner);
+
+  allNames.forEach(function(name) {
+    var div = document.createElement('div');
+    div.className = 'slot-name';
+    div.textContent = name;
+    reel.appendChild(div);
+  });
+
+  var itemH = 52;
+  var windowH = 200;
+  var centerOffset = (windowH - itemH) / 2;
+  var targetY = -(stopIdx * itemH - centerOffset);
+
+  var totalDistance = Math.abs(targetY);
+  var duration = 4000 + Math.random() * 1000;
+  var startTime = null;
+
+  function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+
+  function animate(ts) {
+    if (!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    var eased = easeOutExpo(progress);
+    var currentY = targetY * eased;
+    reel.style.transform = 'translateY(' + currentY + 'px)';
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      onSpinComplete(winner);
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function onSpinComplete(winner) {
+  winners.push(winner);
+  currentRound++;
+
+  document.getElementById('slotMachine').classList.remove('spinning');
+
+  setTimeout(function() {
+    document.querySelector('.slot-window').style.display = 'none';
+    var reveal = document.getElementById('winnerReveal');
+    reveal.style.display = 'block';
+    document.getElementById('winnerName').textContent = winner;
+
+    var card = document.getElementById('w' + currentRound);
+    document.getElementById('w' + currentRound + 'name').textContent = winner;
+    card.classList.add('visible');
+
+    document.getElementById('r' + currentRound).classList.remove('active');
+    document.getElementById('r' + currentRound).classList.add('done');
+
+    fireConfetti();
+
+    if (currentRound < 3) {
+      var nextR = currentRound + 1;
+      document.getElementById('r' + nextR).classList.add('active');
+      setTimeout(function() {
+        document.getElementById('spinBtn').disabled = false;
+        document.getElementById('spinBtn').textContent = 'Sortear ' + nextR + 'º ganhador';
+        isSpinning = false;
+      }, 2000);
+    } else {
+      document.getElementById('spinBtn').style.display = 'none';
+      document.getElementById('allDone').style.display = 'block';
+      isSpinning = false;
+    }
+  }, 500);
+}
+
+function fireConfetti() {
+  var colors = ['#2ECC71', '#F0C75E', '#E74C3C', '#3498DB', '#9B59B6', '#FFFFFF'];
+  for (var i = 0; i < 60; i++) {
+    var piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = (Math.random() * 100) + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (6 + Math.random() * 6) + 'px';
+    piece.style.height = (10 + Math.random() * 8) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    document.body.appendChild(piece);
+
+    var dur = 1500 + Math.random() * 2000;
+    var drift = -100 + Math.random() * 200;
+    var rotation = Math.random() * 720;
+
+    piece.animate([
+      { transform: 'translateY(-20vh) translateX(0) rotate(0deg)', opacity: 1 },
+      { transform: 'translateY(105vh) translateX(' + drift + 'px) rotate(' + rotation + 'deg)', opacity: 0 }
+    ], {
+      duration: dur,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      fill: 'forwards',
+      delay: Math.random() * 400
+    }).onfinish = function() { piece.remove(); };
+  }
+}
+</script>
+
+</body>
+</html>

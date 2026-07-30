@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hands-on Telemedicina — Congresso UNI9</title>
+<style>
+@font-face {
+  font-family: 'Display';
+  src: local('Georgia');
+  font-display: swap;
+}
+
+:root {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --text: #1A1A1A;
+  --text-muted: #5A5A5A;
+  --accent: #0B6E4F;
+  --accent-light: #E8F5EE;
+  --accent-dark: #084A35;
+  --border: #E0DED8;
+  --gold: #C9963B;
+  --gold-light: #FBF5EB;
+  --input-bg: #FFFFFF;
+  --input-border: #CCC9C0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110;
+    --surface: #1C1C1A;
+    --text: #E8E6E1;
+    --text-muted: #9A9890;
+    --accent: #2ECC71;
+    --accent-light: #1A2E22;
+    --accent-dark: #27AE60;
+    --border: #2A2A28;
+    --gold: #D4A84B;
+    --gold-light: #2A2418;
+    --input-bg: #232320;
+    --input-border: #3A3A36;
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111110;
+  --surface: #1C1C1A;
+  --text: #E8E6E1;
+  --text-muted: #9A9890;
+  --accent: #2ECC71;
+  --accent-light: #1A2E22;
+  --accent-dark: #27AE60;
+  --border: #2A2A28;
+  --gold: #D4A84B;
+  --gold-light: #2A2418;
+  --input-bg: #232320;
+  --input-border: #3A3A36;
+  --shadow: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.3);
+}
+:root[data-theme="light"] {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --text: #1A1A1A;
+  --text-muted: #5A5A5A;
+  --accent: #0B6E4F;
+  --accent-light: #E8F5EE;
+  --accent-dark: #084A35;
+  --border: #E0DED8;
+  --gold: #C9963B;
+  --gold-light: #FBF5EB;
+  --input-bg: #FFFFFF;
+  --input-border: #CCC9C0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 32px 0 28px;
+}
+
+.header-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-family: 'Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-wrap: balance;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Urgency badge */
+.urgency {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold-light);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 20px 0 28px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.urgency-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.urgency strong {
+  color: var(--gold);
+}
+
+/* Form */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow-lg);
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field:last-of-type {
+  margin-bottom: 24px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+label .optional {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5A5A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.ig-field {
+  position: relative;
+}
+
+.ig-field input {
+  padding-left: 32px;
+}
+
+.ig-field::before {
+  content: '@';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* Submit */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.3px;
+}
+
+.submit-btn:hover {
+  background: var(--accent-dark);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Prize callout */
+.prize {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--accent-light);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.prize-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Instagram CTA */
+.ig-section {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.ig-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.ig-section p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.ig-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.ig-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ig-link:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.ig-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Story CTA */
+.story-cta {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.story-cta h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.story-cta p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.story-cta .hashtag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Success state */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-msg .check {
+  width: 64px;
+  height: 64px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 32px;
+}
+
+.success-msg h2 {
+  font-family: 'Display', Georgia, serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.success-msg p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-eyebrow">Congresso UNI9 Guarulhos</div>
+    <h1>Hands-on: Telemedicina na Prática</h1>
+    <p>Sessão prática com a Dra. Simone Farah. Dispositivo real, paciente monitorado ao vivo, turma de 20 alunos.</p>
+  </div>
+
+  <div class="urgency">
+    <span class="urgency-icon">&#9889;</span>
+    <span>Apenas <strong>60 vagas</strong> nas 3 sessões — inscreva-se para garantir.</span>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <form id="inscricaoForm" onsubmit="handleSubmit(event)">
+
+      <div class="field">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+      </div>
+
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">WhatsApp</label>
+        <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(11) 99999-9999">
+      </div>
+
+      <div class="field">
+        <label for="instagram">Instagram</label>
+        <div class="ig-field">
+          <input type="text" id="instagram" name="instagram" placeholder="seu.usuario">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="periodo">Período</label>
+        <select id="periodo" name="periodo" required>
+          <option value="" disabled selected>Qual período você cursa?</option>
+          <option value="1">1º período</option>
+          <option value="2">2º período</option>
+          <option value="3">3º período</option>
+          <option value="4">4º período</option>
+          <option value="5">5º período</option>
+          <option value="6">6º período</option>
+          <option value="7">7º período</option>
+          <option value="8">8º período</option>
+          <option value="9">9º período</option>
+          <option value="10">10º período</option>
+          <option value="11">11º período</option>
+          <option value="12">12º período</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sessao">Sessão de preferência</label>
+        <select id="sessao" name="sessao" required>
+          <option value="" disabled selected>Escolha uma sessão</option>
+          <option value="D1-manha">Dia 1 — Manhã</option>
+          <option value="D1-tarde">Dia 1 — Tarde</option>
+          <option value="D2-tarde">Dia 2 — Tarde</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn">Garantir minha vaga</button>
+
+      <div class="prize">
+        <span class="prize-icon">&#127942;</span>
+        <span>Ao se inscrever, você concorre ao sorteio de <strong>1 ano grátis</strong> do curso Medicina Conectada. Sorteio ao vivo no fechamento do Dia 2!</span>
+      </div>
+    </form>
+  </div>
+
+  <div class="success-msg" id="successMsg">
+    <div class="check">&#10003;</div>
+    <h2>Inscrição confirmada!</h2>
+    <p>Você receberá a confirmação da sua sessão por WhatsApp até 24h antes do evento.</p>
+    <p style="margin-top: 16px; font-weight: 600;">Você já está concorrendo ao sorteio de 1 ano grátis do Medicina Conectada.</p>
+    <p style="margin-top: 12px;">Quer uma chance extra? Poste um story no congresso marcando <strong>@dradanimagalhaes</strong> e <strong>@drasimonefarah</strong> e valide no stand!</p>
+  </div>
+
+  <div class="ig-section">
+    <h3>Siga as professoras</h3>
+    <p>Conteúdo exclusivo sobre telemedicina e carreira médica</p>
+    <div class="ig-links">
+      <a href="https://instagram.com/drasimonefarah" target="_blank" rel="noopener" class="ig-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @drasimonefarah
+      </a>
+      <a href="https://instagram.com/dradanimagalhaes" target="_blank" rel="noopener" class="ig-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @dradanimagalhaes
+      </a>
+    </div>
+  </div>
+
+  <div class="story-cta">
+    <h3>Poste um story e concorra também!</h3>
+    <p>Marque <strong>@dradanimagalhaes</strong> e <strong>@drasimonefarah</strong> nos seus stories do congresso, mostre no stand e ganhe uma chance extra no sorteio.</p>
+    <span class="hashtag">#MedicinaConectada</span>
+  </div>
+
+  <div class="footer">
+    Medicina Conectada — Congresso UNI9 Guarulhos 2025
+  </div>
+
+</div>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  var form = document.getElementById('inscricaoForm');
+  var data = {
+    nome: form.nome.value.trim(),
+    email: form.email.value.trim(),
+    whatsapp: form.whatsapp.value.trim(),
+    instagram: form.instagram.value.trim(),
+    periodo: form.periodo.value,
+    sessao: form.sessao.value
+  };
+
+  // In production: send to Google Sheets via Apps Script Web App
+  // fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+  //   method: 'POST',
+  //   body: JSON.stringify(data)
+  // });
+
+  console.log('Inscrição:', data);
+
+  document.getElementById('formCard').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+  document.querySelector('.urgency').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
