@@ -30,7 +30,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -65,11 +64,13 @@ h1 {
   margin-bottom: 32px;
 }
 
+/* Round indicators — generated dynamically */
 .round-indicator {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-bottom: 28px;
+  flex-wrap: wrap;
 }
 
 .round-dot {
@@ -170,10 +171,7 @@ h1 {
   box-shadow: inset 0 0 30px var(--accent-glow);
 }
 
-.slot-reel {
-  transition: transform 0.1s linear;
-  will-change: transform;
-}
+.slot-reel { will-change: transform; }
 
 .slot-name {
   height: 52px;
@@ -238,23 +236,9 @@ h1 {
   letter-spacing: 0.5px;
 }
 
-.spin-btn:hover {
-  box-shadow: 0 0 24px var(--accent-glow);
-}
-
-.spin-btn:active {
-  transform: scale(0.96);
-}
-
-.spin-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-.spin-btn.gold {
-  background: var(--gold);
-}
+.spin-btn:hover { box-shadow: 0 0 24px var(--accent-glow); }
+.spin-btn:active { transform: scale(0.96); }
+.spin-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
 .load-btn {
   padding: 10px 24px;
@@ -269,13 +253,18 @@ h1 {
   transition: border-color 0.2s;
 }
 
-.load-btn:hover {
-  border-color: var(--accent);
-}
+.load-btn:hover { border-color: var(--accent); }
 
 .participant-count {
   font-size: 13px;
   color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.prize-calc {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
   margin-top: 4px;
 }
 
@@ -328,10 +317,8 @@ h1 {
   z-index: 100;
 }
 
-/* File input hidden */
 .file-input { display: none; }
 
-/* All done */
 .all-done {
   display: none;
   text-align: center;
@@ -363,13 +350,9 @@ h1 {
 <div class="stage">
   <div class="eyebrow">Congresso Uninove — Sorteio ao Vivo</div>
   <h1>1 Ano Grátis de Medicina Conectada</h1>
-  <p class="subtitle">3 ganhadores sorteados ao vivo</p>
+  <p class="subtitle" id="subtitle">1 ganhador a cada 100 inscritos</p>
 
-  <div class="round-indicator">
-    <div class="round-dot active" id="r1">1</div>
-    <div class="round-dot" id="r2">2</div>
-    <div class="round-dot" id="r3">3</div>
-  </div>
+  <div class="round-indicator" id="roundIndicator"></div>
 
   <div class="slot-machine" id="slotMachine">
     <div class="slot-window">
@@ -387,13 +370,10 @@ h1 {
     <button class="load-btn" id="loadBtn" onclick="document.getElementById('fileInput').click()">Carregar lista de inscritos</button>
     <input type="file" class="file-input" id="fileInput" accept=".csv,.txt" onchange="loadFile(event)">
     <div class="participant-count" id="countLabel"></div>
+    <div class="prize-calc" id="prizeCalc"></div>
   </div>
 
-  <div class="winners-panel" id="winnersPanel">
-    <div class="winner-card" id="w1"><div class="label">1º Ganhador</div><div class="name" id="w1name">—</div></div>
-    <div class="winner-card" id="w2"><div class="label">2º Ganhador</div><div class="name" id="w2name">—</div></div>
-    <div class="winner-card" id="w3"><div class="label">3º Ganhador</div><div class="name" id="w3name">—</div></div>
-  </div>
+  <div class="winners-panel" id="winnersPanel"></div>
 
   <div class="all-done" id="allDone">
     <h2>Parabéns aos ganhadores!</h2>
@@ -407,6 +387,7 @@ h1 {
 var participants = [];
 var winners = [];
 var currentRound = 0;
+var totalRounds = 0;
 var isSpinning = false;
 
 function loadFile(e) {
@@ -425,28 +406,59 @@ function loadFile(e) {
       if (name) names.push(name);
     });
     participants = names;
+    totalRounds = Math.max(1, Math.floor(participants.length / 100));
+    currentRound = 0;
+    winners = [];
+
     document.getElementById('countLabel').textContent = participants.length + ' inscritos carregados';
+    document.getElementById('prizeCalc').textContent = totalRounds + (totalRounds === 1 ? ' ganhador' : ' ganhadores') + ' (1 a cada 100 inscritos)';
+    document.getElementById('subtitle').textContent = totalRounds + (totalRounds === 1 ? ' ganhador sorteado' : ' ganhadores sorteados') + ' ao vivo';
     document.getElementById('spinBtn').disabled = false;
+    document.getElementById('spinBtn').textContent = 'Sortear 1º ganhador';
     document.getElementById('loadBtn').textContent = 'Lista carregada';
+    document.getElementById('allDone').style.display = 'none';
+
+    buildRoundIndicator();
+    buildWinnerCards();
     buildReel();
   };
   reader.readAsText(file);
+}
+
+function buildRoundIndicator() {
+  var container = document.getElementById('roundIndicator');
+  container.innerHTML = '';
+  for (var i = 1; i <= totalRounds; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'round-dot' + (i === 1 ? ' active' : '');
+    dot.id = 'r' + i;
+    dot.textContent = i;
+    container.appendChild(dot);
+  }
+}
+
+function buildWinnerCards() {
+  var panel = document.getElementById('winnersPanel');
+  panel.innerHTML = '';
+  for (var i = 1; i <= totalRounds; i++) {
+    var card = document.createElement('div');
+    card.className = 'winner-card';
+    card.id = 'w' + i;
+    card.innerHTML = '<div class="label">' + i + 'º Ganhador</div><div class="name" id="w' + i + 'name">—</div>';
+    panel.appendChild(card);
+  }
 }
 
 function buildReel() {
   var reel = document.getElementById('reel');
   reel.innerHTML = '';
   var pool = getPool();
-  var repeated = [];
   for (var i = 0; i < 80; i++) {
-    repeated.push(pool[i % pool.length]);
-  }
-  repeated.forEach(function(name) {
     var div = document.createElement('div');
     div.className = 'slot-name';
-    div.textContent = name;
+    div.textContent = pool[i % pool.length];
     reel.appendChild(div);
-  });
+  }
 }
 
 function getPool() {
@@ -454,7 +466,7 @@ function getPool() {
 }
 
 function spin() {
-  if (isSpinning || currentRound >= 3) return;
+  if (isSpinning || currentRound >= totalRounds) return;
   isSpinning = true;
 
   var pool = getPool();
@@ -491,7 +503,6 @@ function spin() {
   var centerOffset = (windowH - itemH) / 2;
   var targetY = -(stopIdx * itemH - centerOffset);
 
-  var totalDistance = Math.abs(targetY);
   var duration = 4000 + Math.random() * 1000;
   var startTime = null;
 
@@ -504,8 +515,7 @@ function spin() {
     var elapsed = ts - startTime;
     var progress = Math.min(elapsed / duration, 1);
     var eased = easeOutExpo(progress);
-    var currentY = targetY * eased;
-    reel.style.transform = 'translateY(' + currentY + 'px)';
+    reel.style.transform = 'translateY(' + (targetY * eased) + 'px)';
 
     if (progress < 1) {
       requestAnimationFrame(animate);
@@ -538,7 +548,7 @@ function onSpinComplete(winner) {
 
     fireConfetti();
 
-    if (currentRound < 3) {
+    if (currentRound < totalRounds) {
       var nextR = currentRound + 1;
       document.getElementById('r' + nextR).classList.add('active');
       setTimeout(function() {
