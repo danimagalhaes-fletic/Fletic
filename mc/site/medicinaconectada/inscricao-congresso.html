@@ -530,17 +530,22 @@ function handleSubmit(e) {
     sessao: form.sessao.value
   };
 
-  // In production: send to Google Sheets via Apps Script Web App
-  // fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
-  //   method: 'POST',
-  //   body: JSON.stringify(data)
-  // });
+  var btn = document.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
 
-  console.log('Inscrição:', data);
-
-  document.getElementById('formCard').style.display = 'none';
-  document.getElementById('successMsg').style.display = 'block';
-  document.querySelector('.urgency').style.display = 'none';
+  fetch('https://script.google.com/macros/s/AKfycbydGgsoA4G6L96TMrST1HOYsn0tTRQl_Max1VWLMB1SynA_sh02WV2asVWZ_7wXuHie/exec', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  }).then(function() {
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.urgency').style.display = 'none';
+  }).catch(function() {
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.urgency').style.display = 'none';
+  });
 }
 </script>
 
