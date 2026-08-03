@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteio ao Vivo — Medicina Conectada</title>
+<style>
+:root {
+  --bg: #0A0F0D;
+  --surface: #141A17;
+  --surface-2: #1C2420;
+  --text: #E8F0EC;
+  --text-muted: #7A8F83;
+  --accent: #2ECC71;
+  --accent-glow: rgba(46,204,113,0.25);
+  --gold: #F0C75E;
+  --gold-glow: rgba(240,199,94,0.3);
+  --border: #253029;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  width: 100%;
+  max-width: 720px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.round-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.round-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.4s;
+}
+
+.round-dot.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.round-dot.done {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* Shuffle area */
+.shuffle-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 24px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shuffle-box::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 40%, transparent 60%, var(--gold));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.shuffle-box.shuffling::before {
+  opacity: 1;
+}
+
+.shuffle-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  max-height: 240px;
+  overflow: hidden;
+}
+
+.shuffle-name {
+  padding: 6px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.shuffle-name.highlight {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.shuffle-name.fade {
+  opacity: 0.15;
+  transform: scale(0.9);
+}
+
+/* Winner reveal */
+.winner-reveal {
+  display: none;
+  padding: 20px;
+  animation: revealPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes revealPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.winner-name {
+  font-family: Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 40px var(--gold-glow);
+  margin-bottom: 4px;
+}
+
+.winner-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.spin-btn {
+  padding: 16px 48px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.3s;
+  letter-spacing: 0.5px;
+}
+
+.spin-btn:hover { box-shadow: 0 0 24px var(--accent-glow); }
+.spin-btn:active { transform: scale(0.96); }
+.spin-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+.load-btn {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.load-btn:hover { border-color: var(--accent); }
+
+.participant-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.prize-calc {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Winners panel */
+.winners-panel {
+  margin-top: 28px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.winner-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 24px;
+  min-width: 180px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.winner-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.winner-card .label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.winner-card .name {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.file-input { display: none; }
+
+.all-done {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.all-done h2 {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.all-done p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="eyebrow">Congresso Uninove — Sorteio ao Vivo</div>
+  <h1>1 Ano Grátis de Medicina Conectada</h1>
+  <p class="subtitle" id="subtitle">1 ganhador a cada 100 inscritos</p>
+
+  <div class="round-indicator" id="roundIndicator"></div>
+
+  <div class="shuffle-box" id="shuffleBox">
+    <div class="shuffle-grid" id="shuffleGrid"></div>
+    <div class="winner-reveal" id="winnerReveal">
+      <div class="winner-label">Ganhador</div>
+      <div class="winner-name" id="winnerName"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="spin-btn" id="spinBtn" onclick="startShuffle()" disabled>Sortear</button>
+    <button class="load-btn" id="loadBtn" onclick="document.getElementById('fileInput').click()">Carregar lista de inscritos</button>
+    <input type="file" class="file-input" id="fileInput" accept=".csv,.txt" onchange="loadFile(event)">
+    <div class="participant-count" id="countLabel"></div>
+    <div class="prize-calc" id="prizeCalc"></div>
+  </div>
+
+  <div class="winners-panel" id="winnersPanel"></div>
+
+  <div class="all-done" id="allDone">
+    <h2>Parabéns aos ganhadores!</h2>
+    <p>1 ano grátis de Medicina Conectada para cada um.</p>
+  </div>
+
+  <div class="footer">Medicina Conectada &bull; Congresso Uninove Guarulhos 2026</div>
+</div>
+
+<script>
+var participants = [];
+var winners = [];
+var currentRound = 0;
+var totalRounds = 0;
+var isShuffling = false;
+var displayNames = [];
+var MAX_VISIBLE = 30;
+
+function loadFile(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var text = ev.target.result;
+    var lines = text.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(Boolean);
+    var names = [];
+    lines.forEach(function(line, i) {
+      if (i === 0 && (line.toLowerCase().indexOf('nome') !== -1 || line.indexOf(',') !== -1 && line.toLowerCase().indexOf('email') !== -1)) {
+        return;
+      }
+      var name = line.split(',')[0].trim();
+      if (name) names.push(name);
+    });
+    participants = names;
+    totalRounds = Math.max(1, Math.floor(participants.length / 100));
+    currentRound = 0;
+    winners = [];
+
+    document.getElementById('countLabel').textContent = participants.length + ' inscritos carregados';
+    document.getElementById('prizeCalc').textContent = totalRounds + (totalRounds === 1 ? ' ganhador' : ' ganhadores') + ' (1 a cada 100 inscritos)';
+    document.getElementById('subtitle').textContent = totalRounds + (totalRounds === 1 ? ' ganhador sorteado' : ' ganhadores sorteados') + ' ao vivo';
+    document.getElementById('spinBtn').disabled = false;
+    document.getElementById('spinBtn').textContent = 'Sortear 1º ganhador';
+    document.getElementById('loadBtn').textContent = 'Lista carregada';
+    document.getElementById('allDone').style.display = 'none';
+
+    buildRoundIndicator();
+    buildWinnerCards();
+    showGrid();
+  };
+  reader.readAsText(file);
+}
+
+function buildRoundIndicator() {
+  var container = document.getElementById('roundIndicator');
+  container.innerHTML = '';
+  for (var i = 1; i <= totalRounds; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'round-dot' + (i === 1 ? ' active' : '');
+    dot.id = 'r' + i;
+    dot.textContent = i;
+    container.appendChild(dot);
+  }
+}
+
+function buildWinnerCards() {
+  var panel = document.getElementById('winnersPanel');
+  panel.innerHTML = '';
+  for (var i = 1; i <= totalRounds; i++) {
+    var card = document.createElement('div');
+    card.className = 'winner-card';
+    card.id = 'w' + i;
+    card.innerHTML = '<div class="label">' + i + 'º Ganhador</div><div class="name" id="w' + i + 'name">—</div>';
+    panel.appendChild(card);
+  }
+}
+
+function getPool() {
+  return participants.filter(function(n) { return winners.indexOf(n) === -1; });
+}
+
+function pickRandom(arr, count) {
+  var shuffled = arr.slice();
+  for (var i = shuffled.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+  }
+  return shuffled.slice(0, count);
+}
+
+function showGrid() {
+  var grid = document.getElementById('shuffleGrid');
+  grid.innerHTML = '';
+  var pool = getPool();
+  displayNames = pickRandom(pool, Math.min(MAX_VISIBLE, pool.length));
+  displayNames.forEach(function(name) {
+    var el = document.createElement('div');
+    el.className = 'shuffle-name';
+    el.textContent = name;
+    grid.appendChild(el);
+  });
+  document.getElementById('winnerReveal').style.display = 'none';
+  grid.style.display = 'flex';
+}
+
+function startShuffle() {
+  if (isShuffling || currentRound >= totalRounds) return;
+  isShuffling = true;
+
+  var pool = getPool();
+  if (pool.length === 0) return;
+
+  var winnerIdx = Math.floor(Math.random() * pool.length);
+  var winner = pool[winnerIdx];
+
+  document.getElementById('spinBtn').disabled = true;
+  document.getElementById('shuffleBox').classList.add('shuffling');
+
+  var grid = document.getElementById('shuffleGrid');
+  var shuffleCount = 0;
+  var totalShuffles = 25 + Math.floor(Math.random() * 10);
+  var interval = 80;
+
+  function doShuffle() {
+    shuffleCount++;
+    var progress = shuffleCount / totalShuffles;
+
+    // Gradually increase interval (decelerate)
+    interval = 80 + Math.pow(progress, 2) * 400;
+
+    // Pick new random names to show, always include winner in later rounds
+    var visible = Math.min(MAX_VISIBLE, pool.length);
+    var newNames;
+
+    if (progress > 0.7) {
+      // Shrink the grid as we approach the end
+      visible = Math.max(1, Math.round(visible * (1 - (progress - 0.7) * 3)));
+      newNames = pickRandom(pool.filter(function(n) { return n !== winner; }), visible - 1);
+      newNames.splice(Math.floor(Math.random() * newNames.length), 0, winner);
+    } else {
+      newNames = pickRandom(pool, visible);
+    }
+
+    grid.innerHTML = '';
+    newNames.forEach(function(name) {
+      var el = document.createElement('div');
+      el.className = 'shuffle-name';
+      if (progress > 0.85 && name === winner) {
+        el.classList.add('highlight');
+      }
+      if (progress > 0.8 && name !== winner) {
+        el.classList.add('fade');
+      }
+      el.textContent = name;
+      grid.appendChild(el);
+    });
+
+    if (shuffleCount < totalShuffles) {
+      setTimeout(doShuffle, interval);
+    } else {
+      // Final: show only winner
+      setTimeout(function() {
+        grid.innerHTML = '';
+        var el = document.createElement('div');
+        el.className = 'shuffle-name highlight';
+        el.style.fontSize = '20px';
+        el.style.padding = '12px 28px';
+        el.textContent = winner;
+        grid.appendChild(el);
+
+        setTimeout(function() {
+          onShuffleComplete(winner);
+        }, 600);
+      }, 200);
+    }
+  }
+
+  showGrid();
+  setTimeout(doShuffle, 300);
+}
+
+function onShuffleComplete(winner) {
+  winners.push(winner);
+  currentRound++;
+
+  document.getElementById('shuffleBox').classList.remove('shuffling');
+
+  var grid = document.getElementById('shuffleGrid');
+  grid.style.display = 'none';
+  var reveal = document.getElementById('winnerReveal');
+  reveal.style.display = 'block';
+  document.getElementById('winnerName').textContent = winner;
+
+  document.getElementById('w' + currentRound + 'name').textContent = winner;
+  document.getElementById('w' + currentRound).classList.add('visible');
+
+  document.getElementById('r' + currentRound).classList.remove('active');
+  document.getElementById('r' + currentRound).classList.add('done');
+
+  fireConfetti();
+
+  if (currentRound < totalRounds) {
+    var nextR = currentRound + 1;
+    document.getElementById('r' + nextR).classList.add('active');
+    setTimeout(function() {
+      document.getElementById('spinBtn').disabled = false;
+      document.getElementById('spinBtn').textContent = 'Sortear ' + nextR + 'º ganhador';
+      isShuffling = false;
+      showGrid();
+    }, 3000);
+  } else {
+    document.getElementById('spinBtn').style.display = 'none';
+    document.getElementById('allDone').style.display = 'block';
+    isShuffling = false;
+  }
+}
+
+function fireConfetti() {
+  var colors = ['#2ECC71', '#F0C75E', '#E74C3C', '#3498DB', '#9B59B6', '#FFFFFF'];
+  for (var i = 0; i < 80; i++) {
+    var piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = (Math.random() * 100) + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (6 + Math.random() * 8) + 'px';
+    piece.style.height = (10 + Math.random() * 10) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    document.body.appendChild(piece);
+
+    var dur = 1800 + Math.random() * 2500;
+    var drift = -150 + Math.random() * 300;
+    var rotation = Math.random() * 720;
+
+    piece.animate([
+      { transform: 'translateY(-20vh) translateX(0) rotate(0deg)', opacity: 1 },
+      { transform: 'translateY(105vh) translateX(' + drift + 'px) rotate(' + rotation + 'deg)', opacity: 0 }
+    ], {
+      duration: dur,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      fill: 'forwards',
+      delay: Math.random() * 500
+    }).onfinish = function() { piece.remove(); };
+  }
+}
+</script>
+
+</body>
+</html>
