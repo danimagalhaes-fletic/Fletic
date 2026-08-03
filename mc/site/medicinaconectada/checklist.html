@@ -109,41 +109,39 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-foot">
       <span class="status-badge" id="statusBadge">Marque os itens</span>
-      <span class="progress-txt" id="progressTxt">0 de 17 marcados</span>
+      <span class="progress-txt" id="progressTxt">0 de 15 marcados</span>
     </div>
   </div>
 
   <div class="bloco" data-bloco="1">
     <div class="bloco-head"><span class="bloco-n">Bloco 1</span><span class="bloco-t">Situação Clínica do Paciente</span></div>
     <div class="item"><input type="checkbox" id="q1"><label for="q1">O paciente tem condição clínica estável no momento?</label></div>
-    <div class="item"><input type="checkbox" id="q2"><label for="q2">Não há necessidade de exame físico imediato para este atendimento?</label></div>
+    <div class="item"><input type="checkbox" id="q2"><label for="q2">Não há necessidade de exame físico presencial imediato para este momento?</label></div>
     <div class="item"><input type="checkbox" id="q3"><label for="q3">O motivo da consulta pode ser avaliado por anamnese e dados remotos?</label></div>
     <div class="item"><input type="checkbox" id="q4"><label for="q4">Não há risco de emergência que exija presença física? (Se houver risco, não prossiga)</label></div>
   </div>
 
   <div class="bloco" data-bloco="2">
     <div class="bloco-head"><span class="bloco-n">Bloco 2</span><span class="bloco-t">Regulamentação e Conformidade Legal</span></div>
-    <div class="item"><input type="checkbox" id="q5"><label for="q5">Sua especialidade permite teleconsulta pela Resolução CFM 2.314/2022?</label></div>
-    <div class="item"><input type="checkbox" id="q6"><label for="q6">Se for primeira consulta: você verificou as restrições específicas da sua especialidade?</label></div>
-    <div class="item"><input type="checkbox" id="q7"><label for="q7">O paciente assinou o Termo de Consentimento Informado para teleconsulta?</label></div>
-    <div class="item"><input type="checkbox" id="q8"><label for="q8">A plataforma utilizada é segura, com criptografia e registro de prontuário eletrônico?</label></div>
-    <div class="item"><input type="checkbox" id="q9"><label for="q9">Seu registro no CRM está ativo e em dia?</label></div>
+    <div class="item"><input type="checkbox" id="q5"><label for="q5">Seu registro no CRM está ativo e em dia?</label></div>
+    <div class="item"><input type="checkbox" id="q6"><label for="q6">O paciente assinou o Termo de Consentimento Informado para teleconsulta?</label></div>
+    <div class="item"><input type="checkbox" id="q7"><label for="q7">A plataforma utilizada é específica para Telemedicina?</label></div>
+    <div class="item"><input type="checkbox" id="q8"><label for="q8">Os dados pessoais e clínicos da teleconsulta seguem as definições da LGPD?</label></div>
   </div>
 
   <div class="bloco" data-bloco="3">
     <div class="bloco-head"><span class="bloco-n">Bloco 3</span><span class="bloco-t">Estrutura e Capacidade Técnica</span></div>
-    <div class="item"><input type="checkbox" id="q10"><label for="q10">Você tem ambiente adequado: iluminação, áudio e conexão estáveis?</label></div>
-    <div class="item"><input type="checkbox" id="q11"><label for="q11">A plataforma gera prontuário eletrônico com registro da consulta?</label></div>
-    <div class="item"><input type="checkbox" id="q12"><label for="q12">Você tem protocolo definido caso o paciente precise de atendimento presencial urgente?</label></div>
-    <div class="item"><input type="checkbox" id="q13"><label for="q13">Você sabe emitir receita digital com validade legal, se necessário?</label></div>
+    <div class="item"><input type="checkbox" id="q9"><label for="q9">Você tem ambiente adequado: iluminação, áudio, privacidade e conexão estáveis?</label></div>
+    <div class="item"><input type="checkbox" id="q10"><label for="q10">Você tem protocolo definido caso o paciente precise de atendimento presencial urgente?</label></div>
+    <div class="item"><input type="checkbox" id="q11"><label for="q11">Você sabe emitir receita e outros documentos digitais com validade legal, se necessário?</label></div>
   </div>
 
   <div class="bloco" data-bloco="4">
     <div class="bloco-head"><span class="bloco-n">Bloco 4</span><span class="bloco-t">Viabilidade Financeira e Contratual</span></div>
-    <div class="item"><input type="checkbox" id="q14"><label for="q14">O plano de saúde cobre teleconsulta? (Verifique antes, não depois)</label></div>
-    <div class="item"><input type="checkbox" id="q15"><label for="q15">Se consulta particular: valor e forma de pagamento estão definidos antes do início?</label></div>
-    <div class="item"><input type="checkbox" id="q16"><label for="q16">Você tem contrato ou termo de serviço assinado para atendimento digital particular?</label></div>
-    <div class="item"><input type="checkbox" id="q17"><label for="q17">Você conhece sua margem real após custos de plataforma e impostos?</label></div>
+    <div class="item"><input type="checkbox" id="q12"><label for="q12">O plano de saúde cobre teleconsulta? (Verifique antes, não depois)</label></div>
+    <div class="item"><input type="checkbox" id="q13"><label for="q13">Se consulta particular: valor e forma de pagamento estão definidos antes do início?</label></div>
+    <div class="item"><input type="checkbox" id="q14"><label for="q14">Você tem contrato ou termo de serviço assinado para atendimento digital particular?</label></div>
+    <div class="item"><input type="checkbox" id="q15"><label for="q15">Você conhece sua margem real após custos de plataforma e impostos?</label></div>
   </div>
 
   <div class="resultado" id="resultado">
@@ -164,8 +162,8 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
 </footer>
 
 <script>
-const bloco12Ids = ['q1','q2','q3','q4','q5','q6','q7','q8','q9'];
-const bloco34Ids = ['q10','q11','q12','q13','q14','q15','q16','q17'];
+const bloco12Ids = ['q1','q2','q3','q4','q5','q6','q7','q8'];
+const bloco34Ids = ['q9','q10','q11','q12','q13','q14','q15'];
 const allIds = [...bloco12Ids, ...bloco34Ids];
 
 const resultadoEl = document.getElementById('resultado');
