@@ -123,6 +123,10 @@ section{padding:90px 6%;}
 .preco small{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:rgba(255,255,255,.6);}
 .preco-obs{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:28px;line-height:1.6;}
 .preco-obs strong{color:var(--dourado-c);}
+.valor-stack{border-top:1px solid rgba(201,168,76,.2);border-bottom:1px solid rgba(201,168,76,.2);padding:16px 0;margin:24px 0 26px;}
+.valor-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:13px;color:rgba(255,255,255,.62);padding:6px 0;line-height:1.4;}
+.valor-item span:last-child{color:rgba(255,255,255,.85);font-weight:600;white-space:nowrap;}
+.valor-total{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:14px;font-weight:700;color:var(--dourado-c);padding-top:12px;margin-top:8px;border-top:1px dashed rgba(201,168,76,.3);}
 .inv-box{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.14);padding:36px 32px;}
 .inv-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--branco);margin-bottom:22px;}
 .inv-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
@@ -336,10 +340,18 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9;}
     <div>
       <div class="label" style="color:rgba(201,168,76,.65)">Investimento</div>
       <h2 class="h2 h2-w">Estruture agora. <em>Escale o consultório com telemedicina estratégica.</em></h2>
-      <div style="margin-top:28px">
+      <div class="valor-stack">
+        <div class="valor-item"><span>Curso completo — 8 módulos, +6h de conteúdo</span><span>R$ 997</span></div>
+        <div class="valor-item"><span>8 ferramentas práticas exclusivas (1 por módulo)</span><span>R$ 1.016</span></div>
+        <div class="valor-item"><span>Template de pré-teleconsulta</span><span>R$ 147</span></div>
+        <div class="valor-item"><span>Encontros ao vivo com as professoras</span><span>R$ 497</span></div>
+        <div class="valor-item"><span>Checklist de Elegibilidade (bônus imediato)</span><span>R$ 197</span></div>
+        <div class="valor-total"><span>Valor total</span><span>R$ 2.854</span></div>
+      </div>
+      <div style="margin-top:8px">
         <div class="preco-label">10x de</div>
         <div class="preco">240<small> /mês</small></div>
-        <div class="preco-obs">Ou <strong>1.997 à vista</strong> no Pix. Acesso completo ao programa por 1 ano, com todos os bônus inclusos.</div>
+        <div class="preco-obs">Ou <strong>1.997 à vista</strong> no Pix — <strong>30% abaixo</strong> do valor total. Acesso completo ao programa por 1 ano, com todos os bônus inclusos.</div>
         <a href="https://pay.hotmart.com/T104438430W?off=qfs1ffn7" class="btn-gold" style="max-width:300px;display:block">
           Garantir minha vaga agora
           <small>Pix ou cartão</small>
