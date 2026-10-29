@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cardio-Health · Roadmap 90 dias</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+@page { size: A4 landscape; margin: 0; }
+:root {
+  --ink: #14211f; --muted: #5d6c69; --line: #dde5e3; --paper: #ffffff; --wash: #f3f7f6;
+  --f1: #1f6fb2; --f1s: #e3eef8;
+  --f2: #e07a1f; --f2s: #fdeedd;
+  --f3: #22985a; --f3s: #e0f3e8;
+  --com: #7c4dc4; --pre: #e07a1f; --sex: #d6453d; --tel: #1f6fb2; --age: #0d8a87; --ges: #4a5866;
+  --pulse: #d6453d;
+  --fd: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --fb: "Source Sans 3", "Segoe UI", sans-serif;
+  --fm: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin: 0; background: #fff; color: var(--ink); font-family: var(--fb); font-size: 10.5pt; line-height: 1.4; }
+.page { width: 297mm; height: 210mm; padding: 13mm 15mm 11mm; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; gap: 5mm; }
+.page:last-child { page-break-after: auto; }
+h1, h2, h3 { font-family: var(--fd); margin: 0; line-height: 1.1; }
+h2 { font-size: 22pt; font-weight: 800; letter-spacing: -.01em; }
+h3 { font-size: 12.5pt; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font-size: 8pt; text-transform: uppercase; letter-spacing: .14em; font-weight: 700; color: var(--muted); }
+.mono { font-family: var(--fm); font-variant-numeric: tabular-nums; }
+.foot { position: absolute; left: 15mm; right: 15mm; bottom: 6mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 2mm; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 10mm; }
+.head .sub { max-width: 130mm; color: var(--muted); font-size: 10pt; text-align: right; }
+
+/* CAPA */
+.cover { background: #0f2a3a; color: #fff; padding: 0; }
+.cover .band { display: flex; height: 7mm; }
+.cover .band span { flex: 1; }
+.cover .inner { padding: 16mm 18mm 0; display: flex; flex-direction: column; gap: 7mm; flex: 1; }
+.cover .eyebrow { color: #8fd3cf; }
+.cover h1 { font-size: 42pt; font-weight: 800; letter-spacing: -.02em; max-width: 210mm; }
+.cover .lead { font-size: 13pt; max-width: 200mm; color: #d5e4ea; }
+.cover svg.ecg { width: 100%; height: 16mm; }
+.chips { display: flex; flex-wrap: wrap; gap: 3mm; }
+.chip { border: 1px solid rgba(255,255,255,.3); border-radius: 99px; padding: 1.2mm 4mm; font-size: 10pt; }
+.chip b { color: #ffd38a; }
+.cover .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-top: auto; padding-bottom: 16mm; }
+.cover .kpi { background: rgba(255,255,255,.07); border-top: 4px solid; border-radius: 3mm; padding: 4mm 5mm; display: flex; flex-direction: column; gap: 1mm; }
+.cover .kpi .v { font-family: var(--fm); font-size: 15pt; white-space: nowrap; font-weight: 700; }
+.cover .kpi .l { font-size: 8pt; text-transform: uppercase; letter-spacing: .1em; color: #b8cdd6; }
+.cover .kpi .d { font-size: 9pt; color: #d5e4ea; }
+
+/* PREÇOS */
+.prices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+.pc { border-radius: 3mm; padding: 4mm; display: flex; flex-direction: column; gap: 1.5mm; background: var(--wash); border-left: 5px solid var(--c); }
+.pc .name { font-weight: 700; font-size: 10.5pt; }
+.pc .row { display: flex; align-items: baseline; gap: 2mm; }
+.pc .old { font-family: var(--fm); color: var(--muted); text-decoration: line-through; font-size: 10pt; }
+.pc .new { font-family: var(--fm); font-size: 20pt; font-weight: 700; color: var(--c); }
+.pc .tag { font-size: 8.5pt; font-weight: 700; color: var(--c); }
+.pc.same .old { text-decoration: none; }
+.two { display: grid; grid-template-columns: 1.15fr 1fr; gap: 8mm; flex: 1; min-height: 0; }
+.panel { border: 1px solid var(--line); border-radius: 3mm; padding: 5mm; display: flex; flex-direction: column; gap: 3mm; }
+.bars { display: flex; flex-direction: column; gap: 3mm; }
+.bar { display: grid; grid-template-columns: 30mm 1fr; align-items: center; gap: 3mm; }
+.bar .lbl { font-size: 9.5pt; font-weight: 600; }
+.bar .trk { height: 9mm; background: var(--wash); border-radius: 2mm; position: relative; }
+.bar .fill { height: 100%; border-radius: 2mm; display: flex; align-items: center; justify-content: flex-end; padding-right: 2.5mm; color: #fff; font-family: var(--fm); font-weight: 700; font-size: 9.5pt; }
+.small { font-size: 8.5pt; color: var(--muted); }
+
+/* GANTT */
+.gantt { display: grid; grid-template-columns: 40mm repeat(13, 1fr); grid-auto-rows: auto; border-radius: 3mm; overflow: hidden; border: 1px solid var(--line); }
+.gantt .cell { border-left: 1px solid var(--line); }
+.g-month { font-family: var(--fd); font-weight: 700; font-size: 11pt; padding: 1.5mm 3mm; color: var(--ink); background: var(--wash); border-left: 1px solid var(--line); }
+.g-phase { color: #fff; font-weight: 700; font-size: 9pt; padding: 1.6mm 3mm; text-transform: uppercase; letter-spacing: .08em; }
+.g-week { font-family: var(--fm); font-size: 7pt; color: var(--muted); text-align: center; padding: 1mm 0; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.g-lane { display: flex; align-items: center; gap: 2mm; padding: 0 3mm; font-weight: 700; font-size: 9pt; border-bottom: 1px solid var(--line); min-height: 21mm; background: #fff; }
+.g-lane i { width: 3.2mm; height: 3.2mm; border-radius: 1mm; background: var(--c); flex-shrink: 0; }
+.g-row { grid-column: 2 / span 13; display: grid; grid-template-columns: repeat(13, 1fr); border-bottom: 1px solid var(--line); min-height: 21mm; position: relative; align-content: center; row-gap: 1mm; padding: 1.5mm 0;
+  background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(100%/13 - 1px), var(--line) calc(100%/13 - 1px), var(--line) calc(100%/13)); }
+.b { margin: 0 1mm; border-radius: 1.6mm; padding: 1.2mm 2mm; font-size: 7.6pt; font-weight: 700; color: #fff; background: var(--c); line-height: 1.15; white-space: normal; }
+.b.soft { background: color-mix(in srgb, var(--c) 18%, white); color: var(--c); border: 1px dashed var(--c); }
+.ms { display: flex; align-items: center; gap: 1.2mm; font-size: 7.6pt; font-weight: 800; color: var(--c); white-space: nowrap; padding-left: 1mm; }
+.ms::before { content: ""; width: 3mm; height: 3mm; background: var(--c); transform: rotate(45deg); flex-shrink: 0; }
+.legend { display: flex; gap: 6mm; font-size: 8.5pt; color: var(--muted); align-items: center; }
+.legend span { display: flex; align-items: center; gap: 1.5mm; }
+
+/* FASES */
+.phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; flex: 1; min-height: 0; }
+.ph { border-radius: 3mm; overflow: hidden; display: flex; flex-direction: column; background: var(--s); }
+.ph .top { background: var(--c); color: #fff; padding: 4mm 5mm; display: flex; flex-direction: column; gap: 1mm; }
+.ph .num { font-family: var(--fm); font-size: 8.5pt; opacity: .9; }
+.ph .top h3 { font-size: 14pt; }
+.ph .goal { padding: 3mm 5mm 0; font-weight: 700; font-size: 9.5pt; color: var(--c); }
+.ph ul { list-style: none; margin: 0; padding: 3mm 5mm 4mm; display: flex; flex-direction: column; gap: 2.2mm; }
+.ph li { display: grid; grid-template-columns: 15mm 1fr; gap: 2mm; font-size: 9pt; line-height: 1.3; }
+.ph li .d { font-family: var(--fm); font-size: 7.5pt; font-weight: 700; color: var(--c); padding-top: .4mm; }
+.ph li.key { background: #fff; border-radius: 1.6mm; padding: 1.5mm; margin: 0 -1.5mm; font-weight: 700; }
+
+/* CARGA + PROTEÇÕES */
+.prot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+.pcard { border-radius: 3mm; padding: 4.5mm; background: var(--s); border-top: 5px solid var(--c); display: flex; flex-direction: column; gap: 2mm; }
+.pcard h3 { color: var(--c); }
+.pcard ul { margin: 0; padding-left: 4.5mm; display: flex; flex-direction: column; gap: 1.5mm; font-size: 9.3pt; }
+
+/* TABELAS */
+table { width: 100%; border-collapse: collapse; font-size: 8.8pt; }
+th { text-align: left; font-size: 7.3pt; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 1.6mm 2mm; border-bottom: 2px solid var(--ink); }
+td { padding: 1.7mm 2mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.m { font-family: var(--fm); font-weight: 700; white-space: nowrap; }
+.dotc { display: inline-block; width: 2.4mm; height: 2.4mm; border-radius: 50%; background: var(--c); margin-right: 1.5mm; }
+.note { background: #fdf5df; border-left: 4px solid #c99512; border-radius: 0 2mm 2mm 0; padding: 3mm 4mm; font-size: 8.8pt; }
+</style>
+</head>
+<body>
+
+<!-- 1 CAPA -->
+<section class="page cover">
+  <div class="band"><span style="background:var(--f1)"></span><span style="background:var(--f2)"></span><span style="background:var(--f3)"></span></div>
+  <div class="inner">
+    <span class="eyebrow">METTA Mentoria · Clínica Cardio-Health</span>
+    <h1>Roadmap de 90 dias do Dr.&nbsp;Daniel</h1>
+    <p class="lead">Nova tabela de preços e sexta-feira livre, implantadas uma de cada vez, com a agenda misturada de sempre. Mais receita por dia trabalhado e mais equilíbrio, sem sobrecarregar o Dr. Daniel, a equipe e os pacientes.</p>
+    <svg class="ecg" viewBox="0 0 1000 60" preserveAspectRatio="none"><path d="M0 34 H330 L345 34 L356 8 L368 56 L380 20 L390 34 H640 L655 34 L666 8 L678 56 L690 20 L700 34 H1000" fill="none" stroke="#ff7a6b" stroke-width="2.5"/></svg>
+    <div class="chips">
+      <span class="chip">Início <b>03/11/2026</b></span>
+      <span class="chip">Fim <b>31/01/2027</b></span>
+      <span class="chip">Day off <b>toda sexta</b></span>
+      <span class="chip">Agenda <b>misturada (mantida)</b></span>
+      <span class="chip">Retorno <b>gratuito (mantido)</b></span>
+    </div>
+    <div class="kpis">
+      <div class="kpi" style="border-color:var(--f1)"><span class="l">Receita particular / mês</span><span class="v">R$ 29–31 mil</span><span class="d">hoje R$ 25.200 · +15% a +22%</span></div>
+      <div class="kpi" style="border-color:var(--f2)"><span class="l">Receita por dia trabalhado</span><span class="v">R$ 1.816–1.919</span><span class="d">hoje R$ 1.326 · +37% a +45%</span></div>
+      <div class="kpi" style="border-color:var(--f3)"><span class="l">Dias de trabalho / mês</span><span class="v">19 → 16</span><span class="d">cerca de 48 sextas livres por ano</span></div>
+      <div class="kpi" style="border-color:#ff7a6b"><span class="l">Projeção anual</span><span class="v">R$ 349–369 mil</span><span class="d">hoje R$ 302.400</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 PREÇOS + PROJEÇÃO -->
+<section class="page">
+  <div class="head">
+    <div><span class="eyebrow">Decisões tomadas</span><h2>Nova tabela de preços</h2></div>
+    <p class="sub">Valor único por procedimento, sem desconto informal. “Antes” é a média real de Jun + Ago/2026.</p>
+  </div>
+  <div class="prices">
+    <div class="pc" style="--c:#d6453d"><span class="name">Consulta cardiológica</span><div class="row"><span class="old">R$ 320</span><span class="new">R$ 500</span></div><span class="tag">+56%</span></div>
+    <div class="pc" style="--c:#e07a1f"><span class="name">ECO adulto</span><div class="row"><span class="old">R$ 297</span><span class="new">R$ 350</span></div><span class="tag">+18%</span></div>
+    <div class="pc" style="--c:#7c4dc4"><span class="name">ECO infantil</span><div class="row"><span class="old">R$ 450</span><span class="new">R$ 480</span></div><span class="tag">+7%</span></div>
+    <div class="pc" style="--c:#1f6fb2"><span class="name">Eletrocardiograma</span><div class="row"><span class="old">R$ 100</span><span class="new">R$ 150</span></div><span class="tag">+50%</span></div>
+    <div class="pc same" style="--c:#0d8a87"><span class="name">Holter 24 h</span><div class="row"><span class="new">R$ 280</span></div><span class="tag">já vigente</span></div>
+    <div class="pc same" style="--c:#0d8a87"><span class="name">MAPA 24 h</span><div class="row"><span class="new">R$ 280</span></div><span class="tag">já vigente</span></div>
+    <div class="pc same" style="--c:#22985a"><span class="name">Retorno</span><div class="row"><span class="new">Gratuito</span></div><span class="tag">mantido</span></div>
+    <div class="pc same" style="--c:#4a5866"><span class="name">Sexta-feira</span><div class="row"><span class="new">Day off</span></div><span class="tag">a partir de 08/01/2027</span></div>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <h3>Receita particular por mês</h3>
+      <div class="bars">
+        <div class="bar"><span class="lbl">Hoje</span><div class="trk"><div class="fill" style="width:78.75%;background:#93a3a6">R$ 25.200</div></div></div>
+        <div class="bar"><span class="lbl">Conservador</span><div class="trk"><div class="fill" style="width:90.8%;background:var(--f2)">R$ 29.060</div></div></div>
+        <div class="bar"><span class="lbl">Base</span><div class="trk"><div class="fill" style="width:95.97%;background:var(--f3)">R$ 30.710</div></div></div>
+      </div>
+      <p class="small">Conservador: parte da demanda de sexta não migra e algumas consultas se perdem com o reajuste. Base: mesmo volume de hoje. Só atendimentos particulares; repasse de convênio é receita adicional.</p>
+    </div>
+    <div class="panel">
+      <h3>De onde vem o aumento (cenário base)</h3>
+      <table>
+        <thead><tr><th>Categoria</th><th>Hoje</th><th>Novo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dotc" style="--c:#e07a1f"></span>ECO adulto (57)</td><td class="m">16.800</td><td class="m">19.950</td></tr>
+          <tr><td><span class="dotc" style="--c:#7c4dc4"></span>ECO infantil (7)</td><td class="m">3.150</td><td class="m">3.360</td></tr>
+          <tr><td><span class="dotc" style="--c:#d6453d"></span>Consultas (10)</td><td class="m">3.100</td><td class="m">5.000</td></tr>
+          <tr><td><span class="dotc" style="--c:#1f6fb2"></span>Holter, MAPA, ECG, risco</td><td class="m">2.150</td><td class="m">2.400</td></tr>
+          <tr><td><span class="dotc" style="--c:#22985a"></span>Retornos</td><td class="m">0</td><td class="m">0</td></tr>
+          <tr><td><b>Total (R$)</b></td><td class="m">25.200</td><td class="m" style="color:var(--f3)">30.710</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>Cardio-Health · Roadmap 90 dias</span><span>METTA Mentoria · Confidencial · 2</span></div>
+</section>
+
+<!-- 3 LINHA DO TEMPO -->
+<section class="page">
+  <div class="head">
+    <div><span class="eyebrow">Linha do tempo</span><h2>13 semanas, uma mudança grande por mês</h2></div>
+    <div class="legend"><span><span class="b" style="--c:#4a5866;padding:.6mm 3mm">&nbsp;</span>ação</span><span><span class="ms" style="--c:#4a5866">marco</span></span></div>
+  </div>
+
+  <div class="gantt">
+    <!-- meses -->
+    <div style="background:var(--wash)"></div>
+    <div class="g-month" style="grid-column: span 4">Novembro 2026</div>
+    <div class="g-month" style="grid-column: span 5">Dezembro 2026</div>
+    <div class="g-month" style="grid-column: span 4">Janeiro 2027</div>
+    <!-- fases -->
+    <div style="background:var(--wash)"></div>
+    <div class="g-phase" style="grid-column: span 4;background:var(--f1)">Fase 1 · Preparar e comunicar</div>
+    <div class="g-phase" style="grid-column: span 5;background:var(--f2)">Fase 2 · Nova tabela em vigor</div>
+    <div class="g-phase" style="grid-column: span 4;background:var(--f3)">Fase 3 · Sexta livre</div>
+    <!-- semanas -->
+    <div class="g-week" style="border-left:0;text-align:left;padding-left:3mm">semana de</div>
+    <div class="g-week">02/11</div><div class="g-week">09/11</div><div class="g-week">16/11</div><div class="g-week">23/11</div>
+    <div class="g-week">30/11</div><div class="g-week">07/12</div><div class="g-week">14/12</div><div class="g-week">21/12</div><div class="g-week">28/12</div>
+    <div class="g-week">04/01</div><div class="g-week">11/01</div><div class="g-week">18/01</div><div class="g-week">25/01</div>
+
+    <!-- Comunicação -->
+    <div class="g-lane" style="--c:var(--com)"><i></i>Comunicação e equipe</div>
+    <div class="g-row" style="--c:var(--com)">
+      <div class="b" style="grid-column:1/2">Alinhamento</div>
+      <div class="b" style="grid-column:2/4">Roteiro + aviso aos pacientes</div>
+      <div class="b" style="grid-column:4/5">Treino final</div>
+      <div class="b soft" style="grid-column:10/12">Pesquisa de satisfação</div>
+    </div>
+
+    <!-- Preços -->
+    <div class="g-lane" style="--c:var(--pre)"><i></i>Tabela de preços</div>
+    <div class="g-row" style="--c:var(--pre)">
+      <div class="b soft" style="grid-column:1/5">Tabela oficial + planilha com convênio</div>
+      <div class="ms" style="grid-column:5/6;grid-row:1">01/12 nova tabela</div>
+      <div class="b" style="grid-column:5/10;grid-row:2">Novos agendamentos na tabela · antigos honrados até 31/12</div>
+      <div class="b" style="grid-column:10/14;grid-row:2">100% na nova tabela</div>
+    </div>
+
+    <!-- Sexta -->
+    <div class="g-lane" style="--c:var(--sex)"><i></i>Sexta-feira</div>
+    <div class="g-row" style="--c:var(--sex)">
+      <div class="b soft" style="grid-column:1/5">Sem novas marcações às sextas</div>
+      <div class="b" style="grid-column:3/5;grid-row:2">Remarcação ativa</div>
+      <div class="b soft" style="grid-column:5/8;grid-row:1">Sextas em meio período</div>
+      <div class="ms" style="grid-column:7/9;grid-row:2">18/12 última sexta</div>
+      <div class="ms" style="grid-column:10/11;grid-row:1">08/01</div>
+      <div class="b" style="grid-column:10/14;grid-row:2">Day off toda sexta</div>
+    </div>
+
+    <!-- Teleconsulta -->
+    <div class="g-lane" style="--c:var(--tel)"><i></i>Retorno por teleconsulta</div>
+    <div class="g-row" style="--c:var(--tel)">
+      <div class="b soft" style="grid-column:3/4">Plataforma</div>
+      <div class="b soft" style="grid-column:4/6">Piloto (2–3)</div>
+      <div class="b" style="grid-column:6/14">Padrão para visualizar exames · 20 min</div>
+    </div>
+
+    <!-- Agenda -->
+    <div class="g-lane" style="--c:var(--age)"><i></i>Agenda Seg–Qui</div>
+    <div class="g-row" style="--c:var(--age)">
+      <div class="b soft" style="grid-column:3/5">Modelo de dia + 2 encaixes</div>
+      <div class="b" style="grid-column:5/14">Confirmação de todos os atendimentos no dia anterior</div>
+    </div>
+
+    <!-- Gestão -->
+    <div class="g-lane" style="--c:var(--ges);border-bottom:0"><i></i>Acompanhamento</div>
+    <div class="g-row" style="--c:var(--ges);border-bottom:0">
+      <div class="ms" style="grid-column:4/6;grid-row:1">26/11 check 30d</div>
+      <div class="ms" style="grid-column:8/10;grid-row:1">22/12 check 60d</div>
+      <div class="ms" style="grid-column:12/14;grid-row:1">28/01 revisão 90d</div>
+      <div class="b soft" style="grid-column:5/14;grid-row:2">Reunião de 15 min às quintas com a equipe</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Cardio-Health · Roadmap 90 dias</span><span>METTA Mentoria · Confidencial · 3</span></div>
+</section>
+
+<!-- 4 FASES -->
+<section class="page">
+  <div class="head">
+    <div><span class="eyebrow">Passo a passo</span><h2>O que acontece em cada fase</h2></div>
+    <p class="sub">Primeiro preparar e avisar, depois mudar os preços, por último liberar a sexta.</p>
+  </div>
+  <div class="phases">
+    <div class="ph" style="--c:var(--f1);--s:var(--f1s)">
+      <div class="top"><span class="num">FASE 1 · 03/11 – 30/11</span><h3>Preparar e comunicar</h3></div>
+      <p class="goal">Para o paciente, só o aviso muda.</p>
+      <ul>
+        <li><span class="d">03/11</span>Reunião de alinhamento com o Dr. Daniel e a equipe</li>
+        <li><span class="d">03/11</span>Bloquear novas marcações nas sextas a partir de 04/12</li>
+        <li><span class="d">03/11</span>Planilha de caixa com valor de tabela, valor cobrado e convênio</li>
+        <li><span class="d">09/11</span>Roteiro para telefone e WhatsApp com perguntas frequentes</li>
+        <li><span class="d">09/11</span>Aviso aos pacientes: nova tabela em 01/12 e sexta livre em janeiro</li>
+        <li><span class="d">16/11</span>Clínica liga e remarca quem estava nas sextas</li>
+        <li><span class="d">16/11</span>Modelo de dia Seg–Qui com 2 encaixes protegidos</li>
+        <li><span class="d">23/11</span>Piloto de teleconsulta e treino final</li>
+        <li class="key"><span class="d">26/11</span>Checkpoint 30 dias</li>
+      </ul>
+    </div>
+    <div class="ph" style="--c:var(--f2);--s:var(--f2s)">
+      <div class="top"><span class="num">FASE 2 · 01/12 – 31/12</span><h3>Nova tabela em vigor</h3></div>
+      <p class="goal">Preços mudam num mês de demanda mais baixa.</p>
+      <ul>
+        <li class="key"><span class="d">01/12</span>Nova tabela vale para todo novo agendamento</li>
+        <li><span class="d">01/12</span>Quem marcou antes paga o valor combinado até 31/12</li>
+        <li><span class="d">Dez</span>Retorno de exames por teleconsulta de 20 min; exame físico continua presencial</li>
+        <li><span class="d">Dez</span>Confirmação de todos os atendimentos no dia anterior</li>
+        <li><span class="d">04/12</span>Sextas 04, 11 e 18/12 só em meio período para quem não remarcou</li>
+        <li><span class="d">Quintas</span>Reunião de 15 min: o que travou e o que ajustar</li>
+        <li class="key"><span class="d">22/12</span>Checkpoint 60 dias: zero cobrança fora da tabela</li>
+      </ul>
+    </div>
+    <div class="ph" style="--c:var(--f3);--s:var(--f3s)">
+      <div class="top"><span class="num">FASE 3 · 04/01 – 31/01</span><h3>Sexta livre e consolidação</h3></div>
+      <p class="goal">A semana de quatro dias vira rotina.</p>
+      <ul>
+        <li class="key"><span class="d">08/01</span>Primeira sexta livre</li>
+        <li><span class="d">08/01</span>Contatos de sexta respondidos na segunda; urgência orientada para pronto-socorro</li>
+        <li><span class="d">Jan</span>Agenda Seg–Qui com ocupação até 85%, sobrando encaixe</li>
+        <li><span class="d">Jan</span>Pesquisa curta de satisfação com pacientes</li>
+        <li><span class="d">Jan</span>Fechamento de dezembro, primeiro mês na nova tabela</li>
+        <li class="key"><span class="d">28/01</span>Revisão dos 90 dias e plano dos próximos 90</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Cardio-Health · Roadmap 90 dias</span><span>METTA Mentoria · Confidencial · 4</span></div>
+</section>
+
+<!-- 5 CARGA + PROTEÇÕES -->
+<section class="page">
+  <div class="head">
+    <div><span class="eyebrow">Equilíbrio</span><h2>Quatro dias sem sobrecarga</h2></div>
+    <p class="sub">Holter, MAPA e ECG continuam com a equipe, e o retorno de exames vai para teleconsulta.</p>
+  </div>
+  <div class="panel">
+    <h3>Atendimentos presenciais do Dr. Daniel por dia</h3>
+    <div class="bars">
+      <div class="bar" style="grid-template-columns:62mm 1fr"><span class="lbl">Hoje · 5 dias por semana</span><div class="trk"><div class="fill" style="width:69%;background:#93a3a6">6,9</div></div></div>
+      <div class="bar" style="grid-template-columns:62mm 1fr"><span class="lbl">Só tirando a sexta</span><div class="trk"><div class="fill" style="width:83%;background:var(--sex)">8,3 · +19%</div></div></div>
+      <div class="bar" style="grid-template-columns:62mm 1fr"><span class="lbl">Sexta livre + teleconsulta</span><div class="trk"><div class="fill" style="width:75%;background:var(--f3)">7,5 · +9%</div></div></div>
+    </div>
+    <p class="small">Base: 155 atendimentos/mês, 23 deles exames instalados pela equipe; cerca de 12 retornos por mês passam para teleconsulta.</p>
+  </div>
+  <div class="prot">
+    <div class="pcard" style="--c:var(--f1);--s:var(--f1s)"><h3>Pacientes</h3><ul>
+      <li>Cerca de 3 semanas de aviso antes da nova tabela e quase 2 meses antes da sexta livre</li>
+      <li>Valor combinado antes de 01/12 respeitado até o fim do ano</li>
+      <li>A clínica remarca quem estava na sexta</li>
+      <li>Retorno gratuito, e o de exames sem sair de casa</li>
+    </ul></div>
+    <div class="pcard" style="--c:var(--f2);--s:var(--f2s)"><h3>Equipe</h3><ul>
+      <li>Uma mudança grande por mês</li>
+      <li>Roteiro pronto e tabela única, sem negociação no balcão</li>
+      <li>Reunião semanal de 15 minutos</li>
+      <li>Regra clara para contatos que chegam na sexta</li>
+    </ul></div>
+    <div class="pcard" style="--c:var(--f3);--s:var(--f3s)"><h3>Dr. Daniel</h3><ul>
+      <li>Carga diária sobe cerca de 9%, não 19%</li>
+      <li>Dois encaixes protegidos por dia</li>
+      <li>Sexta livre de verdade, sem plantão de WhatsApp</li>
+      <li>Agenda misturada, do jeito que ele já atende</li>
+    </ul></div>
+  </div>
+  <div class="foot"><span>Cardio-Health · Roadmap 90 dias</span><span>METTA Mentoria · Confidencial · 5</span></div>
+</section>
+
+<!-- 6 INDICADORES + RISCOS -->
+<section class="page">
+  <div class="head">
+    <div><span class="eyebrow">Acompanhamento</span><h2>Indicadores e riscos</h2></div>
+  </div>
+  <div class="two" style="grid-template-columns: 1fr 1.25fr">
+    <div class="panel">
+      <h3>Metas</h3>
+      <table>
+        <thead><tr><th>Indicador</th><th>Meta</th><th>Frequência</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dotc" style="--c:var(--f3)"></span>Receita particular do mês</td><td class="m">≥ R$ 29.000</td><td>Mensal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--pre)"></span>Cobranças fora da tabela</td><td class="m">0</td><td>Semanal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--sex)"></span>Sextas sem atendimento (a partir de 08/01)</td><td class="m">100%</td><td>Semanal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--age)"></span>Ocupação da agenda Seg–Qui</td><td class="m">≤ 85%</td><td>Semanal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--age)"></span>Faltas</td><td class="m">≤ 5%</td><td>Semanal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--tel)"></span>Retornos por teleconsulta</td><td class="m">≥ 70%</td><td>Mensal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--sex)"></span>Consultas particulares</td><td class="m">≥ 9/mês</td><td>Mensal</td></tr>
+          <tr><td><span class="dotc" style="--c:var(--ges)"></span>Repasse de convênio registrado</td><td class="m">100%</td><td>Mensal</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <h3>Riscos e resposta combinada</h3>
+      <table>
+        <thead><tr><th>Risco</th><th>Resposta</th></tr></thead>
+        <tbody>
+          <tr><td>Menos consultas com o reajuste</td><td>Mesmo com 20% menos consultas (8 × R$ 500 = R$ 4.000), a linha supera os R$ 3.100 de hoje.</td></tr>
+          <tr><td>Demanda de sexta não migrar</td><td>Remarcação ativa, encaixes e confirmação no dia anterior. O cenário conservador já considera essa perda.</td></tr>
+          <tr><td>Seg–Qui apertados</td><td>Ocupação acima de 90% por 2 semanas: revisar o modelo de dia antes de abrir a sexta.</td></tr>
+          <tr><td>Retorno gratuito ocupar agenda</td><td>Teleconsulta para exames e retorno vinculado à consulta de origem.</td></tr>
+          <tr><td>Desconto informal voltar</td><td>Tabela impressa, roteiro e conferência semanal na planilha.</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>Validar na primeira semana:</b> a quantidade real de ECGs particulares (a projeção supõe cerca de 5 por mês). Volumes vêm da média de Jun + Ago/2026. Convênio fica fora da projeção.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Cardio-Health · Roadmap 90 dias · Base: relatório de Reestruturação Operacional (Jun–Ago 2026)</span><span>METTA Mentoria · Confidencial · 6</span></div>
+</section>
+
+</body>
+</html>
